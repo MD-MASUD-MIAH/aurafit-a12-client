@@ -1,43 +1,83 @@
-import { use, useState } from "react";
-import { Link } from "react-router";
-
+import {  useState } from "react";
+import { Link, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthContext";
 import GoogleLogin from "../social/GoogleLogin";
+import { imageUpload } from "../utilits/utilits";
+import useAuth from "../hooks/useAuth";
 
 const Register = () => {
-  
-
+  const navigate =useNavigate()
   const [errors, setErrors] = useState({});
- 
- 
-  
-const {registerUser} = use(AuthContext)
-      // Create preview
-     
+  const [previewImage, setPreviewImage] = useState(null);
+  const { registerUser, setUser, upDateUser } = useAuth()
 
-  
-  const handleSubmit = (e) => { 
-    e.preventDefault() 
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
 
-  const form = e.target;
-  const formData = new FormData(form);
-  const email = formData.get('email');
-  const password = formData.get('password');
-  const user = Object.fromEntries(formData.entries());
+    // Simple validation
+    const newErrors = {};
+    if (!name) newErrors.name = "Name is required";
+    if (!email) newErrors.email = "Email is required";
+    if (!password || password.length < 6)
+      newErrors.password = "Password must be at least 6 characters";
+    if (!previewImage) newErrors.image = "Image is required";
 
-  console.log(user,email,password); 
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
- registerUser(email,password).then(res=>{
+    try {
+      const res = await registerUser(email, password);
+      await upDateUser({ displayName: name, photoURL: previewImage });
 
-  console.log(res);
-  
- }).catch(err=>{
+      setUser({
+        ...res.user,
+        displayName: name,
+        photoURL: previewImage,
+      });
 
-  setErrors(err.message)
-  
- })
- 
+      Swal.fire({
+        title: "Register Success!",
+        icon: "success",
+        confirmButtonColor: "#550527",
+      });
+
+      form.reset();
+      setPreviewImage(null);
+      setErrors({});
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
+    }finally{
+      navigate('/')
+    }
+  };
+
+  const handleImageChange = async (e) => {
+    const image = e.target.files[0];
+    if (image) {
+      try {
+        const imageUrl = await imageUpload(image);
+        setPreviewImage(imageUrl);
+        setErrors((prev) => ({ ...prev, image: null }));
+      } catch (error) {
+        console.log(error);
+
+        setErrors((prev) => ({
+          ...prev,
+          image: "Image upload failed. Try again.",
+        }));
+      }
+    }
   };
 
   return (
@@ -60,15 +100,13 @@ const {registerUser} = use(AuthContext)
                 <input
                   name="name"
                   type="text"
-                 
-               
                   className={`w-full px-4 py-2 border-b ${
                     errors.name ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:border-[#550527] transition-colors`}
+                  } focus:outline-none focus:border-[#550527]`}
                   placeholder="Enter your name"
                 />
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                  <p className="text-sm text-red-500 mt-1">{errors.name}</p>
                 )}
               </div>
 
@@ -76,7 +114,7 @@ const {registerUser} = use(AuthContext)
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Profile Image
                 </label>
-                {/* <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-4">
                   {previewImage ? (
                     <img
                       src={previewImage}
@@ -100,35 +138,16 @@ const {registerUser} = use(AuthContext)
                       </svg>
                     </div>
                   )}
-                  <label className="flex-1 cursor-pointer">
-                    <input
-                      name="image"
-                      type="file"
-                      onChange={handleImageChange}
-                      className="hidden"
-                      accept="image/*"
-                    />
-                    <div
-                      className={`px-4 py-2 border-b ${
-                        errors.image ? "border-red-500" : "border-gray-300"
-                      } focus:outline-none focus:border-[#550527] transition-colors`}
-                    >
-                      {formData.image ? formData.image.name : "Choose an image"}
-                    </div>
-                  </label>
-                </div> */}
-
-               <input
-                  name="image"
-                  type="file"
-                
-                  className={`w-full px-4 py-2 border-b ${
-                    errors.email ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:border-[#550527] transition-colors`}
-                  placeholder="Enter your email"
-                />
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleImageChange}
+                    accept="image/*"
+                    className="cursor-pointer"
+                  />
+                </div>
                 {errors.image && (
-                  <p className="mt-1 text-sm text-red-500">{errors.image}</p>
+                  <p className="text-sm text-red-500 mt-1">{errors.image}</p>
                 )}
               </div>
 
@@ -139,14 +158,13 @@ const {registerUser} = use(AuthContext)
                 <input
                   name="email"
                   type="email"
-                
                   className={`w-full px-4 py-2 border-b ${
                     errors.email ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:border-[#550527] transition-colors`}
+                  } focus:outline-none focus:border-[#550527]`}
                   placeholder="Enter your email"
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                  <p className="text-sm text-red-500 mt-1">{errors.email}</p>
                 )}
               </div>
 
@@ -157,23 +175,21 @@ const {registerUser} = use(AuthContext)
                 <input
                   name="password"
                   type="password"
-                
                   className={`w-full px-4 py-2 border-b ${
                     errors.password ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:border-[#550527] transition-colors`}
+                  } focus:outline-none focus:border-[#550527]`}
                   placeholder="Enter your password"
                 />
                 {errors.password && (
-                  <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+                  <p className="text-sm text-red-500 mt-1">{errors.password}</p>
                 )}
               </div>
 
               <button
                 type="submit"
-              
-                className="w-full bg-[#550527] hover:bg-[#44041f] text-white py-3 px-4 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
+                className="w-full bg-[#550527] hover:bg-[#44041f] text-white py-3 px-4 rounded-lg font-medium transition-colors"
               >
-              Register
+                Register
               </button>
             </form>
 
@@ -195,10 +211,8 @@ const {registerUser} = use(AuthContext)
               <div className="flex-grow h-px bg-gray-300"></div>
             </div>
 
-            <div className="flex justify-center space-x-4">
-            
-           
-            <GoogleLogin></GoogleLogin>
+            <div className="flex justify-center">
+              <GoogleLogin />
             </div>
           </div>
         </div>

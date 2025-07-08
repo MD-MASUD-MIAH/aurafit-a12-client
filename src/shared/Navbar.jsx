@@ -1,8 +1,41 @@
 import { useState } from "react";
 import { NavLink } from "react-router";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 export default function Navbar() {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 
+  const { user, logout } = useAuth();
+  console.log("current Logger", user?.email);
+
+  const handleLogout = () => {;
+
+  Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) {
+   
+
+    logout().then(()=>{
+
+       Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+    }).catch(err=>{
+      console.log(err.message);
+      
+    })
+  }
+});
+}
   return (
     <>
       {/*<!-- Component: Navbar with Topbar --> */}
@@ -85,14 +118,14 @@ export default function Navbar() {
               }`}
             >
               <li role="none" className="flex items-stretch">
-                <a
+                <NavLink
                   role="menuitem"
                   aria-haspopup="false"
                   className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
                   href="javascript:void(0)"
                 >
-                  <span>Shop</span>
-                </a>
+                  <span>Home</span>
+                </NavLink>
               </li>
               <li role="none" className="flex items-stretch">
                 <a
@@ -118,31 +151,54 @@ export default function Navbar() {
             </ul>
             {/*      <!-- Actions --> */}
             <div className="ml-auto flex items-center justify-end px-6 lg:ml-0 lg:flex-1 lg:p-0">
-            <NavLink to={'/login'}>
-                <span
-                href="#_"
-                class="relative inline-block px-4 py-2 font-medium group"
-              >
-                <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-                <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
-                <span class="relative text-black group-hover:text-white">
-                  Login
-                </span>
-              </span>
-            </NavLink>
+              {user ? (
+                <>
+                  {user?.photoURL && (
+                    <img className="w-10 h-10" src={user.photoURL} alt="" />
+                  )}
+                  <button onClick={handleLogout}>
+                    <span
+                    
+                      href="#_"
+                      class="relative inline-block px-4 py-2 font-medium group"
+                    >
+                      <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+                      <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+                      <span class="relative text-black group-hover:text-white">
+                        Logout
+                      </span>
+                    </span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <NavLink to={"/login"}>
+                    <span
+                      href="#_"
+                      class="relative inline-block px-4 py-2 font-medium group"
+                    >
+                      <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+                      <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+                      <span class="relative text-black group-hover:text-white">
+                        Login
+                      </span>
+                    </span>
+                  </NavLink>
 
-              <NavLink to={"/register"}>
-                <span
-                  href="#_"
-                  class="relative inline-block px-4 py-2 font-medium group"
-                >
-                  <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-                  <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
-                  <span class="relative text-black group-hover:text-white">
-                    Register
-                  </span>
-                </span>
-              </NavLink>
+                  <NavLink to={"/register"}>
+                    <span
+                      href="#_"
+                      class="relative inline-block px-4 py-2 font-medium group"
+                    >
+                      <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+                      <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+                      <span class="relative text-black group-hover:text-white">
+                        Register
+                      </span>
+                    </span>
+                  </NavLink>
+                </>
+              )}
             </div>
           </nav>
         </div>
