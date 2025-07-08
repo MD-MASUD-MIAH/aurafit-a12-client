@@ -1,13 +1,11 @@
 import { useState } from "react";
-
+import { NavLink } from "react-router";
 export default function Navbar() {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
 
   return (
     <>
       {/*<!-- Component: Navbar with Topbar --> */}
-     
-    
 
       {/*<!-- Header --> */}
       <header className=" relative z-20 w-full border-b border-slate-200 bg-white/90 shadow-lg shadow-slate-700/5 after:absolute after:left-0 after:top-full after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden">
@@ -120,32 +118,31 @@ export default function Navbar() {
             </ul>
             {/*      <!-- Actions --> */}
             <div className="ml-auto flex items-center justify-end px-6 lg:ml-0 lg:flex-1 lg:p-0">
-              <a
-                href="#"
-                className="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-lg text-emerald-500"
+            <NavLink to={'/login'}>
+                <span
+                href="#_"
+                class="relative inline-block px-4 py-2 font-medium group"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  aria-labelledby="title description"
-                  role="graphics-symbol"
-                >
-                  <title id="title">Cart Icon</title>
-                  <desc id="description">Cart icon with items</desc>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                  />
-                </svg>
-                <span className="absolute -right-1.5 -top-1.5 inline-flex items-center justify-center gap-1 rounded-full border-2 border-white bg-pink-500 px-1.5 text-sm text-white">
-                  2<span className="sr-only"> new emails </span>
+                <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+                <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+                <span class="relative text-black group-hover:text-white">
+                  Login
                 </span>
-              </a>
+              </span>
+            </NavLink>
+
+              <NavLink to={"/register"}>
+                <span
+                  href="#_"
+                  class="relative inline-block px-4 py-2 font-medium group"
+                >
+                  <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+                  <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+                  <span class="relative text-black group-hover:text-white">
+                    Register
+                  </span>
+                </span>
+              </NavLink>
             </div>
           </nav>
         </div>
