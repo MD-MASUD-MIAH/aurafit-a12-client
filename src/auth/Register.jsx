@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthContext";
 import GoogleLogin from "../social/GoogleLogin";
-import { imageUpload } from "../utilits/utilits";
+import { imageUpload,  saveUserMongo } from "../utilits/utilits";
 import useAuth from "../hooks/useAuth";
 
 const Register = () => {
@@ -41,6 +41,14 @@ const Register = () => {
         displayName: name,
         photoURL: previewImage,
       });
+
+      
+      const userData = {
+        name,
+        email,
+        image: previewImage,
+      }
+  await saveUserMongo(userData)
 
       Swal.fire({
         title: "Register Success!",

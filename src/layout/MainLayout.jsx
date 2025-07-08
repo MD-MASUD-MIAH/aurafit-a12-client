@@ -1,18 +1,17 @@
+import { Outlet } from "react-router";
 
-import React from 'react';
-import { Outlet } from 'react-router';
-import Navbar from '../shared/Navbar';
-import Footer from '../shared/Footer';
+import Footer from "../shared/Footer";
+import Navbar from "../shared/Navbar";
 
 const MainLayout = () => {
-    return (
-        <div>
-            <Navbar></Navbar>
-          
-            <Outlet></Outlet>
-            <Footer></Footer>
-        </div>
-    );
+  return (
+    <div className="poppins">
+      <Navbar></Navbar>
+
+      <Outlet></Outlet>
+      <Footer></Footer>
+    </div>
+  );
 };
 
 export default MainLayout;

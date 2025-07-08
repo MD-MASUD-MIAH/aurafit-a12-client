@@ -1,38 +1,34 @@
 
 
 import Swal from 'sweetalert2';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
+import { saveUserMongo } from '../utilits/utilits';
+import { toast } from 'react-toastify';
 
 const GoogleLogin = () => {
 
       const navigate = useNavigate() 
-      const location = useLocation()
+    
     const {googleLogin}  = useAuth()
-    const handleLoginGoogle = ()=>{
+    const handleLoginGoogle = async()=>{
 
 
-        googleLogin().then(()=>{
-
-              Swal.fire({
-              title: "Google Login Success !",
-              icon: "success",
-              draggable: true,
-              timer:1500,
-            });
-
-            navigate(location?.state ? location.state: '/');
-        }).catch(error=>{
-
-            console.log(error.message);
-              Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: `${error.message}`,
-             
-            });
-            
-        })
+         try {
+      //User Registration using google
+      const result = await googleLogin()
+      const userData = {
+        name: result?.user?.displayName,
+        email: result?.user?.email,
+        image: result?.user?.photoURL,
+      }
+      await saveUserMongo(userData)
+      navigate('/')
+      toast.success('Signup Successful')
+    } catch (err) {
+      console.log(err)
+      toast.error(err?.message)
+    }
     }
 
     return (

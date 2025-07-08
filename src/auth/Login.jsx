@@ -1,24 +1,39 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import GoogleLogin from "../social/GoogleLogin";
+import { saveUserMongo } from "../utilits/utilits";
 const Login = () => {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const { logInUser } = useAuth();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const form = e.target;
 
-    const formData = new FormData(form);
-    const email = formData.get("email");
-    const password = formData.get("password");
-    logInUser(email, password)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        setErrors(err.message);
-      });
+    const email = form.email.value;
+    const password = form.password.value;
+
+    try {
+      //User Login
+      const result = await logInUser(email, password);
+
+      const userData = {
+        name: result?.user?.displayName,
+        email: result?.user?.email,
+        image: result?.user?.photoURL,
+      };
+      // update user
+      await saveUserMongo(userData);
+      navigate("/");
+      toast.success("Login Successful");
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+      setErrors(err.message);
+    }
   };
   return (
     <div className="bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
