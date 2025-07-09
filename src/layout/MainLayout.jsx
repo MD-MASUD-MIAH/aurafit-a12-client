@@ -5,7 +5,7 @@ import Navbar from "../shared/Navbar";
 
 const MainLayout = () => {
   return (
-    <div className="poppins">
+    <div className="urban">
       <Navbar></Navbar>
 
       <Outlet></Outlet>

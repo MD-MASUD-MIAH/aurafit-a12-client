@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 z-20">
-      <header className="relative z-20 w-full border-b border-slate-200 bg-[#8d99ae] shadow-lg shadow-slate-700/5 after:absolute after:left-0 after:top-full after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden text-white ">
+      <header className="relative z-20 w-full border-b border-slate-200 bg-[#2563EB] shadow-lg shadow-slate-700/5 after:absolute after:left-0 after:top-full after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden text-black md:text-white  ">
         <div className="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
           <nav
             aria-label="main navigation"
@@ -28,7 +28,7 @@ const Navbar = () => {
               id="WindUI"
               aria-label="WindUI logo"
               aria-current="page"
-              className="flex items-center gap-2 whitespace-nowrap py-3 focus:outline-none lg:flex-1"
+              className="flex items-center text-white font-bold text-xl gap-2 whitespace-nowrap py-3 focus:outline-none lg:flex-1 pl-4"
               href="javascript:void(0)"
             >
               <img className="w-12 h-12" src={logo} alt="" />
@@ -183,14 +183,14 @@ const Navbar = () => {
                   </NavLink>
                   <button
                     onClick={handleLogout}
-                    className="tom-btn hidden md:block"
+                    className="tom-btn hidden md:block border "
                   >
                     Logout
                   </button>
                 </div>
               ) : (
                 <div aria-haspopup="false" className="flex gap-4">
-                  <NavLink to="/login" className="tom-btn hidden md:block">
+                  <NavLink to="/login" className="tom-btn hidden md:block ">
                     Login
                   </NavLink>
                   <NavLink to={"/register"} className="tom-btn hidden md:block">

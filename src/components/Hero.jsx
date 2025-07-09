@@ -10,6 +10,7 @@ const Hero = () => {
     "https://i.ibb.co/JRY9CpFg/675c8f2a46f9748ac270d1a2-landscap-011-1775p.jpg",
     "https://i.ibb.co/vt9LKTZ/65d3674df1397c34b67e7e9a-IMG-8049.jpg",
     "https://i.ibb.co/NdJH3TkT/VEN06242-min-2048x1365-CZSg-I9qf.jpg",
+   
   ];
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-screen max-h-[800px] w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden h-full md:h-[calc(100vh-150px)]">
       {/* Background images with fade transition */}
       <div className="absolute inset-0">
         {images.map((img, index) => (
@@ -43,7 +44,7 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
-        <div className="container mx-auto px-6 lg:px-8 flex">
+        <div className="container mx-auto px-6 lg:px-8 flex py-30">
           {/* Left Content */}
           <div className="w-full lg:w-1/2">
             <motion.div
@@ -54,7 +55,7 @@ const Hero = () => {
             >
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
                 Transform Your{" "}
-                <span className="text-[#8d99ae]">Fitness Journey</span>
+                <span className="text-[#2563EB]">Fitness Journey</span>
               </h1>
               <p className="text-lg md:text-xl text-white mb-8">
                 Track your progress, smash your goals, and become the best
@@ -64,7 +65,7 @@ const Hero = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-full shadow-lg transition-all duration-300"
+                  className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full shadow-lg transition-all duration-300"
                 >
                   Get Started - It's Free
                 </motion.button>
@@ -82,23 +83,23 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="mt-16 flex flex-wrap gap-6"
+                className="mt-16 flex flex-wrap gap-6 "
               >
                 <div className="flex items-center gap-3 text-white">
                   <div className="p-3 bg-emerald-500/20 rounded-full">
-                    <FiUser className="text-[#8d99ae] text-xl" />
+                    <FiUser className="text-[#2563EB] text-xl" />
                   </div>
                   <span>Personalized Plans</span>
                 </div>
                 <div className="flex items-center gap-3 text-white">
                   <div className="p-3 bg-emerald-500/20 rounded-full">
-                    <FiActivity className="text-[#8d99ae] text-xl" />
+                    <FiActivity className="text-[#2563EB] text-xl" />
                   </div>
                   <span>Real-time Tracking</span>
                 </div>
                 <div className="flex items-center gap-3 text-white">
                   <div className="p-3 bg-emerald-500/20 rounded-full">
-                    <FiAward className="text-[#8d99ae] text-xl" />
+                    <FiAward className="text-[#2563EB] text-xl" />
                   </div>
                   <span>Expert Guidance</span>
                 </div>
@@ -118,8 +119,8 @@ const Hero = () => {
                 Today's Featured Workout
               </h3>
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-[#8d99ae]/20 p-3 rounded-full">
-                  <FiClock className="text-[#8d99ae] text-xl" />
+                <div className="bg-[#2563EB]/20 p-3 rounded-full">
+                  <FiClock className="text-[#2563EB] text-xl" />
                 </div>
                 <div>
                   <h4 className="text-white font-medium">
@@ -129,15 +130,15 @@ const Hero = () => {
                 </div>
               </div>
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-[#8d99ae]/20 p-3 rounded-full">
-                  <FiHeart className="text-[#8d99ae] text-xl" />
+                <div className="bg-[#2563EB]/20 p-3 rounded-full">
+                  <FiHeart className="text-[#2563EB] text-xl" />
                 </div>
                 <div>
                   <h4 className="text-white font-medium">Beginner Yoga Flow</h4>
                   <p className="text-white/80">45 min • 280 kcal</p>
                 </div>
               </div>
-              <button className="w-full mt-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition duration-300">
+              <button className="w-full mt-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition duration-300">
                 Join Now
               </button>
             </motion.div>
