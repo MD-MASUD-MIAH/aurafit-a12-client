@@ -14,6 +14,7 @@
     "@material-tailwind/html": "^3.0.0-beta.7",
     "@material-tailwind/react": "^3.0.0-beta.24",
     "@tailwindcss/vite": "^4.1.11",
+    "@tanstack/react-query": "^5.81.5",
     "@windui/react": "^1.0.1",
     "aos": "^2.3.4",
     "axios": "^1.10.0",

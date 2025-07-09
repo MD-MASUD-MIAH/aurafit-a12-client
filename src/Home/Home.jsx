@@ -4,6 +4,7 @@ import Feature from "./Feature";
 import NewLatter from "./NewLatter";
 import TeamPost from "./TeamPost";
 import Testimonials from "./Testimonials";
+import TrainerTeam from "./TrainerTeam";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <Testimonials></Testimonials>
       <TeamPost></TeamPost>
       <NewLatter></NewLatter>
+      <TrainerTeam></TrainerTeam>
     </div>
   );
 };
