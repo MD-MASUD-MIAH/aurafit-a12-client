@@ -4,7 +4,7 @@ import {
   FaCheckCircle,
   FaHome,
   FaMotorcycle,
-  FaSearchLocation,
+  FaPlus,
   FaTasks,
   FaUserCheck,
   FaUserClock,
@@ -12,7 +12,6 @@ import {
   FaUserShield,
   FaWallet,
 } from "react-icons/fa";
-import { MdPersonAdd } from "react-icons/md";
 
 import { NavLink, Outlet } from "react-router";
 import logo from "../assets/logo.png";
@@ -85,18 +84,18 @@ const DashBoardLayout = () => {
                 Subscribers
               </NavLink>
             </li>
-           
+
             <li>
               <NavLink
-                to="/dashboard/track"
+                to="/dashboard/addClass"
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 rounded-md ${
                     isActive ? "bg-blue-500" : "hover:bg-blue-700"
                   }`
                 }
               >
-                <FaSearchLocation className="mr-3" />
-                Track a Package
+                <FaPlus className="mr-3"></FaPlus>
+                Add Class
               </NavLink>
             </li>
             <li>

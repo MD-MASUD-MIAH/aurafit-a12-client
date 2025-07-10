@@ -11,6 +11,8 @@ import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
 import TainerDeatilsPage from "../components/TainerDeatilsPage";
 import BookingPage from "../components/BookingPage";
+import AddClass from "../DashBoard/adminPage/AddClass";
+import AllClass from "../components/AllClass";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +28,7 @@ export const router = createBrowserRouter([
         {path:'/trainer/:id',element:<PriveteRoute><TainerDeatilsPage></TainerDeatilsPage></PriveteRoute>},
         {path:'/book/:id',element:<PriveteRoute><BookingPage></BookingPage></PriveteRoute>},
          { path: "beTrainer", element:<PriveteRoute><BeATrainer></BeATrainer></PriveteRoute> },
+         {path:'/allClass', Component:AllClass }
     ],
   },
 
@@ -40,6 +43,7 @@ export const router = createBrowserRouter([
       { index: true, Component: DashBoard },
 
       { path: "subscribers", Component: Subscribers },
+      { path: "addClass", Component: AddClass },
      
     ],
   },

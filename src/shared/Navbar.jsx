@@ -88,7 +88,7 @@ const Navbar = () => {
               </li>
               <li role="none" className="flex items-stretch">
                 <NavLink
-                to={'/allTrainer'}
+                  to={"/allTrainer"}
                   onClick={() => setIsToggleOpen(!isToggleOpen)}
                   role="menuitem"
                   aria-current="page"
@@ -101,6 +101,7 @@ const Navbar = () => {
               </li>
               <li role="none" className="flex items-stretch">
                 <NavLink
+                  to={"/allClass"}
                   onClick={() => setIsToggleOpen(!isToggleOpen)}
                   role="menuitem"
                   aria-haspopup="false"
