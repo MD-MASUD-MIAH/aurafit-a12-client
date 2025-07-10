@@ -125,7 +125,7 @@ const AlltrainerCard = ({ trainerData }) => {
             to={`/trainer/${trainerData._id}`}
             className="inline-flex h-10 w-full items-center justify-center gap-2 whitespace-nowrap rounded bg-blue-500 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-blue-700 focus:bg-blue-700-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-emerald-300 disabled:shadow-none"
           >
-            <span>Order now!</span>
+            <span>Know more!</span>
           </Link>
         </div>
       </div>

@@ -26,7 +26,7 @@ const TrainerApplicationForm = () => {
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const [formData, setFormData] = useState({
-    fullName: "",
+    fullName: user.displayName,
     email: user.email,
     age: "",
     skills: [],
@@ -36,6 +36,7 @@ const TrainerApplicationForm = () => {
     maxClassesPerDay: "",
     experience: "",
     bio: "",
+    status: "pending",
     socialLinks: {
       facebook: "",
       twitter: "",
@@ -174,7 +175,6 @@ const TrainerApplicationForm = () => {
                 name="email"
                 type="email"
                 value={user.email}
-                onChange={handleChange}
                 placeholder="enter you email"
                 required
               />

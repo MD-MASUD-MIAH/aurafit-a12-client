@@ -105,7 +105,9 @@ const TainerDeatilsPage = () => {
 
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">About</h3>
-              <p className="text-gray-700">"{singleData.bio}"</p>
+              <p className="text-gray-700">
+                "{singleData.bio}"
+              </p>
             </div>
           </div>
         </div>

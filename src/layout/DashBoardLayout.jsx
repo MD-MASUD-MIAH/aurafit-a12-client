@@ -116,7 +116,7 @@ const DashBoardLayout = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/pending-deliveries"
+                  to="/dashboard/pending-trainer"
                   className={({ isActive }) =>
                     `flex items-center px-4 py-2 rounded-md ${
                       isActive ? "bg-gray-700" : "hover:bg-gray-700"
@@ -124,7 +124,7 @@ const DashBoardLayout = () => {
                   }
                 >
                   <FaTasks className="mr-3" />
-                  Pending Deliveries
+                  Pending Trainer
                 </NavLink>
               </li>
               <li>

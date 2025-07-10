@@ -13,6 +13,8 @@ import TainerDeatilsPage from "../components/TainerDeatilsPage";
 import BookingPage from "../components/BookingPage";
 import AddClass from "../DashBoard/adminPage/AddClass";
 import AllClass from "../components/AllClass";
+import PendingTrainer from "../DashBoard/adminPage/PendingTrainer";
+import PendingDetails from "../DashBoard/adminPage/PendingDetails";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +46,8 @@ export const router = createBrowserRouter([
 
       { path: "subscribers", Component: Subscribers },
       { path: "addClass", Component: AddClass },
+      {path:'pending-trainer', Component:PendingTrainer},
+      {path:'pending-details/:id', Component:PendingDetails}
      
     ],
   },
