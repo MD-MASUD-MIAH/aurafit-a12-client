@@ -1,20 +1,21 @@
 import { createBrowserRouter } from "react-router";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
+import AllClass from "../components/AllClass";
 import AllTrainer from "../components/AllTrainer";
+import BookingPage from "../components/BookingPage";
+import TainerDeatilsPage from "../components/TainerDeatilsPage";
 import PriveteRoute from "../Context/PriveteRoute";
+import AddClass from "../DashBoard/adminPage/AddClass";
+import ApproveTrainer from "../DashBoard/adminPage/ApproveTrainer";
+import PendingDetails from "../DashBoard/adminPage/PendingDetails";
+import PendingTrainer from "../DashBoard/adminPage/PendingTrainer";
 import Subscribers from "../DashBoard/adminPage/Subscribers";
 import DashBoard from "../DashBoard/DashBoard";
 import BeATrainer from "../DashBoard/meber/BeATrainer";
 import Home from "../Home/Home";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
-import TainerDeatilsPage from "../components/TainerDeatilsPage";
-import BookingPage from "../components/BookingPage";
-import AddClass from "../DashBoard/adminPage/AddClass";
-import AllClass from "../components/AllClass";
-import PendingTrainer from "../DashBoard/adminPage/PendingTrainer";
-import PendingDetails from "../DashBoard/adminPage/PendingDetails";
 
 export const router = createBrowserRouter([
   {
@@ -24,13 +25,36 @@ export const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: "/register", Component: Register },
       { path: "/login", Component: Login },
-      { path: "/allTrainer",
-       
-        Component: AllTrainer },
-        {path:'/trainer/:id',element:<PriveteRoute><TainerDeatilsPage></TainerDeatilsPage></PriveteRoute>},
-        {path:'/book/:id',element:<PriveteRoute><BookingPage></BookingPage></PriveteRoute>},
-         { path: "beTrainer", element:<PriveteRoute><BeATrainer></BeATrainer></PriveteRoute> },
-         {path:'/allClass', Component:AllClass }
+      {
+        path: "/allTrainer",
+
+        Component: AllTrainer,
+      },
+      {
+        path: "/trainer/:id",
+        element: (
+          <PriveteRoute>
+            <TainerDeatilsPage></TainerDeatilsPage>
+          </PriveteRoute>
+        ),
+      },
+      {
+        path: "/book/:id",
+        element: (
+          <PriveteRoute>
+            <BookingPage></BookingPage>
+          </PriveteRoute>
+        ),
+      },
+      {
+        path: "beTrainer",
+        element: (
+          <PriveteRoute>
+            <BeATrainer></BeATrainer>
+          </PriveteRoute>
+        ),
+      },
+      { path: "/allClass", Component: AllClass },
     ],
   },
 
@@ -46,9 +70,9 @@ export const router = createBrowserRouter([
 
       { path: "subscribers", Component: Subscribers },
       { path: "addClass", Component: AddClass },
-      {path:'pending-trainer', Component:PendingTrainer},
-      {path:'pending-details/:id', Component:PendingDetails}
-     
+      { path: "pending-trainer", Component: PendingTrainer },
+      { path: "pending-details/:id", Component: PendingDetails },
+      { path: "approve", Component: ApproveTrainer },
     ],
   },
 ]);

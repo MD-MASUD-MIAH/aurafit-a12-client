@@ -10,7 +10,9 @@ const PendingTrainer = () => {
   } = useQuery({
     queryKey: ["pendingTrainer"],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/trainer`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/pending-trainer`
+      );
       return res?.data;
     },
   });
@@ -65,7 +67,7 @@ const PendingTrainer = () => {
                     <p>{res.fullName}</p>
                   </td>
                   <td className="p-3">
-                    <p>14 Jan 2022</p>
+                    <p>{res.created_at}</p>
                     <p className="dark:text-gray-600">Friday</p>
                   </td>
                   <td className="p-3">
@@ -79,7 +81,7 @@ const PendingTrainer = () => {
                       to={`/dashboard/pending-details/${res._id}`}
                       className="px-3 py-1 cursor-pointer font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50"
                     >
-                      <span>Deatils</span>
+                      <span>Details</span>
                     </Link>
                   </td>
                 </tr>

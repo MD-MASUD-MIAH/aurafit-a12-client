@@ -36,8 +36,8 @@ const TrainerApplicationForm = () => {
     maxClassesPerDay: "",
     experience: "",
     bio: "",
-    status: "pending",
-    socialLinks: {
+    created_at:new Date().toISOString(),
+    status: "pending",socialLinks: {
       facebook: "",
       twitter: "",
       instagram: "",

@@ -3,10 +3,13 @@ import { useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loader from "../../shared/Loader";
+import { useState } from "react";
+import ModalForm from "./ModalForm";
 
 const PendingDetails = () => {
 
-    const navigate = useNavigate()
+     const [isShowing, setIsShowing] = useState(false)
+  const navigate = useNavigate();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { isPending, data: singleData = {} } = useQuery({
@@ -30,20 +33,22 @@ const PendingDetails = () => {
       console.log(res.data);
 
       if (res.data) {
-  Swal.fire({
-    title: "Trainer Approved!",
-    text: "The trainer's role has been updated successfully.",
-    icon: "success",
-    confirmButtonText: "OK"
-  });
-}
+        Swal.fire({
+          title: "Trainer Approved!",
+          text: "The trainer's role has been updated successfully.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      }
 
-navigate('/dashboard/pending-trainer')
+      navigate("/dashboard/pending-trainer");
     });
   };
 
   return (
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <ModalForm isShowing={isShowing} setIsShowing={setIsShowing} ></ModalForm>
+        
       <div className="flex flex-col max-w-screen-lg overflow-hidden bg-white border rounded shadow-sm lg:flex-row sm:mx-auto">
         <div className="relative lg:w-1/2">
           <img
@@ -77,20 +82,23 @@ navigate('/dashboard/pending-trainer')
             </p>
             <p className="mb-3">
               <span className="font-bold">Availability:</span>{" "}
-              {singleData.availableDays.join(", ")}
+              {singleData.availableDays?.join(", ")}
             </p>
             <p className="mb-3">
               <span className="font-bold">Time Slots:</span>{" "}
-              {singleData.timeSlots.join(", ")}
+              {singleData.timeSlots?.join(", ")}
             </p>
             <p className="mb-3">
               <span className="font-bold">Bio:</span>{" "}
               {singleData.bio || "Professional fitness trainer"}
             </p>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center gap-6">
             <button onClick={handleSubmit} type="submit" className="tom-btn">
               Approve
+            </button>
+            <button  onClick={()=>setIsShowing(true)} type="submit" className="rej-btn">
+              Reject
             </button>
             <div className="flex space-x-4 ml-5">
               {singleData.socialLinks?.facebook && (

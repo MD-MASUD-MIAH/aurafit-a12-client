@@ -100,19 +100,19 @@ const DashBoardLayout = () => {
             </li>
             <li>
               <NavLink
-                to="/dashboard/profile"
+                to="/dashboard/approve"
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 rounded-md ${
                     isActive ? "bg-gray-700" : "hover:bg-gray-700"
                   }`
                 }
               >
-                <FaUserEdit className="mr-3" />
-                Update Profile
+                <FaUserCheck className="mr-3" />
+               Available Trainers
               </NavLink>
             </li>
 
-            {/* Rider links */}
+         
             <>
               <li>
                 <NavLink
