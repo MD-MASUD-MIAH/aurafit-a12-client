@@ -1,183 +1,226 @@
-import axios from "axios";
 import { useState } from "react";
 import {
   FaAlignLeft,
   FaCalendarAlt,
   FaCamera,
   FaChalkboardTeacher,
+  FaClock,
   FaEnvelope,
+  FaFacebook,
   FaHistory,
+  FaInstagram,
+  FaLinkedin,
   FaListUl,
+  FaTwitter,
   FaUser,
 } from "react-icons/fa";
+import { useNavigate } from "react-router";
+import Select from "react-select";
+import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { imageUpload } from "../../utilits/utilits";
 
-const fitnessSkills = ["Yoga", "Cardio", "HIIT", "Zumba", "Strength"];
-const daysOfWeek = [
-  "Saturday",
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-];
-const timeSlots = [
-  "Morning (6am - 9am)",
-  "Afternoon (12pm - 3pm)",
-  "Evening (5pm - 8pm)",
-  "Night (8pm - 10pm)",
-];
-
 const TrainerApplicationForm = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
   const [formData, setFormData] = useState({
     fullName: "",
-    email: "",
+    email: user.email,
     age: "",
-   
-    maxClassesPerDay: "",
-    experience: "",
     skills: [],
+    photo: null,
     availableDays: [],
     timeSlots: [],
+    maxClassesPerDay: "",
+    experience: "",
     bio: "",
-    status: "pending",
-     createAt:new Date().toISOString()
+    socialLinks: {
+      facebook: "",
+      twitter: "",
+      instagram: "",
+      linkedin: "",
+    },
   });
+
+  const daysOfWeek = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  const timeSlots = [
+    "Morning (6:00 AM - 9:00 AM)",
+    "Afternoon (12:00 PM - 3:00 PM)",
+    "Evening (5:00 PM - 8:00 PM)",
+    "Night (8:00 PM - 10:00 PM)",
+  ];
+
+  const fitnessSkills = [
+    { value: "Yoga", label: "Yoga" },
+    { value: "HIIT", label: "HIIT" },
+    { value: "Strength Training", label: "Strength Training" },
+    { value: "Cardio", label: "Cardio" },
+    { value: "Pilates", label: "Pilates" },
+    { value: "CrossFit", label: "CrossFit" },
+    { value: "Zumba", label: "Zumba" },
+    { value: "Boxing", label: "Boxing" },
+    { value: "Martial Arts", label: "Martial Arts" },
+    { value: "Dance", label: "Dance" },
+    { value: "Nutrition", label: "Nutrition" },
+    { value: "Weight Loss", label: "Weight Loss" },
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSocialLinkChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      socialLinks: {
+        ...prev.socialLinks,
+        [name]: value,
+      },
+    }));
+  };
+
+  const handleSkillChange = (selectedOptions) => {
+    setFormData((prev) => ({
+      ...prev,
+      skills: selectedOptions.map((option) => option.value),
+    }));
+  };
+
+  const handleDayToggle = (day) => {
+    setFormData((prev) => {
+      const newDays = prev.availableDays.includes(day)
+        ? prev.availableDays.filter((d) => d !== day)
+        : [...prev.availableDays, day];
+      return { ...prev, availableDays: newDays };
+    });
+  };
+
+  const handleTimeToggle = (slot) => {
+    setFormData((prev) => {
+      const newSlots = prev.timeSlots.includes(slot)
+        ? prev.timeSlots.filter((t) => t !== slot)
+        : [...prev.timeSlots, slot];
+      return { ...prev, timeSlots: newSlots };
+    });
+  };
+
   const handleFileChange = async (e) => {
-    const image = e.target.files[0];
-
-    const imageUrl = await imageUpload(image);
-
-    setFormData((prev) => ({ ...prev, photo:imageUrl }));
-
-    console.log(imageUrl);
-  };
-
-  const handleSkillToggle = (value) => {
-    setFormData((prev) => {
-      const updated = prev.skills.includes(value)
-        ? prev.skills.filter((item) => item !== value)
-        : [...prev.skills, value];
-      return { ...prev, skills: updated };
-    });
-  };
-
-  const handleDayToggle = (value) => {
-    setFormData((prev) => {
-      const updated = prev.availableDays.includes(value)
-        ? prev.availableDays.filter((item) => item !== value)
-        : [...prev.availableDays, value];
-      return { ...prev, availableDays: updated };
-    });
-  };
-
-  const handleTimeToggle = (value) => {
-    setFormData((prev) => {
-      const updated = prev.timeSlots.includes(value)
-        ? prev.timeSlots.filter((item) => item !== value)
-        : [...prev.timeSlots, value];
-      return { ...prev, timeSlots: updated };
-    });
+    const image = await imageUpload(e.target.files[0]);
+    setFormData((prev) => ({ ...prev, photo: image }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // You can use this to send to backend or log it
-    console.log("Form Submitted:", formData);
-const { data } = await axios.post(
-      `${import.meta.env.VITE_API_URL}/trainer`,
-      formData
-    );
-    // If sending via FormData (for file upload):
-    const submitData = new FormData();
-    for (const key in formData) {
-      if (Array.isArray(formData[key])) {
-        submitData.append(key, JSON.stringify(formData[key]));
-      } else {
-        submitData.append(key, formData[key]);
-      }
-    }
-
-    
-
-    console.log(data);
+    console.log("Form submitted:", formData);
+    await axiosSecure
+      .post("/trainer", formData)
+      .then((res) => {
+        console.log(res.data);
+        navigate("/allTrainer");
+        Swal.fire("success");
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (
-    <div className="w-11/12 mx-auto p-6 bg-white rounded-lg shadow-md my-14 md:my-0">
-      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-        Trainer Application Form
-      </h1>
+    <div className=" max-w-7xl mx-auto mt-12  md:p-6 p-4 bg-white rounded-xl shadow-lg my-8">
+      <header className="text-center mb-10">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          Join Our Trainer Team
+        </h1>
+        <p className="text-gray-600">
+          Please fill out this form to apply as a fitness trainer
+        </p>
+      </header>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-8">
         {/* Personal Information Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Left Column */}
-          <div className="space-y-6">
-            {/* Full Name */}
-            <Input
-              label="Full Name"
-              icon={<FaUser />}
-              name="fullName"
-              type="text"
-              value={formData.fullName}
-              onChange={handleChange}
-              placeholder="John Doe"
-            />
-
-            {/* Email */}
-            <Input
-              label="Email Address"
-              icon={<FaEnvelope />}
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="john@example.com"
-            />
-
-            {/* Age */}
-            <Input
-              label="Age"
-              icon={<FaCalendarAlt />}
-              name="age"
-              type="number"
-              value={formData.age}
-              onChange={handleChange}
-              min="18"
-              max="70"
-              placeholder="30"
-            />
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-6">
-            {/* Profile Photo */}
-            <div className="space-y-2">
-              <label className="flex items-center text-sm font-medium text-gray-700">
-                <FaCamera className="mr-2 text-blue-500" /> Profile Photo
-              </label>
-              <input
-                type="file"
-                onChange={handleFileChange}
-                accept="image/*"
+        <section className="bg-gray-50 p-6 rounded-lg">
+          <h2 className="text-xl font-semibold text-gray-700 mb-6 pb-2 border-b border-gray-200">
+            Personal Information
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-5">
+              <Input
+                label="Full Name"
+                icon={<FaUser className="text-blue-500" />}
+                name="fullName"
+                type="text"
+                value={formData.fullName}
+                onChange={handleChange}
+                placeholder="your name"
                 required
-                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              />
+
+              <Input
+                label="Email Address"
+                icon={<FaEnvelope className="text-blue-500" />}
+                name="email"
+                type="email"
+                value={user.email}
+                onChange={handleChange}
+                placeholder="enter you email"
+                required
               />
             </div>
 
-            {/* Max Classes */}
+            <div className="space-y-5">
+              <Input
+                label="Age"
+                icon={<FaCalendarAlt className="text-blue-500" />}
+                name="age"
+                type="number"
+                value={formData.age}
+                onChange={handleChange}
+                min="18"
+                max="70"
+                placeholder="30"
+                required
+              />
+
+              <div className="space-y-2">
+                <label className="flex items-center text-sm font-medium text-gray-700">
+                  <FaCamera className="mr-2 text-blue-500" />
+                  Profile Photo
+                </label>
+                <input
+                  type="file"
+                  name="image"
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  required
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Professional Information Section */}
+        <section className="bg-gray-50 p-6 rounded-lg">
+          <h2 className="text-xl font-semibold text-gray-700 mb-6 pb-2 border-b border-gray-200">
+            Professional Details
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input
               label="Maximum Classes Per Day"
-              icon={<FaChalkboardTeacher />}
+              icon={<FaChalkboardTeacher className="text-blue-500" />}
               name="maxClassesPerDay"
               type="number"
               value={formData.maxClassesPerDay}
@@ -185,12 +228,12 @@ const { data } = await axios.post(
               min="1"
               max="10"
               placeholder="4"
+              required
             />
 
-            {/* Experience */}
             <Input
               label="Years of Experience"
-              icon={<FaHistory />}
+              icon={<FaHistory className="text-blue-500" />}
               name="experience"
               type="number"
               value={formData.experience}
@@ -198,66 +241,157 @@ const { data } = await axios.post(
               min="0"
               max="50"
               placeholder="5"
+              required
             />
           </div>
-        </div>
+        </section>
 
-        {/* Skills */}
-        <CheckboxGroup
-          title="Skills & Specializations"
-          icon={<FaListUl />}
-          options={fitnessSkills}
-          selected={formData.skills}
-          toggle={handleSkillToggle}
-        />
+        {/* Skills Section */}
+        <section className="bg-gray-50 p-6 rounded-lg">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+            <FaListUl className="text-blue-500 mr-2" />
+            Skills & Specializations
+          </h2>
+          <p className="text-gray-500 text-sm mb-4">
+            Select all that apply to your expertise
+          </p>
+          <Select
+            isMulti
+            options={fitnessSkills}
+            onChange={handleSkillChange}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            placeholder="Select your skills..."
+          />
+        </section>
 
-        {/* Available Days */}
-        <CheckboxGroup
-          title="Days of Week"
-          icon={<FaListUl />}
-          options={daysOfWeek}
-          selected={formData.availableDays}
-          toggle={handleDayToggle}
-        />
+        {/* Social Media Links */}
+        <section className="bg-gray-50 p-6 rounded-lg">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">
+            Social Media Links
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex items-center">
+              <FaFacebook className="text-blue-600 mr-3 w-5 h-5" />
+              <input
+                type="url"
+                name="facebook"
+                value={formData.socialLinks.facebook}
+                onChange={handleSocialLinkChange}
+                placeholder="https://facebook.com/username"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              />
+            </div>
+            <div className="flex items-center">
+              <FaTwitter className="text-blue-400 mr-3 w-5 h-5" />
+              <input
+                type="url"
+                name="twitter"
+                value={formData.socialLinks.twitter}
+                onChange={handleSocialLinkChange}
+                placeholder="https://twitter.com/username"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              />
+            </div>
+            <div className="flex items-center">
+              <FaInstagram className="text-pink-600 mr-3 w-5 h-5" />
+              <input
+                type="url"
+                name="instagram"
+                value={formData.socialLinks.instagram}
+                onChange={handleSocialLinkChange}
+                placeholder="https://instagram.com/username"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              />
+            </div>
+            <div className="flex items-center">
+              <FaLinkedin className="text-blue-700 mr-3 w-5 h-5" />
+              <input
+                type="url"
+                name="linkedin"
+                value={formData.socialLinks.linkedin}
+                onChange={handleSocialLinkChange}
+                placeholder="https://linkedin.com/in/username"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              />
+            </div>
+          </div>
+        </section>
 
-        {/* Time Slots */}
-        <CheckboxGroup
-          title="Time Slots"
-          icon={<FaListUl />}
-          options={timeSlots}
-          selected={formData.timeSlots}
-          toggle={handleTimeToggle}
-        />
+        {/* Availability Section */}
+        <section className="bg-gray-50 p-6 rounded-lg">
+          <h2 className="text-xl font-semibold text-gray-700 mb-2 flex items-center">
+            <FaClock className="text-blue-500 mr-2" />
+            Availability
+          </h2>
+          <p className="text-gray-500 text-sm mb-6">
+            Select when you're available to train
+          </p>
 
-        {/* Bio */}
-        <div className="space-y-2">
-          <label className="flex items-center text-sm font-medium text-gray-700">
-            <FaAlignLeft className="mr-2 text-blue-500" /> Biography
-          </label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="font-medium text-gray-700 mb-3">Days Available</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {daysOfWeek.map((day) => (
+                  <CheckboxItem
+                    key={day}
+                    label={day}
+                    checked={formData.availableDays.includes(day)}
+                    onChange={() => handleDayToggle(day)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-medium text-gray-700 mb-3">Time Slots</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {timeSlots.map((slot) => (
+                  <CheckboxItem
+                    key={slot}
+                    label={slot}
+                    checked={formData.timeSlots.includes(slot)}
+                    onChange={() => handleTimeToggle(slot)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Bio Section */}
+        <section className="bg-gray-50 p-6 rounded-lg">
+          <h2 className="text-xl font-semibold text-gray-700 mb-2 flex items-center">
+            <FaAlignLeft className="text-blue-500 mr-2" />
+            Your Qualifications.
+          </h2>
+
           <textarea
             name="bio"
             value={formData.bio}
             onChange={handleChange}
             required
-            rows="4"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Tell us about your training philosophy and background..."
+            rows="5"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            placeholder="Your training philosophy, certifications, and why you'd be a great fit..."
           />
-        </div>
+        </section>
 
-        {/* Submit */}
-        <button
-          type="submit"
-          className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-colors"
-        >
-          Submit Application
-        </button>
+        {/* Submit Button */}
+        <div className="pt-4">
+          <button
+            type="submit"
+            className="w-full px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+          >
+            Submit Application
+          </button>
+        </div>
       </form>
     </div>
   );
 };
 
-// Reusable input field
+// Reusable Components
 const Input = ({ label, icon, ...props }) => (
   <div className="space-y-2">
     <label className="flex items-center text-sm font-medium text-gray-700">
@@ -266,35 +400,21 @@ const Input = ({ label, icon, ...props }) => (
     </label>
     <input
       {...props}
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
     />
   </div>
 );
 
-// Reusable checkbox group
-const CheckboxGroup = ({ title, icon, options, selected, toggle }) => (
-  <div className="space-y-2">
-    <label className="flex items-center text-sm font-medium text-gray-700">
-      {icon}
-      <span className="ml-2">{title}</span>
-    </label>
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-      {options.map((option) => (
-        <label
-          key={option}
-          className="flex items-center space-x-2 bg-gray-50 hover:bg-gray-100 rounded-lg p-3 cursor-pointer"
-        >
-          <input
-            type="checkbox"
-            checked={selected.includes(option)}
-            onChange={() => toggle(option)}
-            className="rounded text-blue-600 focus:ring-blue-500"
-          />
-          <span className="text-sm text-gray-700">{option}</span>
-        </label>
-      ))}
-    </div>
-  </div>
+const CheckboxItem = ({ label, checked, onChange }) => (
+  <label className="flex items-center space-x-2 bg-white hover:bg-gray-50 rounded-lg p-3 cursor-pointer border border-gray-200 transition">
+    <input
+      type="checkbox"
+      checked={checked}
+      onChange={onChange}
+      className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+    />
+    <span className="text-sm text-gray-700">{label}</span>
+  </label>
 );
 
 export default TrainerApplicationForm;

@@ -24,7 +24,7 @@ const Navbar = () => {
             role="navigation"
           >
             {/* Brand logo */}
-            <a
+            <p
               id="WindUI"
               aria-label="WindUI logo"
               aria-current="page"
@@ -33,7 +33,7 @@ const Navbar = () => {
             >
               <img className="w-12 h-12" src={logo} alt="" />
               AuraFit
-            </a>
+            </p>
 
             {/* Mobile trigger */}
             <button
@@ -88,6 +88,7 @@ const Navbar = () => {
               </li>
               <li role="none" className="flex items-stretch">
                 <NavLink
+                to={'/allTrainer'}
                   onClick={() => setIsToggleOpen(!isToggleOpen)}
                   role="menuitem"
                   aria-current="page"

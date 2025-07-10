@@ -75,7 +75,7 @@ const DashBoardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/subscribers"
-               className={({ isActive }) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 rounded-md ${
                     isActive ? "bg-blue-500" : "hover:bg-blue-700"
                   }`
@@ -85,19 +85,7 @@ const DashBoardLayout = () => {
                 Subscribers
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/dashboard/beTrainer"
-               className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
-                  }`
-                }
-              >
-                <MdPersonAdd className="mr-3" />
-                Be A Trainer
-              </NavLink>
-            </li>
+           
             <li>
               <NavLink
                 to="/dashboard/track"
@@ -229,7 +217,7 @@ const DashBoardLayout = () => {
 
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-64">
-        <main className="flex-1 overflow-y-auto p-6 bg-gray-50">
+        <main className="flex-1 overflow-y-auto py-6 md:p-6 bg-gray-50">
           <Outlet />
         </main>
       </div>
