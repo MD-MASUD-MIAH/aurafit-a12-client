@@ -137,14 +137,14 @@ const TainerDeatilsPage = () => {
 
             <div className="grid grid-cols-2  gap-2">
               {singleData.timeSlots.map((slot, i) => (
-                <Link
-                  to={`/book/${singleData._id}`}
-                  key={i}
-                  className="flex items-center bg-gray-50 px-3 py-2 rounded tom-btn"
-                >
-                  <button className="w-2 h-2 bg-blue-500 rounded-full mr-2"></button>
-                  <span className="text-white text-sm">{slot}</span>
-                </Link>
+             <Link
+  to={`/book/${singleData._id}?slot=${encodeURIComponent(slot)}`}
+  key={i}
+  className="flex items-center bg-gray-50 px-3 py-2 rounded tom-btn"
+>
+  <button className="w-2 h-2 bg-blue-500 rounded-full mr-2"></button>
+  <span className="text-white text-sm">{slot}</span>
+</Link>
               ))}
             </div>
           </div>
