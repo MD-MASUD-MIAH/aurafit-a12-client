@@ -15,6 +15,7 @@ import { AuthContext } from "./AuthContext";
 import { auth } from "../firebase/firebase.init";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [booking,setBooking] = useState({})
   const [loading, setLoading] = useState(true);
   const provider = new GoogleAuthProvider();
 
@@ -48,7 +49,10 @@ const AuthProvider = ({ children }) => {
     upDateUser,
     logout,
     googleLogin,
-    setLoading
+    setLoading,
+   booking,
+   setBooking,
+
   };
 
   useEffect(() => {

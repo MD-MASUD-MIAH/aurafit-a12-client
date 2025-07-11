@@ -6,10 +6,12 @@ import { ToastContainer } from "react-toastify";
 
 const MainLayout = () => {
   return (
-    <div className="urban">
+    <div className="urban  min-h-screen flex flex-col">
       <ToastContainer></ToastContainer>
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <div className="flex-grow">
+    <Outlet />
+  </div>
       <Footer></Footer>
     </div>
   );

@@ -1,23 +1,24 @@
+
+
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useLocation, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import Loader from "../shared/Loader";
 
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import StripeCheckout from "../Form/StripeCheckout";
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+import useAuth from "../hooks/useAuth";
+
+
 
 const BookingPage = () => {
+  const { user } = useAuth();
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const slot = queryParams.get("slot");
 
-  console.log(slot);
-
-  const price = 50;
+  
   const { isPending, data: singleData = {} } = useQuery({
     queryKey: ["singleData", id],
     queryFn: async () => {
@@ -28,13 +29,11 @@ const BookingPage = () => {
     },
   });
 
-  const { data: classData = {} } = useQuery({
+  const { data: classData = [] } = useQuery({
     queryKey: ["classData", id],
     queryFn: async () => {
       const res = await axios?.get(
-        `${
-          import.meta.env.VITE_API_URL
-        }/trainer-classes/${id}`
+        `${import.meta.env.VITE_API_URL}/trainer-classes/${id}`
       );
       return res.data;
     },
@@ -47,17 +46,30 @@ const BookingPage = () => {
   console.log(singleData);
 
   console.log(classData);
+  const uniqueClasses = Array.from(
+    new Set(classData?.map((item) => item.className))
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Get all form data at once
     const form = e.target;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+    const data = Object.fromEntries(formData.entries()); // ⬅️ Move this up
+      data.trainerEmail  = singleData.email 
+      data.trainerId  = singleData._id 
+    const packa = data.package; // now we can access it from data directly
+
+    if (packa === "Basic") {
+      data.amount = 25;
+    } else if (packa === "Standard") {
+      data.amount = 50;
+    } else {
+      data.amount = 100;
+    }
 
     console.log("Form submitted:", data);
-    alert("Registration submitted successfully!");
+    navigate("/payment", { state: data });
   };
 
   return (
@@ -198,38 +210,82 @@ const BookingPage = () => {
                     >
                       Classes
                     </label>
-                    <input
-                      type="text"
-                      id="classes"
-                      name="classes"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      required
-                    />
+                    <select
+                      name="selectClass"
+                      className="w-full border rounded px-3 py-2"
+                    >
+                      <option value="">-- Choose a Class --</option>
+                      {uniqueClasses.map((name, index) => (
+                        <option key={index} value={name}>
+                          {name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Packages
-                    </label>
-                    <div className="space-y-2">
-                      {["Basic", "Standard", "Premium"].map((pkg) => (
-                        <div key={pkg} className="flex items-center">
-                          <input
-                            type="radio"
-                            id={pkg}
-                            name="package"
-                            value={pkg}
-                            defaultChecked={pkg === "Basic"}
-                            className="h-4 w-4 text-blue-600 focus:ring-blue-500"
-                          />
-                          <label
-                            htmlFor={pkg}
-                            className="ml-2 block text-sm text-gray-700"
-                          >
-                            {pkg}
-                          </label>
-                        </div>
-                      ))}
+                  <div
+                    className=" flex justify-between items-center
+                
+                
+                
+                
+                
+                
+                
+                "
+                  >
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Packages
+                      </label>
+                      <div className="space-y-2">
+                        {["Basic", "Standard", "Premium"].map((pkg) => (
+                          <div key={pkg} className="flex items-center">
+                            <input
+                              type="radio"
+                              id={pkg}
+                              name="package"
+                              value={pkg}
+                              defaultChecked={pkg === "Basic"}
+                              className="h-4 w-4 text-blue-600 focus:ring-blue-500"
+                            />
+                            <label
+                              htmlFor={pkg}
+                              className="ml-2 block text-sm text-gray-700"
+                            >
+                              {pkg}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Member Name
+                      </label>
+                      <input
+                        type="text"
+                        value={user.displayName}
+                        id="trainerName"
+                        name="memberName"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Member Email 
+                      </label>
+                      <input
+                        type="text"
+                        value={user.email}
+                        id="trainerName"
+                        name="memberEmail"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                      />
                     </div>
                   </div>
 
@@ -246,9 +302,7 @@ const BookingPage = () => {
         </div>
       </section>
 
-      <Elements stripe={stripePromise}>
-        <StripeCheckout price={price}></StripeCheckout>
-      </Elements>
+     
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import { HashLoader } from "react-spinners";
+import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import "./stripe.css";
-import Swal from "sweetalert2";
-const StripeCheckout = ({ price }) => {
+const StripeCheckout = ({ formData }) => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
@@ -14,22 +14,29 @@ const StripeCheckout = ({ price }) => {
   const [clientSecret, setClientSecret] = useState("");
   const axiosSecure = useAxiosSecure();
 
+
+  const pirce = formData.amount 
+
+  console.log(pirce);
+  
   useEffect(() => {
     const getClientSecret = async () => {
       try {
-        const { data } = await axiosSecure.post("/create-payment-intent", {
-          price,
-        });
+        const { data } = await axiosSecure.post(
+          "/create-payment-intent",
+      formData);
         setClientSecret(data.clientSecret);
       } catch (err) {
         console.error("Error getting client secret:", err);
       }
     };
 
-    if (price > 0) {
+    if (formData.amount > 0) {
       getClientSecret();
     }
-  }, [price, axiosSecure]);
+  }, [formData, axiosSecure]);
+
+  console.log(formData);
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -59,7 +66,7 @@ const StripeCheckout = ({ price }) => {
     if (error) {
       console.log("[error]", error);
       setCardError(error.message);
-      setProcessing(false);
+     
       return;
     } else {
       console.log("[PaymentMethod]", paymentMethod);
@@ -77,35 +84,44 @@ const StripeCheckout = ({ price }) => {
       },
     });
 
-
-        if (result?.error) {
-      setCardError(result?.error?.message)
-      return
+    if (result?.error) {
+      setProcessing(false);
+      setCardError(result?.error?.message);
+      return;
     }
-    if (result?.paymentIntent?.status === 'succeeded') {
-      // save order data in db
-   try{
-     
+    if (result?.paymentIntent?.status === "succeeded") {
+      const transactionId = result.paymentIntent.id;
 
-    Swal.fire('payment succeeded')
+      // Save booking data in DB
+      const bookingInfo = {
+        ...formData,
+        transactionId,
+        date: new Date(), // optional
+        paymentStatus: "paid", // optional
+      };
+
+      try {
+        const res = await axiosSecure.post("/bookings", bookingInfo);
+
+        if (res.data.insertedId) {
+          Swal.fire("Success", "Booking and payment completed!", "success");
+        }
       } catch (err) {
-        console.log(err)
+        setProcessing(false);
+        console.error("Booking save error:", err);
       } finally {
-        setProcessing(false)
-        setCardError(null)
-      
+        setProcessing(false);
+        setCardError(null);
       }
-      // update product quantity in db from plant collection
     }
 
+    setProcessing(false);
 
-
-   
     console.log(result);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="w-full" onSubmit={handleSubmit}>
       <CardElement
         options={{
           style: {
@@ -126,18 +142,16 @@ const StripeCheckout = ({ price }) => {
       {cardError && <p className="text-red-500 pb-4">{cardError}</p>}
       <div className="flex  justify-between items-center">
         <button
-          className="tom-btn"
+          className="tom-btn w-full flex items-center justify-center"
           type="submit"
           disabled={!stripe || processing}
         >
           {processing ? (
             <HashLoader className="mt-1" size={24}></HashLoader>
           ) : (
-            ` Pay $ ${price}`
+            ` Pay $ ${formData.amount}`
           )}
         </button>
-
-        <button className="rej-btn">Cancel</button>
       </div>
     </form>
   );

@@ -18,6 +18,7 @@ import MyProfile from "../DashBoard/meber/MyProfile";
 import Home from "../Home/Home";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
+import PaymentPage from "../DashBoard/meber/PaymentPage";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,9 @@ export const router = createBrowserRouter([
         ),
       },
       { path: "/allClass", Component: AllClass },
+      {path:'/payment',element:<PriveteRoute
+        >   <PaymentPage></PaymentPage></PriveteRoute>
+      }
     ],
   },
 
