@@ -13,6 +13,8 @@
   "dependencies": {
     "@material-tailwind/html": "^3.0.0-beta.7",
     "@material-tailwind/react": "^3.0.0-beta.24",
+    "@stripe/react-stripe-js": "^3.7.0",
+    "@stripe/stripe-js": "^7.4.0",
     "@tailwindcss/vite": "^4.1.11",
     "@tanstack/react-query": "^5.81.5",
     "@windui/react": "^1.0.1",
@@ -29,6 +31,7 @@
     "react-modal": "^3.16.3",
     "react-router": "^7.6.3",
     "react-select": "^5.10.1",
+    "react-spinners": "^0.17.0",
     "react-toastify": "^11.0.5",
     "sweetalert2": "^11.22.2"
   },

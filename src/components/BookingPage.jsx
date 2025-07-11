@@ -3,8 +3,15 @@ import axios from "axios";
 import { useParams } from "react-router";
 import Loader from "../shared/Loader";
 
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import StripeCheckout from "../Form/StripeCheckout";
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
 const BookingPage = () => {
   const { id } = useParams();
+
+  const price = 50
   const { isPending, data: singleData = {} } = useQuery({
     queryKey: ["singleData", id],
     queryFn: async () => {
@@ -123,13 +130,9 @@ const BookingPage = () => {
         </div>
       </section>
 
-      <form
-        action="
-           "
-      >
-        <h1>{singleData.fullName}</h1>
-        <input type="text" name="" id="" />
-      </form>
+      <Elements stripe={stripePromise}>
+        <StripeCheckout price={price}></StripeCheckout>
+      </Elements>
     </div>
   );
 };
