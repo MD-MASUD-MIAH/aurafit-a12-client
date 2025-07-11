@@ -48,6 +48,7 @@ const AuthProvider = ({ children }) => {
     upDateUser,
     logout,
     googleLogin,
+    setLoading
   };
 
   useEffect(() => {

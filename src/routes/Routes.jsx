@@ -12,7 +12,9 @@ import PendingDetails from "../DashBoard/adminPage/PendingDetails";
 import PendingTrainer from "../DashBoard/adminPage/PendingTrainer";
 import Subscribers from "../DashBoard/adminPage/Subscribers";
 import DashBoard from "../DashBoard/DashBoard";
+import ActivityLogPage from "../DashBoard/meber/ActivityLogPage";
 import BeATrainer from "../DashBoard/meber/BeATrainer";
+import MyProfile from "../DashBoard/meber/MyProfile";
 import Home from "../Home/Home";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
@@ -73,6 +75,8 @@ export const router = createBrowserRouter([
       { path: "pending-trainer", Component: PendingTrainer },
       { path: "pending-details/:id", Component: PendingDetails },
       { path: "approve", Component: ApproveTrainer },
+      { path: "activityLogPage", Component: ActivityLogPage },
+      { path: "my-profile", Component: MyProfile },
     ],
   },
 ]);

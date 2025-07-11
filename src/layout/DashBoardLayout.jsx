@@ -8,7 +8,6 @@ import {
   FaTasks,
   FaUserCheck,
   FaUserClock,
-  FaUserEdit,
   FaUserShield,
   FaWallet,
 } from "react-icons/fa";
@@ -22,7 +21,7 @@ const DashBoardLayout = () => {
   return (
     <div className="flex h-screen ">
       {/* Mobile sidebar toggle */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white shadow z-50">
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="p-4 text-gray-600 hover:text-gray-900 focus:outline-none"
@@ -101,27 +100,26 @@ const DashBoardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/approve"
-                className={({ isActive }) =>
+               className={({ isActive }) =>
                   `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-gray-700" : "hover:bg-gray-700"
+                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
                   }`
                 }
               >
                 <FaUserCheck className="mr-3" />
-               Available Trainers
+                Available Trainers
               </NavLink>
             </li>
 
-         
             <>
               <li>
                 <NavLink
                   to="/dashboard/pending-trainer"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 rounded-md ${
-                      isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                    }`
-                  }
+                  `flex items-center px-4 py-2 rounded-md ${
+                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                  }`
+                }
                 >
                   <FaTasks className="mr-3" />
                   Pending Trainer
@@ -129,28 +127,28 @@ const DashBoardLayout = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/completed-deliveries"
+                  to="/dashboard/activityLogPage"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 rounded-md ${
-                      isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                    }`
-                  }
+                  `flex items-center px-4 py-2 rounded-md ${
+                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                  }`
+                }
                 >
                   <FaCheckCircle className="mr-3" />
-                  Completed Deliveries
+                  Activity Log Page
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/my-earnings"
+                  to="/dashboard/my-profile"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 rounded-md ${
-                      isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                    }`
-                  }
+                  `flex items-center px-4 py-2 rounded-md ${
+                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                  }`
+                }
                 >
                   <FaWallet className="mr-3" />
-                  My Earnings
+                  My Profile
                 </NavLink>
               </li>
             </>
@@ -161,10 +159,10 @@ const DashBoardLayout = () => {
                 <NavLink
                   to="/dashboard/assign-rider"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 rounded-md ${
-                      isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                    }`
-                  }
+                  `flex items-center px-4 py-2 rounded-md ${
+                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                  }`
+                }
                 >
                   <FaMotorcycle className="mr-3" />
                   Assign Rider
@@ -174,10 +172,10 @@ const DashBoardLayout = () => {
                 <NavLink
                   to="/dashboard/active-riders"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 rounded-md ${
-                      isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                    }`
-                  }
+                  `flex items-center px-4 py-2 rounded-md ${
+                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                  }`
+                }
                 >
                   <FaUserCheck className="mr-3" />
                   Active Riders
@@ -187,10 +185,10 @@ const DashBoardLayout = () => {
                 <NavLink
                   to="/dashboard/pending-riders"
                   className={({ isActive }) =>
-                    `flex items-center px-4 py-2 rounded-md ${
-                      isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                    }`
-                  }
+                  `flex items-center px-4 py-2 rounded-md ${
+                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                  }`
+                }
                 >
                   <FaUserClock className="mr-3" />
                   Pending Riders
@@ -199,11 +197,11 @@ const DashBoardLayout = () => {
               <li>
                 <NavLink
                   to="/dashboard/makeAdmin"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 rounded-md ${
-                      isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                    }`
-                  }
+                   className={({ isActive }) =>
+                  `flex items-center px-4 py-2 rounded-md ${
+                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                  }`
+                }
                 >
                   <FaUserShield className="mr-3" />
                   Make Admin

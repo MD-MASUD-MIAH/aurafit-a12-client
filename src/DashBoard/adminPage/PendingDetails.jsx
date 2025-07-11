@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loader from "../../shared/Loader";
-import { useState } from "react";
 import ModalForm from "./ModalForm";
 
 const PendingDetails = () => {
+  const [isShowing, setIsShowing] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
-     const [isShowing, setIsShowing] = useState(false)
   const navigate = useNavigate();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
@@ -45,10 +46,33 @@ const PendingDetails = () => {
     });
   };
 
+  const handleSubmi = async(e) => {
+    e.preventDefault();
+  await axiosSecure
+    .patch(`/trainer/reject/${id}`, { feedback: feedback })
+    .then((res) => {
+      if (res.data.result.modifiedCount > 0) {
+        Swal.fire("Rejected!", "Trainer has been rejected.", "info");
+        // Optional: refetch or remove from pending list
+      }
+
+        navigate("/dashboard/pending-trainer");
+    });
+
+    setIsShowing(false);
+  };
+
   return (
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <ModalForm isShowing={isShowing} setIsShowing={setIsShowing} ></ModalForm>
-        
+      <ModalForm
+        handleSubmi={handleSubmi}
+        setFeedback={setFeedback}
+        feedback={feedback}
+        singleData={singleData}
+        isShowing={isShowing}
+        setIsShowing={setIsShowing}
+      ></ModalForm>
+
       <div className="flex flex-col max-w-screen-lg overflow-hidden bg-white border rounded shadow-sm lg:flex-row sm:mx-auto">
         <div className="relative lg:w-1/2">
           <img
@@ -97,7 +121,11 @@ const PendingDetails = () => {
             <button onClick={handleSubmit} type="submit" className="tom-btn">
               Approve
             </button>
-            <button  onClick={()=>setIsShowing(true)} type="submit" className="rej-btn">
+            <button
+              onClick={() => setIsShowing(true)}
+              type="submit"
+              className="rej-btn"
+            >
               Reject
             </button>
             <div className="flex space-x-4 ml-5">
