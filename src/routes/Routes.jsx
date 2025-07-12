@@ -14,11 +14,13 @@ import Subscribers from "../DashBoard/adminPage/Subscribers";
 import DashBoard from "../DashBoard/DashBoard";
 import ActivityLogPage from "../DashBoard/meber/ActivityLogPage";
 import BeATrainer from "../DashBoard/meber/BeATrainer";
+import BookedTrainer from "../DashBoard/meber/BookedTrainer";
 import MyProfile from "../DashBoard/meber/MyProfile";
+import PaymentPage from "../DashBoard/meber/PaymentPage";
 import Home from "../Home/Home";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
-import PaymentPage from "../DashBoard/meber/PaymentPage";
+import AddNewSlots from "../DashBoard/trainer/AddNewSlots";
 
 export const router = createBrowserRouter([
   {
@@ -58,9 +60,15 @@ export const router = createBrowserRouter([
         ),
       },
       { path: "/allClass", Component: AllClass },
-      {path:'/payment',element:<PriveteRoute
-        >   <PaymentPage></PaymentPage></PriveteRoute>
-      }
+      {
+        path: "/payment",
+        element: (
+          <PriveteRoute>
+            {" "}
+            <PaymentPage></PaymentPage>
+          </PriveteRoute>
+        ),
+      },
     ],
   },
 
@@ -81,6 +89,17 @@ export const router = createBrowserRouter([
       { path: "approve", Component: ApproveTrainer },
       { path: "activityLogPage", Component: ActivityLogPage },
       { path: "my-profile", Component: MyProfile },
+      {
+        path: "booked",
+        element: (
+          <PriveteRoute>
+          
+            <BookedTrainer></BookedTrainer>
+          </PriveteRoute>
+        ),
+      },
+
+      {path:'addSlots',Component:AddNewSlots}
     ],
   },
 ]);

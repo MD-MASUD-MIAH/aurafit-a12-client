@@ -157,7 +157,7 @@ const DashBoardLayout = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/assign-rider"
+                  to="/dashboard/booked"
                   className={({ isActive }) =>
                   `flex items-center px-4 py-2 rounded-md ${
                     isActive ? "bg-blue-500" : "hover:bg-blue-700"
@@ -165,20 +165,20 @@ const DashBoardLayout = () => {
                 }
                 >
                   <FaMotorcycle className="mr-3" />
-                  Assign Rider
+              Booked Trainer
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/active-riders"
+                  to="/dashboard/addSlots"
                   className={({ isActive }) =>
                   `flex items-center px-4 py-2 rounded-md ${
                     isActive ? "bg-blue-500" : "hover:bg-blue-700"
                   }`
                 }
                 >
-                  <FaUserCheck className="mr-3" />
-                  Active Riders
+                 <FaPlus className="mr-3"></FaPlus>
+                    Add Slots
                 </NavLink>
               </li>
               <li>

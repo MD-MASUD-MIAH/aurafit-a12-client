@@ -15,9 +15,7 @@ const StripeCheckout = ({ formData }) => {
   const axiosSecure = useAxiosSecure();
 
 
-  const pirce = formData.amount 
-
-  console.log(pirce);
+ 
   
   useEffect(() => {
     const getClientSecret = async () => {

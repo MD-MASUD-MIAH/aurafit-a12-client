@@ -58,6 +58,7 @@ const BookingPage = () => {
     const data = Object.fromEntries(formData.entries()); // ⬅️ Move this up
       data.trainerEmail  = singleData.email 
       data.trainerId  = singleData._id 
+      data.trainerSkills = singleData.skills
     const packa = data.package; // now we can access it from data directly
 
     if (packa === "Basic") {
