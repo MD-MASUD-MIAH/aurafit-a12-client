@@ -11,6 +11,9 @@ import {
   FaUserShield,
   FaWallet,
 } from "react-icons/fa";
+import { CiBookmarkCheck } from "react-icons/ci"; 
+
+import { MdManageHistory } from "react-icons/md";
 
 import { NavLink, Outlet } from "react-router";
 import logo from "../assets/logo.png";
@@ -164,7 +167,7 @@ const DashBoardLayout = () => {
                   }`
                 }
                 >
-                  <FaMotorcycle className="mr-3" />
+                <CiBookmarkCheck className="mr-3" />
               Booked Trainer
                 </NavLink>
               </li>
@@ -183,15 +186,15 @@ const DashBoardLayout = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/pending-riders"
+                  to="/dashboard/menageSlots"
                   className={({ isActive }) =>
                   `flex items-center px-4 py-2 rounded-md ${
                     isActive ? "bg-blue-500" : "hover:bg-blue-700"
                   }`
                 }
                 >
-                  <FaUserClock className="mr-3" />
-                  Pending Riders
+                <MdManageHistory className="mr-3" />
+              Manage Slots
                 </NavLink>
               </li>
               <li>

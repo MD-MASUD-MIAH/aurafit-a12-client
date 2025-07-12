@@ -19,6 +19,8 @@ const ClassPagination = () => {
     },
   });
 
+  console.log(allClass);
+
   if (isPending) {
     return <Loader></Loader>;
   }
@@ -112,12 +114,12 @@ const ClassPagination = () => {
                 <div className="flex flex-wrap gap-2">
                   {classItem?.trainers?.map((trainer) => (
                     <Link
-                      to={`/trainer/${trainer.trainerId}`}
+                      to={`/trainer/${trainer._id}`}
                       key={trainer.trainerId}
                       className="flex items-center space-x-2"
                     >
                       <img
-                        src={trainer.trainerPhoto}
+                        src={trainer.photo}
                         alt={trainer.fullName}
                         className="w-8 h-8 rounded-full object-cover"
                         onError={(e) => {

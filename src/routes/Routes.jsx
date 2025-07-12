@@ -17,10 +17,11 @@ import BeATrainer from "../DashBoard/meber/BeATrainer";
 import BookedTrainer from "../DashBoard/meber/BookedTrainer";
 import MyProfile from "../DashBoard/meber/MyProfile";
 import PaymentPage from "../DashBoard/meber/PaymentPage";
+import AddNewSlots from "../DashBoard/trainer/AddNewSlots";
+import ManageSlots from "../DashBoard/trainer/ManageSlots";
 import Home from "../Home/Home";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
-import AddNewSlots from "../DashBoard/trainer/AddNewSlots";
 
 export const router = createBrowserRouter([
   {
@@ -93,13 +94,13 @@ export const router = createBrowserRouter([
         path: "booked",
         element: (
           <PriveteRoute>
-          
             <BookedTrainer></BookedTrainer>
           </PriveteRoute>
         ),
       },
 
-      {path:'addSlots',Component:AddNewSlots}
+      { path: "addSlots", Component: AddNewSlots },
+      { path: "menageSlots", Component: ManageSlots },
     ],
   },
 ]);

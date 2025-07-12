@@ -50,14 +50,30 @@ const AddClass = () => {
           {/* Class Name */}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wider">
-              Class Name
+              Needed Skills For Class
             </label>
             <div className="relative">
-              <input
-                {...register("className", { required: true })}
+              <select
+                {...register("skillName", { required: true })}
                 className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all appearance-none bg-white"
                 defaultValue=""
-              ></input>
+              >
+                <option value="" disabled hidden>
+                  � Select a class type
+                </option>
+                <option value="Yoga">🧘‍♀️ Yoga</option>
+                <option value="HIIT">🔥 HIIT</option>
+                <option value="Strength Training">💪 Strength Training</option>
+                <option value="Cardio">🏃‍♂️ Cardio</option>
+                <option value="Pilates">🌟 Pilates</option>
+                <option value="CrossFit">🏋️‍♂️ CrossFit</option>
+                <option value="Zumba">💃 Zumba</option>
+                <option value="Boxing">🥊 Boxing</option>
+                <option value="Martial Arts">🥋 Martial Arts</option>
+                <option value="Dance">💃 Dance</option>
+                <option value="Nutrition">🥗 Nutrition</option>
+                <option value="Weight Loss">⚖️ Weight Loss</option>
+              </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
                   className="fill-current h-4 w-4"
@@ -103,44 +119,6 @@ const AddClass = () => {
                     ></path>
                   </svg>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wider">
-              Needed Skills For Class
-            </label>
-            <div className="relative">
-              <select
-                {...register("skillName", { required: true })}
-                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all appearance-none bg-white"
-                defaultValue=""
-              >
-                <option value="" disabled hidden>
-                  � Select a class type
-                </option>
-                <option value="Yoga">🧘‍♀️ Yoga</option>
-                <option value="HIIT">🔥 HIIT</option>
-                <option value="Strength Training">💪 Strength Training</option>
-                <option value="Cardio">🏃‍♂️ Cardio</option>
-                <option value="Pilates">🌟 Pilates</option>
-                <option value="CrossFit">🏋️‍♂️ CrossFit</option>
-                <option value="Zumba">💃 Zumba</option>
-                <option value="Boxing">🥊 Boxing</option>
-                <option value="Martial Arts">🥋 Martial Arts</option>
-                <option value="Dance">💃 Dance</option>
-                <option value="Nutrition">🥗 Nutrition</option>
-                <option value="Weight Loss">⚖️ Weight Loss</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
               </div>
             </div>
           </div>

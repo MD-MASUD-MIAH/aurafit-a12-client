@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import {
-  FaAlignLeft,
   FaCalendarAlt,
   FaChalkboardTeacher,
   FaClock,
@@ -28,7 +27,7 @@ const timeSlots = [
 
 const AddNewSlots = () => {
   const { user } = useAuth();
-  const { register, handleSubmit, reset } = useForm();
+  const { handleSubmit, control } = useForm();
 
   const { data: trainer = {}, isLoading } = useQuery({
     queryKey: ["trainer", user?.email],
@@ -37,7 +36,7 @@ const AddNewSlots = () => {
       const res = await axios.get(
         `${import.meta.env.VITE_API_URL}/slots/${user.email}`
       );
-      return res.json();
+      return res.data;
     },
   });
 
@@ -51,52 +50,63 @@ const AddNewSlots = () => {
     },
   });
 
-  console.log(rawClassData);
+  const classOptions = rawClassData.map((cls) => ({
+    value: cls?.name?.toLowerCase(),
+    label: cls?.name,
+  }));
 
-  
-const classOptions = rawClassData.map(cls => ({
-  value: cls?.name?.toLowerCase(), // Convert to lowercase for consistency
-  label: cls.name
-}));
-
-  // Convert timeSlots to React Select options
   const timeSlotOptions = timeSlots.map((slot) => ({
     value: slot,
     label: slot,
   }));
 
-  // Get trainer's currently selected slots
   const selectedSlots =
-    trainer.timeSlots?.map((slot) => ({
+    trainer?.timeSlots?.map((slot) => ({
       value: slot,
       label: slot,
     })) || [];
 
-  const onSubmit = async (data) => {
-    try {
-      console.log(data);
+ const onSubmit = async (data) => {
+  try {
+    const availableDays = data.availableDays.map((d) => d.value);
+    const timeSlots = data.timeSlots.map((t) => t.value);
+    const classes = data.availableClasses.map((c) => c.value);
+    const skills = [...new Set(classes.map((c) => c.charAt(0).toUpperCase() + c.slice(1)))]; // Optional: Capitalize first letter
 
-      const response = true;
-      if (response.ok) {
-        alert("Time slots updated successfully!");
-        reset();
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Error updating slots. Please try again.");
+    const payload = {
+      availableDays,
+      timeSlots,
+      classes,
+      skills,
+    };
+
+    const res = await axios.patch(
+      `${import.meta.env.VITE_API_URL}/trainer/${user.email}`,
+      payload
+    );
+
+    if (res.data.modifiedCount > 0) {
+      alert("Availability and skills updated successfully!");
+    } else {
+      alert("No changes made.");
     }
-  };
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Error updating slots. Please try again.");
+  }
+};
+
 
   if (isLoading) return <Loader />;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg w-11/12 mt-10 shadow-md">
       <h2 className="text-2xl font-bold mb-6 flex items-center">
         <FaClock className="mr-2 text-blue-500" />
         Manage Your Time Slots
       </h2>
 
-      {/* Trainer Info Section */}
+      {/* Trainer Info */}
       <div className="bg-gray-50 p-4 rounded-lg mb-6">
         <h3 className="text-lg font-semibold mb-3 flex items-center">
           <FaUser className="mr-2 text-blue-500" />
@@ -114,7 +124,7 @@ const classOptions = rawClassData.map(cls => ({
         </div>
       </div>
 
-      {/* Time Slot Selection Form */}
+      {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Available Days */}
         <div>
@@ -122,42 +132,54 @@ const classOptions = rawClassData.map(cls => ({
             <FaCalendarAlt className="inline mr-1 text-blue-500" />
             Available Days *
           </label>
-          <Select
-            options={[
-              { value: "Monday", label: "Monday" },
-              { value: "Tuesday", label: "Tuesday" },
-              { value: "Wednesday", label: "Wednesday" },
-              { value: "Thursday", label: "Thursday" },
-              { value: "Friday", label: "Friday" },
-              { value: "Saturday", label: "Saturday" },
-              { value: "Sunday", label: "Sunday" },
-            ]}
-            defaultValue={trainer.availableDays?.map((day) => ({
-              value: day,
-              label: day,
-            }))}
-            isMulti
+          <Controller
             name="availableDays"
-            {...register("availableDays", { required: true })}
-            className="basic-multi-select"
-            classNamePrefix="select"
+            control={control}
+            defaultValue={
+              trainer?.availableDays?.map((day) => ({
+                value: day,
+                label: day,
+              })) || []
+            }
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                options={[
+                  { value: "Monday", label: "Monday" },
+                  { value: "Tuesday", label: "Tuesday" },
+                  { value: "Wednesday", label: "Wednesday" },
+                  { value: "Thursday", label: "Thursday" },
+                  { value: "Friday", label: "Friday" },
+                  { value: "Saturday", label: "Saturday" },
+                  { value: "Sunday", label: "Sunday" },
+                ]}
+                isMulti
+                classNamePrefix="select"
+              />
+            )}
           />
         </div>
 
-        {/* Time Slots Selection */}
+        {/* Time Slots */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             <FaClock className="inline mr-1 text-blue-500" />
             Select Your Time Slots *
           </label>
-          <Select
-            options={timeSlotOptions}
-            defaultValue={selectedSlots}
-            isMulti
+          <Controller
             name="timeSlots"
-            {...register("timeSlots", { required: true })}
-            className="basic-multi-select"
-            classNamePrefix="select"
+            control={control}
+            defaultValue={selectedSlots}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                options={timeSlotOptions}
+                isMulti
+                classNamePrefix="select"
+              />
+            )}
           />
           <p className="mt-1 text-sm text-gray-500">
             Select all time slots you're available for training sessions
@@ -170,36 +192,29 @@ const classOptions = rawClassData.map(cls => ({
             <FaChalkboardTeacher className="inline mr-1 text-blue-500" />
             Available Classes *
           </label>
-         <Select
-  options={classOptions}
-  defaultValue={trainer.classes?.map(cls => {
-    // Find the matching class from rawClassData
-    const matchedClass = rawClassData.find(c => c.name.toLowerCase() === cls.toLowerCase());
-    return {
-      value: cls.toLowerCase(),
-      label: matchedClass ? matchedClass.name : cls
-    };
-  })}
-  isMulti
-  name="availableClasses"
-  {...register("availableClasses", { required: true })}
-  className="basic-multi-select"
-  classNamePrefix="select"
-/>
-        </div>
-
-        {/* Additional Notes */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            <FaAlignLeft className="inline mr-1 text-blue-500" />
-            Additional Notes
-          </label>
-          <textarea
-            {...register("notes")}
-            rows={3}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
-            placeholder="Any special instructions or notes..."
-            defaultValue={trainer.notes || ""}
+          <Controller
+            name="availableClasses"
+            control={control}
+            defaultValue={
+              trainer.classes?.map((cls) => {
+                const matched = rawClassData.find(
+                  (c) => c?.name?.toLowerCase() === cls.toLowerCase()
+                );
+                return {
+                  value: cls.toLowerCase(),
+                  label: matched ? matched.name : cls,
+                };
+              }) || []
+            }
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                options={classOptions}
+                isMulti
+                classNamePrefix="select"
+              />
+            )}
           />
         </div>
 
