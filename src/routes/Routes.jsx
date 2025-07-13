@@ -24,6 +24,10 @@ import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
 import ClassContainer from "../components/ClassContainer";
 import PostForums from "../DashBoard/adminPage/PostForums";
+import SingleVotePage from "../Home/SingleVotePage";
+import ForumPostPage from "../Home/SingleVotePage";
+import ForumsPage from "../Home/ForumsPage";
+import AllForums from "../Home/AllForums";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +67,10 @@ export const router = createBrowserRouter([
         ),
       },
       { path: "/allClass", Component: ClassContainer },
+      {path:'/forums',Component:AllForums
+
+    },
+      {path:'/forums/:id',Component:SingleVotePage},
       {
         path: "/payment",
         element: (
@@ -103,7 +111,9 @@ export const router = createBrowserRouter([
 
       { path: "addSlots", Component: AddNewSlots },
       { path: "menageSlots", Component: ManageSlots },
-      {path:'postForums',Component:PostForums}
+      {path:'postForums',Component:PostForums},
+   
+
     ],
   },
 ]);
