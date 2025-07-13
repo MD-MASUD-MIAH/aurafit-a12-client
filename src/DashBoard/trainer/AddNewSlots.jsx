@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import {
   FaCalendarAlt,
   FaChalkboardTeacher,
@@ -66,36 +66,41 @@ const AddNewSlots = () => {
       label: slot,
     })) || [];
 
- const onSubmit = async (data) => {
-  try {
-    const availableDays = data.availableDays.map((d) => d.value);
-    const timeSlots = data.timeSlots.map((t) => t.value);
-    const classes = data.availableClasses.map((c) => c.value);
-    const skills = [...new Set(classes.map((c) => c.charAt(0).toUpperCase() + c.slice(1)))]; // Optional: Capitalize first letter
+  const onSubmit = async (data) => {
 
-    const payload = {
-      availableDays,
-      timeSlots,
-      classes,
-      skills,
-    };
+    
+    try {
+      const availableDays = data.availableDays.map((d) => d.value);
+      const timeSlots = data.timeSlots.map((t) => t.value);
+      const classes = data.availableClasses.map((c) => c.value);
+      const skills = [
+        ...new Set(classes.map((c) => c.charAt(0).toUpperCase() + c.slice(1))),
+      ]; // Optional: Capitalize first letter
 
-    const res = await axios.patch(
-      `${import.meta.env.VITE_API_URL}/trainer/${user.email}`,
-      payload
-    );
+      const payload = {
+        availableDays,
+        timeSlots,
+        classes,
+        skills,
+      };
 
-    if (res.data.modifiedCount > 0) {
-      alert("Availability and skills updated successfully!");
-    } else {
-      alert("No changes made.");
+      const res = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/trainer/${user.email}`,
+        payload
+      );
+
+     
+
+      if (res.data.modifiedCount > 0) {
+        alert("Availability and skills updated successfully!");
+      } else {
+        alert("No changes made.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error updating slots. Please try again.");
     }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Error updating slots. Please try again.");
-  }
-};
-
+  };
 
   if (isLoading) return <Loader />;
 

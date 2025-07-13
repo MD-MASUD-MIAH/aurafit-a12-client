@@ -22,6 +22,7 @@ import ManageSlots from "../DashBoard/trainer/ManageSlots";
 import Home from "../Home/Home";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
+import ClassContainer from "../components/ClassContainer";
 
 export const router = createBrowserRouter([
   {
@@ -60,7 +61,7 @@ export const router = createBrowserRouter([
           </PriveteRoute>
         ),
       },
-      { path: "/allClass", Component: AllClass },
+      { path: "/allClass", Component: ClassContainer },
       {
         path: "/payment",
         element: (

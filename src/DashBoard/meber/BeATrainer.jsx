@@ -55,12 +55,18 @@ const TrainerApplicationForm = () => {
     "Sunday",
   ];
 
-  const timeSlots = [
-    "Morning (6:00 AM - 9:00 AM)",
-    "Afternoon (12:00 PM - 3:00 PM)",
-    "Evening (5:00 PM - 8:00 PM)",
-    "Night (8:00 PM - 10:00 PM)",
-  ];
+ const timeSlots = [
+  "Early Morning (5:00 AM - 6:30 AM)",
+  "Morning (6:00 AM - 9:00 AM)",
+  "Late Morning (9:00 AM - 11:00 AM)",
+  "Midday (11:00 AM - 12:30 PM)",
+  "Afternoon (12:00 PM - 3:00 PM)",
+  "Late Afternoon (3:00 PM - 5:00 PM)",
+  "Evening (5:00 PM - 8:00 PM)",
+  "Late Evening (8:00 PM - 9:30 PM)",
+  "Night (9:00 PM - 10:30 PM)",
+  "Late Night (10:30 PM - 12:00 AM)",
+];
 
   const fitnessSkills = [
     { value: "Yoga", label: "Yoga" },

@@ -4,19 +4,26 @@ import { useState } from "react";
 import { Link } from "react-router";
 import Loader from "../shared/Loader";
 
-const ClassPagination = () => {
+const AllClasses = ({searchText}) => {
   const [currentPage, setCurrentPage] = useState(1);
+  
+  console.log(searchText);
+  
 
   const {
+    data: allClass = [],
     isPending,
     isError,
-    data: allClass = [],
   } = useQuery({
-    queryKey: ["allClass"],
+    queryKey: ["allClass", searchText],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/class`);
-      return res?.data;
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/class?search=${searchText}`
+      );
+      return res.data;
     },
+    // search খালি থাকলেও সব ক্লাস আনবে
+    enabled: true,
   });
 
   console.log(allClass);
@@ -63,18 +70,22 @@ const ClassPagination = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto px-4 py-8  overflow-hidden">
-      <div className="flex flex-col items-center gap-3 pt-5 pb-19">
-        <h1 className="text-3xl font-bold text-center  ">
-          Join Our Expert-Led Classes
-        </h1>
-        <p className="max-w-2xl text-center">
-          Take your fitness journey to the next level with guidance from
-          certified trainers. Our expert-led classes are designed for all
-          fitness levels — whether you're just starting out or pushing for peak
-          performance.
-        </p>
-      </div>
+   <div>
+    
+      
+     
+
+
+     <div className="w-11/12 mx-auto px-4 py-8  overflow-hidden">
+      
+
+        
+ 
+  
+
+
+      
+     
       {/* Class Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {currentItems.map((classItem) => (
@@ -97,12 +108,9 @@ const ClassPagination = () => {
             />
             <div className="p-6">
               <h2 className="text-xl font-bold mb-2 dark:text-white">
-                {classItem.className}
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-1">
-                <span className="font-semibold">Skill:</span>{" "}
                 {classItem.skillName}
-              </p>
+              </h2>
+             
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 {classItem.details}
               </p>
@@ -201,7 +209,8 @@ const ClassPagination = () => {
         </div>
       )}
     </div>
+   </div>
   );
 };
 
-export default ClassPagination;
+export default AllClasses;
