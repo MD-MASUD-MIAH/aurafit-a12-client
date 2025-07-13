@@ -98,7 +98,7 @@ const AllClasses = ({searchText}) => {
                 classItem.image ||
                 "https://via.placeholder.com/300x200?text=Class+Image"
               }
-              alt={classItem.className}
+              alt={classItem.skillName}
               className="w-full h-48 object-cover"
               onError={(e) => {
                 e.target.onerror = null;

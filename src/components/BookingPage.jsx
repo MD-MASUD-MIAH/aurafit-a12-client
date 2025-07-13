@@ -1,14 +1,10 @@
-
-
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router";
 import Loader from "../shared/Loader";
 
-
+import { useState } from "react";
 import useAuth from "../hooks/useAuth";
-
-
 
 const BookingPage = () => {
   const { user } = useAuth();
@@ -17,8 +13,8 @@ const BookingPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const slot = queryParams.get("slot");
+  const [selectedClass, setSelectedClass] = useState(null);
 
-  
   const { isPending, data: singleData = {} } = useQuery({
     queryKey: ["singleData", id],
     queryFn: async () => {
@@ -43,12 +39,16 @@ const BookingPage = () => {
     return <Loader></Loader>;
   }
 
+  console.log(selectedClass);
+
   console.log(singleData);
 
   console.log(classData);
-  const uniqueClasses = Array.from(
-    new Set(classData?.map((item) => item.className))
-  );
+  const uniqueClasses = classData?.filter(
+  (item, index, self) =>
+    index === self.findIndex((t) => t.skillName === item.skillName)
+);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,9 +56,11 @@ const BookingPage = () => {
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries()); // ⬅️ Move this up
-      data.trainerEmail  = singleData.email 
-      data.trainerId  = singleData._id 
-      data.trainerSkills = singleData.skills
+    data.trainerEmail = singleData.email;
+    data.trainerId = singleData._id;
+    data.trainerSkills = singleData.skills;
+    data.selectClass =selectedClass?.skillName
+
     const packa = data.package; // now we can access it from data directly
 
     if (packa === "Basic") {
@@ -72,6 +74,7 @@ const BookingPage = () => {
     console.log("Form submitted:", data);
     navigate("/payment", { state: data });
   };
+
 
   return (
     <div className="w-11/12  mx-auto">
@@ -212,29 +215,25 @@ const BookingPage = () => {
                       Classes
                     </label>
                     <select
-                      name="selectClass"
-                      className="w-full border rounded px-3 py-2"
-                    >
-                      <option value="">-- Choose a Class --</option>
-                      {uniqueClasses.map((name, index) => (
-                        <option key={index} value={name}>
-                          {name}
-                        </option>
-                      ))}
-                    </select>
+  name="classId"
+  className="w-full border rounded px-3 py-2"
+  onChange={(e) => {
+    const selectedId = e.target.value;
+    const foundClass = uniqueClasses.find((cls) => cls._id === selectedId);
+    setSelectedClass(foundClass);
+  }}
+>
+  <option value="">--	Pick your class--</option>
+  {uniqueClasses.map((cls) => (
+    <option key={cls?._id} value={cls?._id}>
+      {cls?.skillName}
+    </option>
+  ))}
+</select>
+
                   </div>
 
-                  <div
-                    className=" flex justify-between items-center
-                
-                
-                
-                
-                
-                
-                
-                "
-                  >
+                  <div className=" flex justify-between items-center">
                     <div className="mb-6">
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Packages
@@ -263,7 +262,7 @@ const BookingPage = () => {
 
                     <div className="mb-4">
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Member Name
+                        Member Name
                       </label>
                       <input
                         type="text"
@@ -277,7 +276,7 @@ const BookingPage = () => {
 
                     <div className="mb-4">
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Member Email 
+                        Member Email
                       </label>
                       <input
                         type="text"
@@ -302,8 +301,6 @@ const BookingPage = () => {
           </div>
         </div>
       </section>
-
-     
     </div>
   );
 };

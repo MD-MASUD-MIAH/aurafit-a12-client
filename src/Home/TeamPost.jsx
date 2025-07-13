@@ -37,11 +37,11 @@ const TeamPost = () => {
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl">
-            Community Discussions
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+            Latest Conversations in the Forum
           </h2>
           <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Join the conversation with fitness enthusiasts and experts
+            Stay updated with recent discussions from our community.
           </p>
         </div>
 
@@ -101,12 +101,9 @@ const TeamPost = () => {
               {/* Footer with action button */}
               <div className="px-6 pb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                   
-                  </span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400"></span>
                   <Link to={`/forums/${post._id}`} className="tom-btn">
                     Read more
-                  
                   </Link>
                 </div>
               </div>
