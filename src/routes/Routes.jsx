@@ -23,6 +23,7 @@ import Home from "../Home/Home";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
 import ClassContainer from "../components/ClassContainer";
+import PostForums from "../DashBoard/adminPage/PostForums";
 
 export const router = createBrowserRouter([
   {
@@ -102,6 +103,7 @@ export const router = createBrowserRouter([
 
       { path: "addSlots", Component: AddNewSlots },
       { path: "menageSlots", Component: ManageSlots },
+      {path:'postForums',Component:PostForums}
     ],
   },
 ]);

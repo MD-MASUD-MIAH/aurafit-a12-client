@@ -12,7 +12,7 @@ import {
   FaWallet,
 } from "react-icons/fa";
 import { CiBookmarkCheck } from "react-icons/ci"; 
-
+import { MdPostAdd } from "react-icons/md";
 import { MdManageHistory } from "react-icons/md";
 
 import { NavLink, Outlet } from "react-router";
@@ -199,15 +199,15 @@ const DashBoardLayout = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/makeAdmin"
+                  to="/dashboard/postForums"
                    className={({ isActive }) =>
                   `flex items-center px-4 py-2 rounded-md ${
                     isActive ? "bg-blue-500" : "hover:bg-blue-700"
                   }`
                 }
                 >
-                  <FaUserShield className="mr-3" />
-                  Make Admin
+                 <MdPostAdd className="mr-3" />
+                 Post Forums
                 </NavLink>
               </li>
             </>

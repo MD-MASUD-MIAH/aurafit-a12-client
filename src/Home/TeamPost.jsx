@@ -1,74 +1,59 @@
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { Link } from "react-router";
+import { toast } from "react-toastify";
+
+import Loader from "../shared/Loader";
+import useAuth from "../hooks/useAuth";
 
 const TeamPost = () => {
-  // Demo data - replace with real data from your CMS/backend
-  const recentPosts = [
-    {
-      id: 1,
-      title: "How I Improved My 5K Time in 30 Days",
-      excerpt:
-        "Sharing my training regimen and nutrition plan that helped me shave 2 minutes off my personal best...",
-      author: "MarathonMike92",
-      date: "May 15, 2023",
-      category: "Running",
-      url: "/forum/running/improve-5k-time",
+  const queryClient = useQueryClient();
+  const {user} = useAuth()
+  // Fetch posts
+  const { isPending, data: postData = [] } = useQuery({
+    queryKey: ["forums"],
+    queryFn: async () => {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/forums`);
+      return res?.data;
     },
-    {
-      id: 2,
-      title: "Essential Strength Exercises for Cyclists",
-      excerpt:
-        "These 5 exercises transformed my cycling performance and reduced injury risk...",
-      author: "PedalPower",
-      date: "May 12, 2023",
-      category: "Cycling",
-      url: "/forum/cycling/strength-exercises",
-    },
-    {
-      id: 3,
-      title: "Plant-Based Nutrition for Muscle Growth",
-      excerpt:
-        "My complete guide to building muscle on a vegan diet with meal plans and supplement tips...",
-      author: "VeganGains",
-      date: "May 10, 2023",
-      category: "Nutrition",
-      url: "/forum/nutrition/plant-based-muscle",
-    },
-    {
-      id: 4,
-      title: "Recovering from ACL Injury - My Journey",
-      excerpt:
-        "Month-by-month breakdown of my rehabilitation process and what worked best...",
-      author: "ComebackQueen",
-      date: "May 8, 2023",
-      category: "Injury Prevention",
-      url: "/forum/injury/acl-recovery",
-    },
-    {
-      id: 5,
-      title: "Best Budget Fitness Trackers 2023",
-      excerpt:
-        "Comparing features and accuracy of trackers under $100 based on 3 months of testing...",
-      author: "TechFit",
-      date: "May 5, 2023",
-      category: "Gear Reviews",
-      url: "/forum/gear/budget-trackers",
-    },
-    {
-      id: 6,
-      title: "Morning vs Evening Workouts - Science Breakdown",
-      excerpt:
-        "Examining the latest research on optimal training times for different goals...",
-      author: "ScienceOfFit",
-      date: "May 3, 2023",
-      category: "Training Science",
-      url: "/forum/science/timing-workouts",
-    },
-  ];
+  });
 
+  // Vote mutation
+   const voteMutation = useMutation({
+    mutationFn: async ({ postId, voteType }) => {
+      const res = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/forums/${postId}/vote`,
+        { voteType, userEmail: user.email },
+        { withCredentials: true }
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["forums"]);
+      toast.success("✅ Vote recorded!");
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || "❌ Failed to vote");
+    },
+  });
+
+  const handleVote = (postId, voteType) => {
+    if (!user?.email) {
+      toast.error("Please login to vote");
+      return;
+    }
+
+    voteMutation.mutate({ postId, voteType });
+    console.log("📌 Vote sent:", postId, voteType);
+  };
+
+
+  if(isPending){
+    return <Loader></Loader>
+  }
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-      <div className="w-11/12 overflow-hidden mx-auto">
+      <div className="w-11/12 overflow-hidden mx-auto pb-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
             Community Discussions
@@ -79,46 +64,93 @@ const TeamPost = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {recentPosts.map((post) => (
-            <motion.div
-              key={post.id}
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.2 }}
-              className="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+          {postData?.map((post) => (
+            <div
+              key={post._id}
+              className="overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200 dark:bg-gray-800 dark:text-gray-300"
             >
               <div className="p-6">
-                <div className="flex items-center mb-3">
-                  <span className="inline-block px-3 py-1 text-xs font-semibold text-blue-800 dark:text-blue-200 bg-blue-100 dark:bg-blue-900 rounded-full">
-                    {post.category}
-                  </span>
-                  <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
-                    {post.date}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                  <a
-                    href={post.url}
-                    className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                <header className="flex gap-4">
+                  <div>
+                    <p className="bg-blue-200 py-1 px-2 rounded-2xl uppercase text-xs mb-2 text-blue-600 dark:bg-blue-800 dark:text-blue-200 inline-block">
+                      {post.authhorRole}
+                    </p>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      {post.authorName}
+                    </p>
+                    <h3 className="text-xl text-black dark:text-white font-bold">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-slate-400">
+                      {new Date(post.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                </header>
+              </div>
+
+              <div className="px-6">
+                <p className="text-gray-600 dark:text-gray-300">
+                  {post.description.slice(0, 150)}{" "}
+                  <Link
+                    to={`/forums/${post._id}`}
+                    className="text-blue-600 dark:text-blue-400 underline text-bold text-sm"
                   >
-                    {post.title}
-                  </a>
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  {post.excerpt}
+                    read more
+                  </Link>
                 </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    @{post.author}
-                  </span>
-                  <a
-                    href={post.url}
-                    className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
-                  >
-                    Read more →
-                  </a>
+              </div>
+
+              <div className="px-6 py-4">
+                <div className="flex justify-between items-center gap-2">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Community votes
+                  </p>
+
+   
+                <div className="flex gap-2">
+  {/* 👍 Upvote Button */}
+  <button
+    onClick={() => handleVote(post._id, "upvote")}
+    disabled={
+      voteMutation.isLoading || post.userVote === "downvote" // block if already downvoted
+    }
+    className={`px-3 py-1 text-sm rounded-md flex items-center gap-1
+      ${post.userVote === "upvote"
+        ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+        : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"}
+      ${post.userVote === "downvote" ? "opacity-50 cursor-not-allowed" : ""}
+    `}
+  >
+    <span>👍</span>
+    <span>{post.upvoteCount || 0}</span>
+    {post.userVote === "upvote" && <span className="ml-1 font-bold">Voted</span>}
+  </button>
+
+  {/* 👎 Downvote Button */}
+  <button
+    onClick={() => handleVote(post._id, "downvote")}
+    disabled={
+      voteMutation.isLoading || post.userVote === "upvote" // block if already upvoted
+    }
+    className={`px-3 py-1 text-sm rounded-md flex items-center gap-1
+      ${post.userVote === "downvote"
+        ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+        : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"}
+      ${post.userVote === "upvote" ? "opacity-50 cursor-not-allowed" : ""}
+    `}
+  >
+    <span>👎</span>
+    <span>{post.downvoteCount || 0}</span>
+    {post.userVote === "downvote" && <span className="ml-1 font-bold">Voted</span>}
+  </button>
+</div>
+
+
+
+
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
