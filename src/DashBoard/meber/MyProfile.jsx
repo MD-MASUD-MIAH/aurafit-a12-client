@@ -9,11 +9,13 @@ import {
 } from "react-icons/fa";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
+import { PageName } from "../../components/PageName";
 import useAuth from "../../hooks/useAuth";
 import { imageUpload } from "../../utilits/utilits";
 
 const MyProfile = () => {
-  const { user, upDateUser,setLoading } = useAuth();
+  PageName("My Profile");
+  const { user, upDateUser, setLoading } = useAuth();
   const [name, setName] = useState(user?.displayName || "");
   const [imageFile, setImageFile] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -46,7 +48,7 @@ const MyProfile = () => {
         text: "Your name and photo have been updated.",
       });
 
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       Swal.fire({
         icon: "error",

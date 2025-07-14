@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { PageName } from "../../components/PageName";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loader from "../../shared/Loader";
 
 const ApproveTrainer = () => {
+  PageName("Available Trainer");
   const axiosSecure = useAxiosSecure();
   const {
     isPending,

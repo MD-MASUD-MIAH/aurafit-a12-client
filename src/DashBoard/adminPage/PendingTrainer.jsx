@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router";
+import { PageName } from "../../components/PageName";
 import Loader from "../../shared/Loader";
 const PendingTrainer = () => {
+  PageName("PendingTrainer");
   const {
     isPending,
     isError,

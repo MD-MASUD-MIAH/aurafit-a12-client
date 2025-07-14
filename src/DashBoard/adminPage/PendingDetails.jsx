@@ -2,11 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
+import { PageName } from "../../components/PageName";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loader from "../../shared/Loader";
 import ModalForm from "./ModalForm";
 
 const PendingDetails = () => {
+  PageName("Applier Details");
   const [isShowing, setIsShowing] = useState(false);
   const [feedback, setFeedback] = useState("");
 
@@ -46,18 +48,18 @@ const PendingDetails = () => {
     });
   };
 
-  const handleSubmi = async(e) => {
+  const handleSubmi = async (e) => {
     e.preventDefault();
-  await axiosSecure
-    .patch(`/trainer/reject/${id}`, { feedback: feedback })
-    .then((res) => {
-      if (res.data.result.modifiedCount > 0) {
-        Swal.fire("Rejected!", "Trainer has been rejected.", "info");
-        // Optional: refetch or remove from pending list
-      }
+    await axiosSecure
+      .patch(`/trainer/reject/${id}`, { feedback: feedback })
+      .then((res) => {
+        if (res.data.result.modifiedCount > 0) {
+          Swal.fire("Rejected!", "Trainer has been rejected.", "info");
+          // Optional: refetch or remove from pending list
+        }
 
         navigate("/dashboard/pending-trainer");
-    });
+      });
 
     setIsShowing(false);
   };

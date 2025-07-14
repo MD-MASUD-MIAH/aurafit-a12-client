@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import { PageName } from "../../components/PageName";
 
 const PostForums = () => {
   const { user } = useAuth();
-
+  PageName('Post Forums')
   const { data: userData } = useQuery({
     queryKey: ["trainerOrAdmin", user.email],
     enabled: !!user.email,

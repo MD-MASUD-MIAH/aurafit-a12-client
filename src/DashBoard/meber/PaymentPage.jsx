@@ -2,12 +2,15 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLocation } from "react-router";
 import StripeCheckout from "../../Form/StripeCheckout";
+import { PageName } from "../../components/PageName";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 const PaymentPage = () => {
   const location = useLocation();
   const formData = location.state;
 
   console.log(formData);
+
+  PageName('Payment')
 
   return (
     <div className=" w-11/12

@@ -5,8 +5,13 @@ import Loader from "../shared/Loader";
 
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
+import { PageName } from "./PageName";
+
+
 
 const BookingPage = () => {
+
+  PageName('Booking Page')
   const { user } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();

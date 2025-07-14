@@ -20,8 +20,11 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { imageUpload } from "../../utilits/utilits";
+import { PageName } from "../../components/PageName";
 
 const TrainerApplicationForm = () => {
+
+  PageName('Be A Trainer')
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
@@ -46,14 +49,15 @@ const TrainerApplicationForm = () => {
   });
 
   const daysOfWeek = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+  { value: "Monday", label: "Monday" },
+  { value: "Tuesday", label: "Tuesday" },
+  { value: "Wednesday", label: "Wednesday" },
+  { value: "Thursday", label: "Thursday" },
+  { value: "Friday", label: "Friday" },
+  { value: "Saturday", label: "Saturday" },
+  { value: "Sunday", label: "Sunday" },
+];
+
 
  const timeSlots = [
   "Early Morning (5:00 AM - 6:30 AM)",
@@ -99,21 +103,21 @@ const TrainerApplicationForm = () => {
     }));
   };
 
-  const handleSkillChange = (selectedOptions) => {
-    setFormData((prev) => ({
-      ...prev,
-      skills: selectedOptions.map((option) => option.value),
-    }));
-  };
+  // const handleSkillChange = (selectedOptions) => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     skills: selectedOptions.map((option) => option.value),
+  //   }));
+  // };
 
-  const handleDayToggle = (day) => {
-    setFormData((prev) => {
-      const newDays = prev.availableDays.includes(day)
-        ? prev.availableDays.filter((d) => d !== day)
-        : [...prev.availableDays, day];
-      return { ...prev, availableDays: newDays };
-    });
-  };
+  // const handleDayToggle = (day) => {
+  //   setFormData((prev) => {
+  //     const newDays = prev.availableDays.includes(day)
+  //       ? prev.availableDays.filter((d) => d !== day)
+  //       : [...prev.availableDays, day];
+  //     return { ...prev, availableDays: newDays };
+  //   });
+  // };
 
   const handleTimeToggle = (slot) => {
     setFormData((prev) => {
@@ -252,23 +256,35 @@ const TrainerApplicationForm = () => {
         </section>
 
         {/* Skills Section */}
-        <section className="bg-gray-50 p-6 rounded-lg">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-            <FaListUl className="text-blue-500 mr-2" />
-            Skills & Specializations
-          </h2>
-          <p className="text-gray-500 text-sm mb-4">
-            Select all that apply to your expertise
-          </p>
-          <Select
-            isMulti
-            options={fitnessSkills}
-            onChange={handleSkillChange}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            placeholder="Select your skills..."
-          />
-        </section>
+       {/* Skills Section */}
+<section className="bg-gray-50 p-6 rounded-lg">
+  <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+    <FaListUl className="text-blue-500 mr-2" />
+    Skills & Specializations
+  </h2>
+  <p className="text-gray-500 text-sm mb-4">
+    Select all that apply to your expertise
+  </p>
+
+  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    {fitnessSkills.map((skill) => (
+      <CheckboxItem
+        key={skill.value}
+        label={skill.label}
+        checked={formData.skills.includes(skill.value)}
+        onChange={() => {
+          setFormData((prev) => {
+            const newSkills = prev.skills.includes(skill.value)
+              ? prev.skills.filter((s) => s !== skill.value)
+              : [...prev.skills, skill.value];
+            return { ...prev, skills: newSkills };
+          });
+        }}
+      />
+    ))}
+  </div>
+</section>
+
 
         {/* Social Media Links */}
         <section className="bg-gray-50 p-6 rounded-lg">
@@ -334,19 +350,19 @@ const TrainerApplicationForm = () => {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="font-medium text-gray-700 mb-3">Days Available</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {daysOfWeek.map((day) => (
-                  <CheckboxItem
-                    key={day}
-                    label={day}
-                    checked={formData.availableDays.includes(day)}
-                    onChange={() => handleDayToggle(day)}
-                  />
-                ))}
-              </div>
-            </div>
+          <div>
+  <h3 className="font-medium text-gray-700 mb-3">Days Available</h3>
+  <Select
+  isMulti
+  options={daysOfWeek}
+  value={daysOfWeek.filter(day => formData.availableDays.includes(day.value))}
+  onChange={(selectedOptions) => {
+    const selectedDays = selectedOptions ? selectedOptions.map(option => option.value) : [];
+    setFormData(prev => ({ ...prev, availableDays: selectedDays }));
+  }}
+  placeholder="Select available days..."
+/>
+</div>
 
             <div>
               <h3 className="font-medium text-gray-700 mb-3">Time Slots</h3>

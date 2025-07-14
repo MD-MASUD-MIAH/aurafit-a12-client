@@ -3,8 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import { FaMoneyBillWave, FaUserCheck, FaUsers } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loader from "../../shared/Loader";
+import { PageName } from "../../components/PageName";
 const Balance = () => {
   const axiosSecure = useAxiosSecure();
+
+  PageName('Balance')
 
   const { isPending, data: subscribers = [] } = useQuery({
     queryKey: ["subscribers"],

@@ -4,13 +4,14 @@ import useAuth from "../../hooks/useAuth";
 import FindTrainer from "./FindTrainer";
 import axios from "axios";
 import Loader from "../../shared/Loader";
+import { PageName } from "../../components/PageName";
 
 
 const BookedTrainer = () => {
   const { user } = useAuth();
-
+PageName('Booked Trainer')
   
- const { data: booked = [], } = useQuery({
+ const { isPending, data: booked = [], } = useQuery({
   queryKey: ["booked", user?.email],
   enabled: !!user?.email,
   queryFn: async () => {
@@ -19,10 +20,14 @@ const BookedTrainer = () => {
   },
 });
 
-
+if(isPending){
+  return <Loader></Loader>
+}
 
 
   console.log(booked);
+
+
   
 
   return (

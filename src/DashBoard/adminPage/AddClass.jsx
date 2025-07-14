@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { imageUpload } from "../../utilits/utilits";
+import { PageName } from "../../components/PageName";
 
 const AddClass = () => {
+
+  PageName('Add Class')
   const { register, handleSubmit, reset } = useForm();
   const [isImage, setIsImage] = useState("");
 

@@ -2,19 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Modal from "react-modal";
 
+import { PageName } from "../../components/PageName";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 const ActivityLogPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [feedback, setFeedback] = useState("");
-  
-  const axiosSecure = useAxiosSecure();
 
+  const axiosSecure = useAxiosSecure();
+  PageName("Activity Log");
   const { data: applications = [] } = useQuery({
     queryKey: ["trainer-application"],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/my-trainer-application`
-      );
+      const res = await axiosSecure.get(`/my-trainer-application`);
       return res.data;
     },
   });

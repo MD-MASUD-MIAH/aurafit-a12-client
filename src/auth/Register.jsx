@@ -1,17 +1,19 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { AuthContext } from "../Context/AuthContext";
-import GoogleLogin from "../social/GoogleLogin";
-import { imageUpload,  saveUserMongo } from "../utilits/utilits";
+import { PageName } from "../components/PageName";
 import useAuth from "../hooks/useAuth";
+import GoogleLogin from "../social/GoogleLogin";
+import { imageUpload, saveUserMongo } from "../utilits/utilits";
 
 const Register = () => {
-  const navigate =useNavigate()
+  const navigate = useNavigate();
+
   const [errors, setErrors] = useState({});
   const [previewImage, setPreviewImage] = useState(null);
-  const { registerUser, setUser, upDateUser } = useAuth()
+  const { registerUser, setUser, upDateUser } = useAuth();
 
+  PageName("Register");
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,8 +25,15 @@ const Register = () => {
     const newErrors = {};
     if (!name) newErrors.name = "Name is required";
     if (!email) newErrors.email = "Email is required";
-    if (!password || password.length < 6)
-      newErrors.password = "Password must be at least 6 characters";
+   if (!password) {
+  newErrors.password = "Password is required";
+} else if (password.length < 6) {
+  newErrors.password = "Password must be at least 6 characters";
+} else if (!/[A-Z]/.test(password)) {
+  newErrors.password = "Password must contain at least one uppercase letter";
+} else if (!/[a-z]/.test(password)) {
+  newErrors.password = "Password must contain at least one lowercase letter";
+}
     if (!previewImage) newErrors.image = "Image is required";
 
     if (Object.keys(newErrors).length > 0) {
@@ -42,21 +51,21 @@ const Register = () => {
         photoURL: previewImage,
       });
 
-      
       const userData = {
         name,
         email,
         image: previewImage,
-      }
-  await saveUserMongo(userData)
+      };
+      await saveUserMongo(userData);
 
       Swal.fire({
         title: "Register Success!",
         icon: "success",
-        confirmButtonColor: "#550527",
+        confirmButtonColor: "blue",
       });
 
       form.reset();
+
       setPreviewImage(null);
       setErrors({});
     } catch (error) {
@@ -65,8 +74,8 @@ const Register = () => {
         title: "Oops...",
         text: error.message,
       });
-    }finally{
-      navigate('/')
+    } finally {
+      navigate("/");
     }
   };
 
@@ -91,12 +100,10 @@ const Register = () => {
   return (
     <div className="bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
       <div className="w-11/12 mx-auto py-10 flex flex-col items-center justify-center min-h-[calc(100vh-300px)]">
-        <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-[#550527]">
+        <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-blue">
           <div className="p-8">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-[#550527]">
-                Create Your Account
-              </h2>
+              <h2 className="text-2xl font-bold ">Create Your Account</h2>
               <p className="text-gray-600 mt-2">Join our community today</p>
             </div>
 
@@ -110,7 +117,7 @@ const Register = () => {
                   type="text"
                   className={`w-full px-4 py-2 border-b ${
                     errors.name ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:border-[#550527]`}
+                  } focus:outline-none focus:border-blue-600`}
                   placeholder="Enter your name"
                 />
                 {errors.name && (
@@ -168,7 +175,7 @@ const Register = () => {
                   type="email"
                   className={`w-full px-4 py-2 border-b ${
                     errors.email ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:border-[#550527]`}
+                  } focus:outline-none focus:border-blue-600`}
                   placeholder="Enter your email"
                 />
                 {errors.email && (
@@ -185,7 +192,7 @@ const Register = () => {
                   type="password"
                   className={`w-full px-4 py-2 border-b ${
                     errors.password ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:border-[#550527]`}
+                  } focus:outline-none focus:border-blue-600`}
                   placeholder="Enter your password"
                 />
                 {errors.password && (
@@ -193,10 +200,7 @@ const Register = () => {
                 )}
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-[#550527] hover:bg-[#44041f] text-white py-3 px-4 rounded-lg font-medium transition-colors"
-              >
+              <button type="submit" className="tom-btn w-full">
                 Register
               </button>
             </form>

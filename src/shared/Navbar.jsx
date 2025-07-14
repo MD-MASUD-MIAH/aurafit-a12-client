@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import logo from "../assets/logo.png";
 import useAuth from "../hooks/useAuth";
 const Navbar = () => {
@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 z-20">
-      <header className="relative z-20 w-full border-b border-slate-200 bg-[#2563EB] shadow-lg shadow-slate-700/5 after:absolute after:left-0 after:top-full after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden text-black md:text-white  ">
+      <header className="relative  z-20 w-full border-b border-slate-200 bg-[#2563EB] shadow-lg shadow-slate-700/5 after:absolute after:left-0 after:top-full after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden text-black md:text-white  ">
         <div className="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
           <nav
             aria-label="main navigation"
@@ -30,7 +30,7 @@ const Navbar = () => {
               id="WindUI"
               aria-label="WindUI logo"
               aria-current="page"
-              className="flex items-center text-white font-bold text-xl gap-2 whitespace-nowrap py-3 focus:outline-none lg:flex-1 pl-4"
+              className="flex items-center text-black lg:text-white font-bold text-xl gap-2 whitespace-nowrap py-3 focus:outline-none lg:flex-1 pl-4"
               href="javascript:void(0)"
             >
               <img className="w-12 h-12" src={logo} alt="" />
@@ -50,7 +50,7 @@ const Navbar = () => {
               aria-expanded={isToggleOpen ? "true" : "false"}
               aria-label="Toggle navigation"
             >
-              <div className="absolute left-1/2 top-1/2 w-6 -translate-x-1/2 -translate-y-1/2 transform">
+              <div className="absolute left-1/2 top-1/2 w-6 -translate-x-1/2 -translate-y-1/2 transform ">
                 <span
                   aria-hidden="true"
                   className="absolute block h-0.5 w-9/12 -translate-y-2 transform rounded-full bg-slate-900 transition-all duration-300"
@@ -82,7 +82,7 @@ const Navbar = () => {
                   to="/"
                   role="menuitem"
                   aria-haspopup="false"
-                  className="flex items-center gap-2 py-4"
+                  className="flex items-center gap-2 py-4 text-black lg:text-white"
                   href="javascript:void(0)"
                 >
                   <span>Home</span>
@@ -95,7 +95,7 @@ const Navbar = () => {
                   role="menuitem"
                   aria-current="page"
                   aria-haspopup="false"
-                  className="flex items-center gap-2 py-4 font-normal transition-colors duration-300 hover:text-emerald-600 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
+                  className="flex items-center text-black lg:text-white  gap-2 py-4 font-normal transition-colors duration-300 hover:text-blue-400 focus:text-black focus:outline-none focus-visible:outline-none lg:px-8"
                   href="javascript:void(0)"
                 >
                   <span>All Trainer</span>
@@ -107,7 +107,7 @@ const Navbar = () => {
                   onClick={() => setIsToggleOpen(!isToggleOpen)}
                   role="menuitem"
                   aria-haspopup="false"
-                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
+                  className="flex items-center text-black lg:text-white  gap-2 py-4 font-normal transition-colors duration-300 hover:text-blue-400 focus:text-black focus:outline-none focus-visible:outline-none lg:px-8"
                   href="javascript:void(0)"
                 >
                   <span>All Classes</span>
@@ -115,11 +115,11 @@ const Navbar = () => {
               </li>
               <li role="none" className="flex items-stretch">
                 <NavLink
-                to={'/forums'}
+                  to={"/forums"}
                   onClick={() => setIsToggleOpen(!isToggleOpen)}
                   role="menuitem"
                   aria-haspopup="false"
-                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
+                  className="flex items-center text-black lg:text-white  gap-2 py-4 font-normal transition-colors duration-300 hover:text-blue-400 focus:text-black focus:outline-none focus-visible:outline-none lg:px-8"
                   href="javascript:void(0)"
                 >
                   <span>Forums</span>
@@ -132,7 +132,7 @@ const Navbar = () => {
                     to="/dashboard"
                     role="menuitem"
                     aria-haspopup="false"
-                    className="flex items-center gap-2 py-4 lg:px-8"
+                    className="flex items-center text-black lg:text-white  gap-2 py-4 font-normal transition-colors duration-300 hover:text-blue-400 focus:text-black focus:outline-none focus-visible:outline-none lg:px-8"
                     href="javascript:void(0)"
                   >
                     <span>Dashboard</span>
@@ -154,7 +154,7 @@ const Navbar = () => {
                     className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
                     href="javascript:void(0)"
                   >
-                    <span className="tom-btn">Logout</span>
+                    <span className="nav-btn">Logout</span>
                   </a>
                 </button>
               ) : (
@@ -163,14 +163,8 @@ const Navbar = () => {
                   role="none"
                   className="flex items-stretch block md:hidden"
                 >
-                  <a
-                    role="menuitem"
-                    aria-haspopup="false"
-                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
-                    href="javascript:void(0)"
-                  >
-                    <span className="tom-btn">Login</span>
-                  </a>
+                  <span className="tom-btn">Login</span>
+                 
                 </NavLink>
               )}
             </ul>
@@ -179,26 +173,26 @@ const Navbar = () => {
             <div className="ml-auto flex items-center justify-end px-6 lg:ml-0 lg:flex-1 lg:p-0">
               {user ? (
                 <div className="flex gap-4">
-                  <NavLink>
+                  <Link to={"/dashboard/my-profile"}>
                     <img
                       className="w-10 h-10 rounded-full"
                       src={user.photoURL}
                       alt=""
                     />
-                  </NavLink>
+                  </Link>
                   <button
                     onClick={handleLogout}
-                    className="tom-btn hidden md:block border "
+                    className=" hidden md:block border nav-btn "
                   >
                     Logout
                   </button>
                 </div>
               ) : (
                 <div aria-haspopup="false" className="flex gap-4">
-                  <NavLink to="/login" className="tom-btn hidden md:block ">
+                  <NavLink to="/login" className="nav-btn hidden md:block ">
                     Login
                   </NavLink>
-                  <NavLink to={"/register"} className="tom-btn hidden md:block">
+                  <NavLink to={"/register"} className="nav-btn hidden md:block">
                     Register
                   </NavLink>
                 </div>

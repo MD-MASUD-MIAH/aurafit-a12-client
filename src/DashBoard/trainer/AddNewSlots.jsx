@@ -9,6 +9,7 @@ import {
   FaUser,
 } from "react-icons/fa";
 import Select from "react-select";
+import { PageName } from "../../components/PageName";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../../shared/Loader";
 
@@ -28,6 +29,8 @@ const timeSlots = [
 const AddNewSlots = () => {
   const { user } = useAuth();
   const { handleSubmit, control } = useForm();
+
+  PageName("Add slot");
 
   const { data: trainer = {}, isLoading } = useQuery({
     queryKey: ["trainer", user?.email],
@@ -67,8 +70,6 @@ const AddNewSlots = () => {
     })) || [];
 
   const onSubmit = async (data) => {
-
-    
     try {
       const availableDays = data.availableDays.map((d) => d.value);
       const timeSlots = data.timeSlots.map((t) => t.value);
@@ -88,8 +89,6 @@ const AddNewSlots = () => {
         `${import.meta.env.VITE_API_URL}/trainer/${user.email}`,
         payload
       );
-
-     
 
       if (res.data.modifiedCount > 0) {
         alert("Availability and skills updated successfully!");

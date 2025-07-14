@@ -1,10 +1,16 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import GoogleLogin from "../social/GoogleLogin";
 import { saveUserMongo } from "../utilits/utilits";
+import { PageName } from "../components/PageName";
 const Login = () => {
+  
+   
+    const location = useLocation()
+
+  PageName('Login')
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const { logInUser } = useAuth();
@@ -27,7 +33,7 @@ const Login = () => {
       };
       // update user
       await saveUserMongo(userData);
-      navigate("/");
+       navigate(location?.state ? location.state: '/');
       toast.success("Login Successful");
     } catch (err) {
       console.log(err);

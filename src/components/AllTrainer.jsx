@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loader from "../shared/Loader";
 import AlltrainerCard from "./AlltrainerCard";
+import { PageName } from "./PageName";
 
 const AllTrainer = () => {
+  PageName("AllTrainer");
   const {
     isPending,
     isError,

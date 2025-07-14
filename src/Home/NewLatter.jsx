@@ -34,7 +34,7 @@ const NewLatter = () => {
 
         {/* Right Side: Content */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">
-          <h2 className="text-4xl font-extrabold text-blue-900 mb-4">
+          <h2 className="text-4xl font-extrabold  mb-4">
             Subscribe To Our Newsletter
           </h2>
           <p className="text-gray-600 mb-6">

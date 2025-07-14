@@ -2,8 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useParams } from "react-router";
 import Loader from "../shared/Loader";
+import { PageName } from "./PageName";
 const TainerDeatilsPage = () => {
   const { id } = useParams();
+
+  PageName('Booking Slot')
 
   const { isPending, data: singleData = {} } = useQuery({
     queryKey: ["singleData", id],

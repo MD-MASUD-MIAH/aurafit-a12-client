@@ -3,12 +3,13 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router";
 import Loader from "../shared/Loader";
+import { PageName } from "./PageName";
 
 const AllClasses = ({searchText}) => {
   const [currentPage, setCurrentPage] = useState(1);
   
   console.log(searchText);
-  
+  PageName('AllClass')
 
   const {
     data: allClass = [],
@@ -22,7 +23,7 @@ const AllClasses = ({searchText}) => {
       );
       return res.data;
     },
-    // search খালি থাকলেও সব ক্লাস আনবে
+    //
     enabled: true,
   });
 
@@ -71,22 +72,10 @@ const AllClasses = ({searchText}) => {
 
   return (
    <div>
-    
-      
-     
-
+ 
 
      <div className="w-11/12 mx-auto px-4 py-8  overflow-hidden">
-      
-
-        
- 
-  
-
-
-      
-     
-      {/* Class Cards */}
+    {/* Class Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {currentItems.map((classItem) => (
           <div

@@ -13,14 +13,30 @@
   transition: all 0.3s ease-in-out;
   transform: scale(1);
 }
+.nav-btn {
+  background-color: #2563eb;
+  color: white;
+  border: 1px solid white; /* ✅ এটা সঠিক */
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+}
 
 .tom-btn:hover {
   background-color: #3b82f6;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
 }
+.nav-btn:hover {
+  background-color: #3b82f6;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
 .rej-btn {
-  background-color:red;
+  background-color: red;
   color: white;
   font-weight: 600;
   padding: 0.5rem 1.25rem;
@@ -39,11 +55,10 @@
 }
 
 .urban {
-   font-family: "Urbanist", sans-serif;
+  font-family: "Urbanist", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
-
 
 

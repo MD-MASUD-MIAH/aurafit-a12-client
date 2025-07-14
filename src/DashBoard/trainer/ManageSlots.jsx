@@ -13,11 +13,14 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loader from "../../shared/Loader";
+import { PageName } from "../../components/PageName";
 
 const ManageSlots = () => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const axiosSecure = useAxiosSecure();
+
+  PageName('Manage Slots')
 
   const { data: trainer = {}, isLoading } = useQuery({
     queryKey: ["trainer", user?.email],

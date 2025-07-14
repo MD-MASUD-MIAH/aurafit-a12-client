@@ -29,10 +29,12 @@ import ForumPostPage from "../Home/SingleVotePage";
 import ForumsPage from "../Home/ForumsPage";
 import AllForums from "../Home/AllForums";
 import Balance from "../DashBoard/adminPage/Balance";
+import NotFoundError from "../components/NotFoundError";
 
 export const router = createBrowserRouter([
   {
     path: "/",
+    errorElement:<NotFoundError></NotFoundError>,
     Component: MainLayout,
     children: [
       { index: true, Component: Home },

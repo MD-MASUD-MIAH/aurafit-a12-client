@@ -1,115 +1,128 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { useEffect } from "react";
-
 const About = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: false,
-      mirror: true,
-    });
-  }, []);
-
   return (
-    <section className="pb-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 ">
-      <div className="w-11/12 overflow-hidden mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-          data-aos="fade-up"
-        >
-          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
-            Our Fitness Philosophy
-          </h2>
-          <div className="mt-4 h-1 w-20 bg-blue-500 mx-auto rounded-full" />
-          <p className="mt-6 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Empowering your health journey through technology and science
-          </p>
-        </motion.div>
-
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Image */}
-          <motion.div
-            className="relative rounded-2xl overflow-hidden shadow-xl"
-            data-aos="fade-right"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            <img
-              src="https://i.ibb.co/B2XZK3pz/fitness-friends-gym-portrait-by-happy-relax-proud-group-ready-training-fitness-challenge-personal-tr.jpg"
-              alt="Our fitness team"
-              className="w-full h-auto object-cover"
-            />
-            <div className="absolute inset-0 bg-blue-500 opacity-10" />
-          </motion.div>
-
-          {/* Right Column - Text */}
-          <div className="space-y-6" data-aos="fade-left">
-            <div className="flex items-start">
-              <div className="flex-shrink-0 bg-blue-100 dark:bg-blue-900/30 rounded-lg p-3 mr-4">
-                <span className="text-blue-600 dark:text-blue-400 text-2xl">
-                  🏆
-                </span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                  Founded in 2020
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Born from a passion to make advanced fitness tracking
-                  accessible to everyone.
-                </p>
+    <div className="  mx-auto w-11/12   l">
+      <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+          {" "}
+          Health & Wellness Philosophy
+        </h2>
+        <p className="text-base text-gray-700 md:text-lg">
+          We believe fitness is not just about working out—it's a lifestyle.
+          That’s why we focus on holistic wellness, combining activity tracking
+          with nutrition tips,
+        </p>
+      </div>
+      <div className="grid mx-auto w-11/12 gap-8 lg:grid-cols-2 sm:mx-auto">
+        <div className="flex flex-col justify-center">
+          <div className="flex">
+            <div className="mr-4">
+              <div className="flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-indigo-50">
+                <svg
+                  className="w-8 h-8 text-deep-purple-accent-400"
+                  stroke="currentColor"
+                  viewBox="0 0 52 52"
+                >
+                  <polygon
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                    points="29 13 14 29 25 29 23 39 38 23 27 23"
+                  />
+                </svg>
               </div>
             </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 bg-blue-100 dark:bg-blue-900/30 rounded-lg p-3 mr-4">
-                <span className="text-blue-600 dark:text-blue-400 text-2xl">
-                  🌎
-                </span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                  500,000+ Users Worldwide
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Helping people across 45 countries achieve their fitness
-                  goals.
-                </p>
+            <div>
+              <h6 className="mb-2 font-semibold leading-5">
+                They urge you to put down
+              </h6>
+              <p className="text-sm text-gray-900">
+                Skate ipsum dolor sit amet, alley oop vert mute-air Colby Carter
+                flail 180 berm. Half-cab camel back ollie transition ledge Wes
+                Humpston 1080.
+              </p>
+              <hr className="w-full my-6 border-gray-300" />
+            </div>
+          </div>
+          <div className="flex">
+            <div className="mr-4">
+              <div className="flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-indigo-50">
+                <svg
+                  className="w-8 h-8 text-deep-purple-accent-400"
+                  stroke="currentColor"
+                  viewBox="0 0 52 52"
+                >
+                  <polygon
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                    points="29 13 14 29 25 29 23 39 38 23 27 23"
+                  />
+                </svg>
               </div>
             </div>
-
-            <div className="flex items-start">
-              <div className="flex-shrink-0 bg-blue-100 dark:bg-blue-900/30 rounded-lg p-3 mr-4">
-                <span className="text-blue-600 dark:text-blue-400 text-2xl">
-                  🔬
-                </span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                  Science-Backed Methods
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Our algorithms are developed with sports scientists and
-                  nutritionists.
-                </p>
+            <div>
+              <h6 className="mb-2 font-semibold leading-5">
+                The powerless in a world
+              </h6>
+              <p className="text-sm text-gray-900">
+                The first mate and his Skipper too will do their very best to
+                make the others comfortable in their tropic island nest. Michael
+                Knight a young loner.
+              </p>
+              <hr className="w-full my-6 border-gray-300" />
+            </div>
+          </div>
+          <div className="flex">
+            <div className="mr-4">
+              <div className="flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-indigo-50">
+                <svg
+                  className="w-8 h-8 text-deep-purple-accent-400"
+                  stroke="currentColor"
+                  viewBox="0 0 52 52"
+                >
+                  <polygon
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                    points="29 13 14 29 25 29 23 39 38 23 27 23"
+                  />
+                </svg>
               </div>
             </div>
-
-            <button className="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
-              Meet Our Team →
-            </button>
+            <div>
+              <h6 className="mb-2 font-semibold leading-5">
+                Tell them I hate them
+              </h6>
+              <p className="text-sm text-gray-900">
+                Chase ball of string eat plants, meow, and throw up because I
+                ate plants going to catch the red dot today going to catch the
+                red dot today. I could pee on this if I had the energy.
+              </p>
+            </div>
           </div>
         </div>
+        <div className="grid grid-cols-2 gap-5">
+          <img
+            className="object-cover w-full h-56 col-span-2 rounded shadow-lg"
+            src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+            alt=""
+          />
+          <img
+            className="object-cover w-full h-48 rounded shadow-lg"
+            src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+            alt=""
+          />
+          <img
+            className="object-cover w-full h-48 rounded shadow-lg"
+            src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+            alt=""
+          />
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 

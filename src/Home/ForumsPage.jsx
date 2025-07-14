@@ -6,8 +6,11 @@ import { Link } from "react-router";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import Loader from "../shared/Loader";
+import { PageName } from "../components/PageName";
 
 const ForumsPage = () => {
+
+  PageName('Forums')
   const queryClient = useQueryClient();
   const { user } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);

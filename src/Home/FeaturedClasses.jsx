@@ -57,9 +57,9 @@ const FeaturedClasses = () => {
 
         {/* Classes Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {classes.map((classItem) => (
+          {classes?.map((classItem) => (
             <div
-              key={classItem.id}
+              key={classItem._id}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
               {/* Class Image */}

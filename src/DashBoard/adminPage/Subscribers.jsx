@@ -6,9 +6,12 @@ import {
   FaSpinner,
 } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { PageName } from "../../components/PageName";
 
 const Subscribers = () => {
   const axiosSecure = useAxiosSecure();
+
+  PageName('Subscribers')
 
   const { isPending, data: subscribers = [] } = useQuery({
     queryKey: ["subscribers"],
