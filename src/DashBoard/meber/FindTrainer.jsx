@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaClock, FaDumbbell, FaInfoCircle, FaUser } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const TrainerBookingInfo = ({ bookingData }) => {
 
@@ -69,16 +70,33 @@ const TrainerBookingInfo = ({ bookingData }) => {
       
 
       if (response) {
-        alert('Review submitted successfully!');
+       Swal.fire({
+  icon: 'success',
+  title: 'Review submitted successfully!',
+  showConfirmButton: false,
+  timer: 1500
+});
         setShowReviewModal(false);
         setRating(0);
         event.target.reset();
       } else {
-        throw new Error('Failed to submit review');
+
+
+      Swal.fire({
+  icon: 'error',
+  title: 'Error submitting review',
+  text: 'Please try again.',
+  confirmButtonColor: '#d33'
+});
       }
     } catch (error) {
       console.error('Error submitting review:', error);
-      alert('Error submitting review. Please try again.');
+    Swal.fire({
+  icon: 'error',
+  title: 'Error submitting review',
+  text: 'Please try again.',
+  confirmButtonColor: '#d33'
+});
     }
   };
 

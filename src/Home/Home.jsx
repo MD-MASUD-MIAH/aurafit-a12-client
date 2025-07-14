@@ -1,6 +1,7 @@
 import Hero from "../components/Hero";
 import About from "./About";
 import Feature from "./Feature";
+import FeaturedClasses from "./FeaturedClasses";
 import NewLatter from "./NewLatter";
 import TeamPost from "./TeamPost";
 import Testimonials from "./Testimonials";
@@ -12,6 +13,7 @@ const Home = () => {
       <Hero></Hero>
       <Feature></Feature>
       <About></About>
+      <FeaturedClasses></FeaturedClasses>
       <Testimonials></Testimonials>
       <TeamPost></TeamPost>
       <NewLatter></NewLatter>

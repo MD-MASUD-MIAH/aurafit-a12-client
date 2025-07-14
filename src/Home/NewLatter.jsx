@@ -21,60 +21,42 @@ const NewLatter = () => {
   };
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 to-indigo-50 w-11/12 mx-auto">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-3">
-            Stay Updated
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Join our newsletter for the latest fitness tips, workout plans, and
-            exclusive offers.
-          </p>
+    <section className="bg-blue-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10">
+        {/* Left Side: Illustration */}
+        <div className="w-full lg:w-1/2 flex justify-center">
+          <img
+            src="https://i.ibb.co/35Szc2jX/undraw-fitness-stats-uk0g-removebg-preview.png"
+            alt="Newsletter Illustration"
+            className="max-w-md w-full "
+          />
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
+        {/* Right Side: Content */}
+        <div className="w-full lg:w-1/2 text-center lg:text-left">
+          <h2 className="text-4xl font-extrabold text-blue-900 mb-4">
+            Subscribe To Our Newsletter
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Want to get special offers before they run out? Subscribe to our
+            email to get exclusive discounts and offers.
+          </p>
+
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
           >
-            <div className="flex-1">
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                required
-                placeholder="Enter your email"
-                className="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
+            <input
+              type="email"
+              placeholder="Your Email Address"
+              required
+              name="email"
+              className="px-5 py-3 rounded-full border border-gray-300 w-full sm:w-auto flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
             <button type="submit" className="tom-btn">
-              Subscribe Now
+              Subscribe
             </button>
           </form>
-
-          <div className="mt-4 flex items-center">
-            <input
-              type="checkbox"
-              id="consent"
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-            />
-            <label
-              htmlFor="consent"
-              className="ml-2 block text-sm text-gray-700"
-            >
-              I agree to receive emails about fitness tips and special offers
-            </label>
-          </div>
-        </div>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-500">
-            We respect your privacy. Unsubscribe at any time.
-          </p>
         </div>
       </div>
     </section>

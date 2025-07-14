@@ -28,6 +28,7 @@ import SingleVotePage from "../Home/SingleVotePage";
 import ForumPostPage from "../Home/SingleVotePage";
 import ForumsPage from "../Home/ForumsPage";
 import AllForums from "../Home/AllForums";
+import Balance from "../DashBoard/adminPage/Balance";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,7 @@ export const router = createBrowserRouter([
       { path: "addSlots", Component: AddNewSlots },
       { path: "menageSlots", Component: ManageSlots },
       {path:'postForums',Component:PostForums},
+      {path:'balance',Component:Balance}
    
 
     ],

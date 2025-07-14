@@ -45,7 +45,7 @@ const TrainerTeam = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1  gap-8">
           {trainers.map((trainer) => (
             <motion.div
               key={trainer.id}
@@ -53,38 +53,53 @@ const TrainerTeam = () => {
               transition={{ duration: 0.3 }}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="h-64 overflow-hidden">
-                <img
-                  src={trainer.image}
-                  alt={trainer.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <div className="mb-4">
-                  <h3 className="text-xl font-bold text-gray-800">
-                    {trainer.name}
-                  </h3>
-                  <p className="text-blue-600 font-medium">{trainer.role}</p>
-                </div>
-                <p className="text-gray-600 mb-5">{trainer.bio}</p>
-
-                <div>
-                  <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                    Areas of Expertise
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {trainer.expertise.map((item, index) => (
-                      <span
-                        key={index}
-                        className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
+             <div className="flex flex-col max-w-screen-lg overflow-hidden bg-white border rounded shadow-sm lg:flex-row sm:mx-auto">
+        <div className="relative lg:w-1/2">
+          <img
+            src={trainers.photo}
+            alt=""
+            className="object-cover w-full lg:absolute h-80 lg:h-full"
+          />
+          <svg
+            className="absolute top-0 right-0 hidden h-full text-white lg:inline-block"
+            viewBox="0 0 20 104"
+            fill="currentColor"
+          >
+            <polygon points="17.3036738 5.68434189e-14 20 5.68434189e-14 20 104 0.824555778 104" />
+          </svg>
+        </div>
+        <div className="flex flex-col justify-center p-8 bg-white lg:p-16 lg:pl-10 lg:w-1/2">
+          <div>
+            <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+              {trainers.status === "pending"
+                ? "New Trainer"
+                : "Available Now"}
+            </p>
+          </div>
+          <h5 className="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">
+            Meet {trainers.fullName}
+          </h5>
+          <div className="mb-5 text-gray-800">
+            <p className="mb-3">
+              <span className="font-bold">{trainers.experience} years</span>{" "}
+              of training experience
+            </p>
+            <p className="mb-3">
+              <span className="font-bold">Availability:</span>{" "}
+              {trainers.availableDays?.join(", ")}
+            </p>
+            <p className="mb-3">
+              <span className="font-bold">Time Slots:</span>{" "}
+              {trainers.timeSlots?.join(", ")}
+            </p>
+            <p className="mb-3">
+              <span className="font-bold">Bio:</span>{" "}
+              {trainers.bio || "Professional fitness trainer"}
+            </p>
+          </div>
+        
+        </div>
+      </div>
             </motion.div>
           ))}
         </div>

@@ -1,19 +1,16 @@
 import { useState } from "react";
+import { CiBookmarkCheck } from "react-icons/ci";
 import {
   FaBell,
   FaCheckCircle,
   FaHome,
-  FaMotorcycle,
+  FaMoneyBill,
   FaPlus,
   FaTasks,
   FaUserCheck,
-  FaUserClock,
-  FaUserShield,
   FaWallet,
 } from "react-icons/fa";
-import { CiBookmarkCheck } from "react-icons/ci"; 
-import { MdPostAdd } from "react-icons/md";
-import { MdManageHistory } from "react-icons/md";
+import { MdManageHistory, MdPostAdd } from "react-icons/md";
 
 import { NavLink, Outlet } from "react-router";
 import logo from "../assets/logo.png";
@@ -47,7 +44,7 @@ const DashBoardLayout = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 transform ${
+        className={`fixed inset-y-0 left-0 mt-14 md:mt-0 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 transition-transform duration-200 ease-in-out z-20 w-64 bg-blue-600 text-white`}
       >
@@ -103,7 +100,7 @@ const DashBoardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/approve"
-               className={({ isActive }) =>
+                className={({ isActive }) =>
                   `flex items-center px-4 py-2 rounded-md ${
                     isActive ? "bg-blue-500" : "hover:bg-blue-700"
                   }`
@@ -119,10 +116,10 @@ const DashBoardLayout = () => {
                 <NavLink
                   to="/dashboard/pending-trainer"
                   className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
-                  }`
-                }
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                    }`
+                  }
                 >
                   <FaTasks className="mr-3" />
                   Pending Trainer
@@ -132,10 +129,10 @@ const DashBoardLayout = () => {
                 <NavLink
                   to="/dashboard/activityLogPage"
                   className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
-                  }`
-                }
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                    }`
+                  }
                 >
                   <FaCheckCircle className="mr-3" />
                   Activity Log Page
@@ -145,10 +142,10 @@ const DashBoardLayout = () => {
                 <NavLink
                   to="/dashboard/my-profile"
                   className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
-                  }`
-                }
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                    }`
+                  }
                 >
                   <FaWallet className="mr-3" />
                   My Profile
@@ -162,52 +159,66 @@ const DashBoardLayout = () => {
                 <NavLink
                   to="/dashboard/booked"
                   className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
-                  }`
-                }
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                    }`
+                  }
                 >
-                <CiBookmarkCheck className="mr-3" />
-              Booked Trainer
+                  <CiBookmarkCheck className="mr-3" />
+                  Booked Trainer
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/addSlots"
                   className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
-                  }`
-                }
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                    }`
+                  }
                 >
-                 <FaPlus className="mr-3"></FaPlus>
-                    Add Slots
+                  <FaPlus className="mr-3"></FaPlus>
+                  Add Slots
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/menageSlots"
                   className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
-                  }`
-                }
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                    }`
+                  }
                 >
-                <MdManageHistory className="mr-3" />
-              Manage Slots
+                  <MdManageHistory className="mr-3" />
+                  Manage Slots
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/dashboard/postForums"
-                   className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
-                  }`
-                }
+                  className={({ isActive }) =>
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                    }`
+                  }
                 >
-                 <MdPostAdd className="mr-3" />
-                 Post Forums
+                  <MdPostAdd className="mr-3" />
+                  Post Forums
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/dashboard/balance"
+                  className={({ isActive }) =>
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                    }`
+                  }
+                >
+                  <FaMoneyBill className="mr-3" />
+                  Balance
                 </NavLink>
               </li>
             </>

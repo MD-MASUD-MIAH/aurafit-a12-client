@@ -99,7 +99,7 @@ export default function ModalForm({isShowing,setIsShowing,singleData,setFeedback
         </h3>
         <button
           onClick={() => setIsShowing(false)}
-          className="inline-flex items-center justify-center h-10 gap-2 px-5 text-sm font-medium tracking-wide transition duration-300 rounded-full justify-self-center whitespace-nowrap text-emerald-500 hover:bg-emerald-100 hover:text-emerald-600 focus:bg-emerald-200 focus:text-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:text-emerald-300 disabled:shadow-none disabled:hover:bg-transparent"
+          className="inline-flex items-center justify-center h-10 gap-2 px-5 text-sm font-medium tracking-wide transition duration-300 rounded-full justify-self-center whitespace-nowrap text-blue-500 hover:bg-blue-100 hover:text-blue-600 focus:bg-blue-200 focus:text-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:text-blue-300 disabled:shadow-none disabled:hover:bg-transparent"
           aria-label="close dialog"
         >
           <span className="relative only:-mx-5">
@@ -156,12 +156,12 @@ export default function ModalForm({isShowing,setIsShowing,singleData,setFeedback
                 onChange={(e) => setFeedback(e.target.value)}
                 placeholder=" "
                 rows="4"
-                className="relative w-full p-4 text-sm transition-all border rounded outline-none peer border-slate-200 text-slate-500 autofill:bg-white focus:border-emerald-500 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                className="relative w-full p-4 text-sm transition-all border rounded outline-none peer border-slate-200 text-slate-500 autofill:bg-white focus:border-blue-500 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                 required
               />
               <label
                 htmlFor="feedback"
-                className="absolute -top-2 left-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:left-0 before:top-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500"
+                className="absolute -top-2 left-2 z-[1] px-2 text-xs text-blue-400 transition-all before:absolute before:left-0 before:top-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs peer-focus:text-emerald-500"
               >
                 Your Feedback
               </label>
@@ -170,7 +170,7 @@ export default function ModalForm({isShowing,setIsShowing,singleData,setFeedback
             {/* Submit button */}
             <button
               type="submit"
-              className="inline-flex items-center justify-center w-full h-10 gap-2 px-5 text-sm font-medium tracking-wide text-white transition duration-300 rounded whitespace-nowrap bg-emerald-500 hover:bg-emerald-600 focus:bg-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none"
+              className="inline-flex items-center justify-center w-full h-10 gap-2 px-5 text-sm font-medium tracking-wide text-white transition duration-300 rounded whitespace-nowrap bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-emerald-300 disabled:shadow-none"
             >
               Submit Feedback
             </button>
