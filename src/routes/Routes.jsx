@@ -30,6 +30,7 @@ import ForumsPage from "../Home/ForumsPage";
 import AllForums from "../Home/AllForums";
 import Balance from "../DashBoard/adminPage/Balance";
 import NotFoundError from "../components/NotFoundError";
+import AdminAccess from "../Context/AdminAccess";
 
 export const router = createBrowserRouter([
   {
@@ -96,7 +97,10 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: DashBoard },
 
-      { path: "subscribers", Component: Subscribers },
+      { path: "subscribers", element: <PriveteRoute><AdminAccess>
+        
+        <Subscribers></Subscribers>
+        </AdminAccess></PriveteRoute> },
       { path: "addClass", Component: AddClass },
       { path: "pending-trainer", Component: PendingTrainer },
       { path: "pending-details/:id", Component: PendingDetails },

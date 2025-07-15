@@ -25,15 +25,17 @@ const Register = () => {
     const newErrors = {};
     if (!name) newErrors.name = "Name is required";
     if (!email) newErrors.email = "Email is required";
-   if (!password) {
-  newErrors.password = "Password is required";
-} else if (password.length < 6) {
-  newErrors.password = "Password must be at least 6 characters";
-} else if (!/[A-Z]/.test(password)) {
-  newErrors.password = "Password must contain at least one uppercase letter";
-} else if (!/[a-z]/.test(password)) {
-  newErrors.password = "Password must contain at least one lowercase letter";
-}
+    if (!password) {
+      newErrors.password = "Password is required";
+    } else if (password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    } else if (!/[A-Z]/.test(password)) {
+      newErrors.password =
+        "Password must contain at least one uppercase letter";
+    } else if (!/[a-z]/.test(password)) {
+      newErrors.password =
+        "Password must contain at least one lowercase letter";
+    }
     if (!previewImage) newErrors.image = "Image is required";
 
     if (Object.keys(newErrors).length > 0) {
@@ -67,6 +69,7 @@ const Register = () => {
       form.reset();
 
       setPreviewImage(null);
+      navigate("/");
       setErrors({});
     } catch (error) {
       Swal.fire({
@@ -74,8 +77,6 @@ const Register = () => {
         title: "Oops...",
         text: error.message,
       });
-    } finally {
-      navigate("/");
     }
   };
 

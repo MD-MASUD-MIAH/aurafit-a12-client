@@ -1,16 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { PageName } from "../components/PageName";
 import useAuth from "../hooks/useAuth";
 import GoogleLogin from "../social/GoogleLogin";
 import { saveUserMongo } from "../utilits/utilits";
-import { PageName } from "../components/PageName";
 const Login = () => {
-  
-   
-    const location = useLocation()
+  const location = useLocation();
 
-  PageName('Login')
+  PageName("Login");
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const { logInUser } = useAuth();
@@ -33,7 +31,7 @@ const Login = () => {
       };
       // update user
       await saveUserMongo(userData);
-       navigate(location?.state ? location.state: '/');
+      navigate(location?.state ? location.state : "/");
       toast.success("Login Successful");
     } catch (err) {
       console.log(err);
@@ -42,17 +40,17 @@ const Login = () => {
     }
   };
   return (
-    <div className="bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
+    <div className="bg-gradient-to-br from-purple-50 to-pink-50 min-h-[calc(100vh-200px)]">
       <div className="w-11/12 mx-auto py-10 flex flex-col items-center justify-center min-h-[calc(100vh-300px)]">
-        <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-[#550527]">
-          <div className="p-8">
+        <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-blue-600 md:mt-6">
+          <div className="p-8 ">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-[#550527]">
+              <h2 className="text-2xl font-bold text-blue-600">
                 Login Account
               </h2>
             </div>
 
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6  " onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email Address
@@ -62,7 +60,7 @@ const Login = () => {
                   type="email"
                   className={`w-full px-4 py-2 border-b ${
                     errors.email ? "border-red-500" : "border-gray-300"
-                  } focus:outline-none focus:border-[#550527] transition-colors`}
+                  } focus:outline-none focus:border-blue-600 transition-colors`}
                   placeholder="Enter your email"
                 />
                 {errors.email && (
@@ -89,9 +87,9 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="w-full bg-[#550527] hover:bg-[#44041f] text-white py-3 px-4 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
+                className="w-full bg-blue-600 hover:bg-blue-600 text-white py-3 px-4 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center"
               >
-                Register
+                Login
               </button>
             </form>
 
@@ -99,7 +97,7 @@ const Login = () => {
               you new in this site please,register{" "}
               <Link
                 to="/register"
-                className="text-[#550527] font-medium hover:underline"
+                className="text-blue-600 font-medium hover:underline"
               >
                 Login here
               </Link>

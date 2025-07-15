@@ -62,6 +62,7 @@ const StripeCheckout = ({ formData }) => {
     });
 
     if (error) {
+      setProcessing(false)
       console.log("[error]", error);
       setCardError(error.message);
      

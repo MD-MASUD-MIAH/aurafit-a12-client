@@ -9,6 +9,7 @@ import {
   FaUser,
 } from "react-icons/fa";
 import Select from "react-select";
+import Swal from "sweetalert2";
 import { PageName } from "../../components/PageName";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../../shared/Loader";
@@ -53,9 +54,13 @@ const AddNewSlots = () => {
     },
   });
 
+  console.log(rawClassData);
+  console.log(trainer);
+  
+
   const classOptions = rawClassData.map((cls) => ({
-    value: cls?.name?.toLowerCase(),
-    label: cls?.name,
+    value: cls?.skillName?.toLowerCase(),
+    label: cls?.skillName,
   }));
 
   const timeSlotOptions = timeSlots.map((slot) => ({
@@ -74,33 +79,60 @@ const AddNewSlots = () => {
       const availableDays = data.availableDays.map((d) => d.value);
       const timeSlots = data.timeSlots.map((t) => t.value);
       const classes = data.availableClasses.map((c) => c.value);
-      const skills = [
+      const newSkills = [
         ...new Set(classes.map((c) => c.charAt(0).toUpperCase() + c.slice(1))),
-      ]; // Optional: Capitalize first letter
+      ];
 
+     
+      const existingRes = await axios.get(
+        `${import.meta.env.VITE_API_URL}/slots/${user.email}`
+      );
+      const existingTrainer = existingRes.data;
+      const previousSkills = existingTrainer?.skills || [];
+
+    
+      const mergedSkills = [...new Set([...previousSkills, ...newSkills])];
+
+      // 🔵 Prepare data
       const payload = {
         availableDays,
         timeSlots,
         classes,
-        skills,
+        skills: mergedSkills,
       };
 
+      // 🔴 Send PATCH request
       const res = await axios.patch(
         `${import.meta.env.VITE_API_URL}/trainer/${user.email}`,
         payload
       );
 
       if (res.data.modifiedCount > 0) {
-        alert("Availability and skills updated successfully!");
+        Swal.fire({
+          icon: "success",
+          title: "Updated!",
+          text: "Availability and skills updated successfully!",
+          timer: 2000,
+          showConfirmButton: false,
+        });
       } else {
-        alert("No changes made.");
+        Swal.fire({
+          icon: "info",
+          title: "No Changes",
+          text: "No updates were made.",
+          timer: 2000,
+          showConfirmButton: false,
+        });
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Error updating slots. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "Update Failed",
+        text: "Something went wrong while updating. Please try again.",
+      });
     }
   };
-
   if (isLoading) return <Loader />;
 
   return (

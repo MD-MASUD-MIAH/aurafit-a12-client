@@ -14,9 +14,14 @@ import { MdManageHistory, MdPostAdd } from "react-icons/md";
 
 import { NavLink, Outlet } from "react-router";
 import logo from "../assets/logo.png";
+import useRole from "../hooks/userRole";
 
 const DashBoardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { role } = useRole();
+
+  console.log(role);
 
   return (
     <div className="flex h-screen ">
@@ -71,17 +76,19 @@ const DashBoardLayout = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/dashboard/subscribers"
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md ${
-                    isActive ? "bg-blue-500" : "hover:bg-blue-700"
-                  }`
-                }
-              >
-                <FaBell className="mr-3" />
-                Subscribers
-              </NavLink>
+              {role?.role === "admin" && (
+                <NavLink
+                  to="/dashboard/subscribers"
+                  className={({ isActive }) =>
+                    `flex items-center px-4 py-2 rounded-md ${
+                      isActive ? "bg-blue-500" : "hover:bg-blue-700"
+                    }`
+                  }
+                >
+                  <FaBell className="mr-3" />
+                  Subscribers
+                </NavLink>
+              )}
             </li>
 
             <li>
