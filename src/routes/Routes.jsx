@@ -31,6 +31,9 @@ import AllForums from "../Home/AllForums";
 import Balance from "../DashBoard/adminPage/Balance";
 import NotFoundError from "../components/NotFoundError";
 import AdminAccess from "../Context/AdminAccess";
+import PrivacyPolicy from "../components/PrivacyPolicy";
+import TermsOfService from "../components/TermsOfService";
+import CookiePolicy from "../components/CookiePolicy";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +78,9 @@ export const router = createBrowserRouter([
 
     },
       {path:'/forums/:id',Component:SingleVotePage},
+      {path:'/privacyPolicy',Component:PrivacyPolicy},
+      {path:'/termsOfService',Component:TermsOfService},
+      {path:'/cookiePolicy',Component:CookiePolicy},
       {
         path: "/payment",
         element: (

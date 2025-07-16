@@ -3,14 +3,16 @@ import { Link, NavLink } from "react-router";
 import Swal from "sweetalert2";
 import logo from "../assets/logo.png";
 import useAuth from "../hooks/useAuth";
-import useRole from "../hooks/userRole";
+import useRole from "../hooks/useRole";
+
 const Navbar = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const { user, logout } = useAuth();
 
-  const {role} = useRole()
+  const {role} = useRole() 
 
-  console.log(role);
+  console.log("role object:", role);
+  
   
 
   const handleLogout = () => {

@@ -1,23 +1,29 @@
+import { Link } from "react-router";
+import logo from "../assets/logo.png";
 const Footer = () => {
   return (
-    <footer className="bg-blue-600 text-white pt-12 pb-8">
+    <footer className="bg-[url('https://i.ibb.co/cXX22T07/abstract-smooth-blue-curvy-template-presentation-1017-53582.jpg')] text-white pt-12 pb-8 bg-cover  bg-center bg-no-repeat ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* About Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4">FitTrack Pro</h3>
+            <div className="flex items-center mb-4 gap-4">
+              <img className="w-10 h-10" src={logo} alt="" />
+              <h3 className="text-xl font-bold mt-1  ">AuraFit</h3>
+            </div>
             <p className="text-gray-300 mb-4">
               Your complete fitness companion for tracking workouts, nutrition,
               and health metrics.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex items-center space-x-4">
               <a
-                href="#"
+                href="https://web.facebook.com/"
+                target="_blank"
                 className="text-gray-300 hover:text-white transition-colors"
               >
                 <span className="sr-only">Facebook</span>
                 <svg
-                  className="h-6 w-6"
+                  className="h-7 w-7"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -25,7 +31,8 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/"
+                target="_blank"
                 className="text-gray-300 hover:text-white transition-colors"
               >
                 <span className="sr-only">Instagram</span>
@@ -38,16 +45,18 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://www.youtube.com/"
+                target="_blank"
                 className="text-gray-300 hover:text-white transition-colors"
               >
-                <span className="sr-only">Twitter</span>
+                <span className="sr-only">Youtube</span>
                 <svg
-                  className="h-6 w-6"
+                  className="h-7 w-7"
                   fill="currentColor"
-                  viewBox="0 0 24 24"
+                  viewBox="0 0 576 512"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                  <path d="M549.655 124.083c-6.281-23.65-24.812-42.184-48.462-48.462C458.781 64 288 64 288 64s-170.781 0-213.193 11.621c-23.65 6.278-42.184 24.812-48.462 48.462C16.722 166.497 16 215.229 16 256s.722 89.503 10.345 131.917c6.278 23.65 24.812 42.184 48.462 48.462C117.219 448 288 448 288 448s170.781 0 213.193-11.621c23.65-6.278 42.184-24.812 48.462-48.462C559.278 345.503 560 296.771 560 256s-.722-89.503-10.345-131.917zM232 334V178l142 78-142 78z" />
                 </svg>
               </a>
             </div>
@@ -58,44 +67,37 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to={"/"}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to={"/allTrainer"}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  Workouts
-                </a>
+                  All Trainer
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to={"allClass"}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  Nutrition
-                </a>
+                  All Classes
+                </Link>
               </li>
+
               <li>
-                <a
-                  href="#"
+                <Link
+                  to={"/forums"}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  Progress Tracking
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Premium Features
-                </a>
+                  Forums
+                </Link>
               </li>
             </ul>
           </div>
@@ -124,7 +126,7 @@ const Footer = () => {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                <span>123 Fitness St, Healthville HV 12345</span>
+                <span>123 Shibchar St, Healthville HV 12345</span>
               </li>
               <li className="flex items-center">
                 <svg
@@ -140,7 +142,7 @@ const Footer = () => {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                <span>(123) 456-7890</span>
+                <span>+88 01764091069</span>
               </li>
               <li className="flex items-center">
                 <svg
@@ -156,69 +158,44 @@ const Footer = () => {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                <span>support@fittrackpro.com</span>
+                <span>aurafit@gamil.com</span>
               </li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
-            <p className="text-gray-300 mb-4">
-              Subscribe to get fitness tips and special offers
-            </p>
-            <form className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-lg transition-colors"
+            <h3 className="text-lg font-semibold mb-4">Company Policies</h3>
+
+            <div className=" flex flex-col space-y-3">
+              <Link
+                to={"/privacyPolicy"}
+                className="text-gray-300 hover:text-white text-sm transition-colors"
               >
-                <svg
-                  className="h-5 w-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </button>
-            </form>
+                Privacy Policy
+              </Link>
+              <Link
+                to={"/termsOfService"}
+                className="text-gray-300 hover:text-white text-sm transition-colors"
+              >
+                Terms of Service
+              </Link>
+              <Link
+                to={"/cookiePolicy"}
+                className="text-gray-300 hover:text-white text-sm transition-colors"
+              >
+                Cookie Policy
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-700 pt-6 mt-6 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-white pt-6 mt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} FitTrack Pro. All rights reserved.
+            © {new Date().getFullYear()} AuraFit Pro. All rights reserved.
           </p>
-          <div className="flex space-x-6">
-            <a
-              href="#"
-              className="text-gray-400 hover:text-white text-sm transition-colors"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-white text-sm transition-colors"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-white text-sm transition-colors"
-            >
-              Cookie Policy
-            </a>
+          <div>
+            <p></p>
           </div>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import { FaFireAlt, FaUsers, FaWalking } from "react-icons/fa";
+
 const About = () => {
   return (
     <div className="  mx-auto w-11/12   l">
@@ -16,108 +18,75 @@ const About = () => {
         <div className="flex flex-col justify-center">
           <div className="flex">
             <div className="mr-4">
-              <div className="flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
+              <div className="flex items-center justify-center w-12 h-12 mb-3 rounded-full bg-indigo-100 text-red-600">
+                <FaFireAlt className="text-2xl" />
               </div>
             </div>
             <div>
-              <h6 className="mb-2 font-semibold leading-5">
-                They urge you to put down
+              <h6 className="mb-2 text-lg font-semibold leading-6">
+                10,000+ Calories Burned
               </h6>
-              <p className="text-sm text-gray-900">
-                Skate ipsum dolor sit amet, alley oop vert mute-air Colby Carter
-                flail 180 berm. Half-cab camel back ollie transition ledge Wes
-                Humpston 1080.
+              <p className="text-base text-gray-800">
+                Aurafit users have collectively burned over 10,000 calories by
+                staying consistent with their fitness routines, challenges, and
+                workouts.
               </p>
               <hr className="w-full my-6 border-gray-300" />
             </div>
           </div>
+
           <div className="flex">
             <div className="mr-4">
-              <div className="flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
+              <div className="flex items-center justify-center w-12 h-12 mb-3 rounded-full bg-indigo-100 text-blue-600">
+                <FaWalking className="text-2xl" />
               </div>
             </div>
             <div>
-              <h6 className="mb-2 font-semibold leading-5">
-                The powerless in a world
+              <h6 className="mb-2 text-lg font-semibold leading-6">
+                5,000+ Steps Tracked
               </h6>
-              <p className="text-sm text-gray-900">
-                The first mate and his Skipper too will do their very best to
-                make the others comfortable in their tropic island nest. Michael
-                Knight a young loner.
+              <p className="text-base text-gray-800">
+                With Aurafit, users track over 5,000 steps every day on average
+                — promoting healthy movement and activity throughout their daily
+                routines.
               </p>
               <hr className="w-full my-6 border-gray-300" />
             </div>
           </div>
+
           <div className="flex">
             <div className="mr-4">
-              <div className="flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
+              <div className="flex items-center justify-center w-12 h-12 mb-3 rounded-full bg-indigo-100 text-green-600">
+                <FaUsers className="text-2xl" />
               </div>
             </div>
             <div>
-              <h6 className="mb-2 font-semibold leading-5">
-                Tell them I hate them
+              <h6 className="mb-2 text-lg font-semibold leading-6">
+                100+ Active Members
               </h6>
-              <p className="text-sm text-gray-900">
-                Chase ball of string eat plants, meow, and throw up because I
-                ate plants going to catch the red dot today going to catch the
-                red dot today. I could pee on this if I had the energy.
+              <p className="text-base text-gray-800">
+                More than 100 active users log in daily to track progress,
+                participate in community challenges, and share their fitness
+                journey with Aurafit.
               </p>
             </div>
           </div>
         </div>
+
         <div className="grid grid-cols-2 gap-5">
           <img
             className="object-cover w-full h-56 col-span-2 rounded shadow-lg"
-            src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+            src="https://i.ibb.co/KzKWTzSC/the-team-edited-800w-e1496920052827.jpg;"
             alt=""
           />
           <img
             className="object-cover w-full h-48 rounded shadow-lg"
-            src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+            src="https://i.ibb.co/NgmQFt4s/how-much-personal-trainer-cost.jpg;"
             alt=""
           />
           <img
             className="object-cover w-full h-48 rounded shadow-lg"
-            src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+            src="https://i.ibb.co/3YNKzRXZ/personal-training-become-a-personal-trainer-640x480.jpg"
             alt=""
           />
         </div>

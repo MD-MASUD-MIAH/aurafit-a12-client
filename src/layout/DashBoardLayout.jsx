@@ -14,7 +14,7 @@ import { MdManageHistory, MdPostAdd } from "react-icons/md";
 
 import { NavLink, Outlet } from "react-router";
 import logo from "../assets/logo.png";
-import useRole from "../hooks/userRole";
+import useRole from "../hooks/useRole";
 
 const DashBoardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -76,7 +76,7 @@ const DashBoardLayout = () => {
               </NavLink>
             </li>
             <li>
-              {role?.role === "admin" && (
+              {role=== "admin" && (
                 <NavLink
                   to="/dashboard/subscribers"
                   className={({ isActive }) =>
