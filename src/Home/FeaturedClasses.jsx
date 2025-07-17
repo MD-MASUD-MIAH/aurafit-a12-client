@@ -9,7 +9,7 @@ const FeaturedClasses = () => {
   const { isPending, data: bookedData = [] } = useQuery({
     queryKey: ["bookedData"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/booked");
+      const res = await axiosSecure.get("/totalbooked");
       return res.data;
     },
   });

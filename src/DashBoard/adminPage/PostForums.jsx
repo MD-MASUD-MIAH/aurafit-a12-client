@@ -3,9 +3,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { PageName } from "../../components/PageName";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const PostForums = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure()
   PageName('Post Forums')
   const { data: userData } = useQuery({
     queryKey: ["trainerOrAdmin", user.email],
@@ -34,8 +36,8 @@ const PostForums = () => {
     };
     console.log(postData);
 
-    await axios
-      .post(`${import.meta.env.VITE_API_URL}/forums`, postData)
+    await axiosSecure
+      .post(`/forums`, postData)
       .then((res) => {
         console.log(res.data);
 

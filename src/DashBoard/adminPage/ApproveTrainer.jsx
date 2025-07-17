@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
 import Swal from "sweetalert2";
 import { PageName } from "../../components/PageName";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -16,7 +16,7 @@ const ApproveTrainer = () => {
   } = useQuery({
     queryKey: ["allTrainer"],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/trainer`);
+      const res = await axiosSecure.get(`/trainerAdmin`);
 
       return res?.data;
     },

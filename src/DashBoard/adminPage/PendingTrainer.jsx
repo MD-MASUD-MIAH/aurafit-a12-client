@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
 import { Link } from "react-router";
 import { PageName } from "../../components/PageName";
 import Loader from "../../shared/Loader";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const PendingTrainer = () => {
+
+  const axiosSecure = useAxiosSecure()
   PageName("PendingTrainer");
   const {
     isPending,
@@ -12,8 +15,8 @@ const PendingTrainer = () => {
   } = useQuery({
     queryKey: ["pendingTrainer"],
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/pending-trainer`
+      const res = await axiosSecure.get(
+        `/pending-trainer`
       );
       return res?.data;
     },

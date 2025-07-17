@@ -1,13 +1,17 @@
-import { PageName } from "../components/PageName";
+// RoleBasedDashboardRedirect.jsx
+import { Navigate } from "react-router";
+import useRole from "../hooks/useRole";
 
-const DashBoard = () => {
+const RoleBasedDashboardRedirect = () => {
+  const { role, isLoading } = useRole();
 
-     PageName('DashBoard')
-  return (
-    <div className="py-10">
-      <h1>Home</h1>
-    </div>
-  );
+  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+
+  if (role === "admin") return <Navigate to="/dashboard/balance" />;
+  if (role === "trainer") return <Navigate to="/dashboard/menageSlots" />;
+  if (role === "member") return <Navigate to="/dashboard/my-profile" />;
+
+  return <Navigate to="/login" />; // fallback in case of unexpected role
 };
 
-export default DashBoard;
+export default RoleBasedDashboardRedirect;

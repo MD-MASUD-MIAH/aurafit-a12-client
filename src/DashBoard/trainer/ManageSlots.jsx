@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+
 import { FaClock, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { PageName } from "../../components/PageName";
@@ -18,8 +18,8 @@ const ManageSlots = () => {
     queryKey: ["trainer", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/slots/${user.email}`
+      const res = await axiosSecure.get(
+        `/slots/${user.email}`
       );
       return res.data;
     },
@@ -29,8 +29,8 @@ const ManageSlots = () => {
     queryKey: ["bookings", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/trainer/bookings/${trainer._id}`
+      const res = await axiosSecure.get(
+        `/trainer/bookings/${trainer._id}`
       );
       return res.data;
     },

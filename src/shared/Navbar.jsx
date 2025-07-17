@@ -205,7 +205,7 @@ const Navbar = () => {
             <div className="ml-auto flex items-center justify-end px-6 lg:ml-0 lg:flex-1 lg:p-0">
               {user ? (
                 <div className="flex gap-4">
-                  <Link to={"/dashboard/my-profile"}>
+                  <Link to={"/profile"}>
                     <img
                       className="w-10 h-10 rounded-full"
                       src={user.photoURL}

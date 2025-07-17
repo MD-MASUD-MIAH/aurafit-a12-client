@@ -1,15 +1,24 @@
 import { createBrowserRouter } from "react-router";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
-import AllClass from "../components/AllClass";
 import AllTrainer from "../components/AllTrainer";
 import BookingPage from "../components/BookingPage";
+import ClassContainer from "../components/ClassContainer";
+import CookiePolicy from "../components/CookiePolicy";
+import NotFoundError from "../components/NotFoundError";
+import PrivacyPolicy from "../components/PrivacyPolicy";
+import Profile from "../components/Profile";
 import TainerDeatilsPage from "../components/TainerDeatilsPage";
+import TermsOfService from "../components/TermsOfService";
+import AdminAccess from "../Context/AdminAccess";
 import PriveteRoute from "../Context/PriveteRoute";
+import TrainerAccess from "../Context/TrainerAccess";
 import AddClass from "../DashBoard/adminPage/AddClass";
 import ApproveTrainer from "../DashBoard/adminPage/ApproveTrainer";
+import Balance from "../DashBoard/adminPage/Balance";
 import PendingDetails from "../DashBoard/adminPage/PendingDetails";
 import PendingTrainer from "../DashBoard/adminPage/PendingTrainer";
+import PostForums from "../DashBoard/adminPage/PostForums";
 import Subscribers from "../DashBoard/adminPage/Subscribers";
 import DashBoard from "../DashBoard/DashBoard";
 import ActivityLogPage from "../DashBoard/meber/ActivityLogPage";
@@ -19,31 +28,30 @@ import MyProfile from "../DashBoard/meber/MyProfile";
 import PaymentPage from "../DashBoard/meber/PaymentPage";
 import AddNewSlots from "../DashBoard/trainer/AddNewSlots";
 import ManageSlots from "../DashBoard/trainer/ManageSlots";
+import AllForums from "../Home/AllForums";
 import Home from "../Home/Home";
+import SingleVotePage from "../Home/SingleVotePage";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
-import ClassContainer from "../components/ClassContainer";
-import PostForums from "../DashBoard/adminPage/PostForums";
-import SingleVotePage from "../Home/SingleVotePage";
-import ForumPostPage from "../Home/SingleVotePage";
-import ForumsPage from "../Home/ForumsPage";
-import AllForums from "../Home/AllForums";
-import Balance from "../DashBoard/adminPage/Balance";
-import NotFoundError from "../components/NotFoundError";
-import AdminAccess from "../Context/AdminAccess";
-import PrivacyPolicy from "../components/PrivacyPolicy";
-import TermsOfService from "../components/TermsOfService";
-import CookiePolicy from "../components/CookiePolicy";
+import AdminTrainerAcess from "../Context/AdminTrainerAcess";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    errorElement:<NotFoundError></NotFoundError>,
+    errorElement: <NotFoundError></NotFoundError>,
     Component: MainLayout,
     children: [
       { index: true, Component: Home },
       { path: "/register", Component: Register },
       { path: "/login", Component: Login },
+      {
+        path: "/profile",
+        element: (
+          <PriveteRoute>
+            <Profile></Profile>
+          </PriveteRoute>
+        ),
+      },
       {
         path: "/allTrainer",
 
@@ -74,13 +82,11 @@ export const router = createBrowserRouter([
         ),
       },
       { path: "/allClass", Component: ClassContainer },
-      {path:'/forums',Component:AllForums
-
-    },
-      {path:'/forums/:id',Component:SingleVotePage},
-      {path:'/privacyPolicy',Component:PrivacyPolicy},
-      {path:'/termsOfService',Component:TermsOfService},
-      {path:'/cookiePolicy',Component:CookiePolicy},
+      { path: "/forums", Component: AllForums },
+      { path: "/forums/:id", Component: SingleVotePage },
+      { path: "/privacyPolicy", Component: PrivacyPolicy },
+      { path: "/termsOfService", Component: TermsOfService },
+      { path: "/cookiePolicy", Component: CookiePolicy },
       {
         path: "/payment",
         element: (
@@ -103,14 +109,20 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: DashBoard },
 
-      { path: "subscribers", element: <PriveteRoute><AdminAccess>
-        
-        <Subscribers></Subscribers>
-        </AdminAccess></PriveteRoute> },
-      { path: "addClass", Component: AddClass },
-      { path: "pending-trainer", Component: PendingTrainer },
+      {
+        path: "subscribers",
+        element: (
+          <PriveteRoute>
+            <AdminAccess>
+              <Subscribers></Subscribers>
+            </AdminAccess>
+          </PriveteRoute>
+        ),
+      },
+      { path: "addClass", element:<PriveteRoute><AdminAccess><AddClass></AddClass></AdminAccess></PriveteRoute>},
+      { path: "pending-trainer", element:<PriveteRoute><AdminAccess><PendingTrainer></PendingTrainer></AdminAccess></PriveteRoute> },
       { path: "pending-details/:id", Component: PendingDetails },
-      { path: "approve", Component: ApproveTrainer },
+      { path: "approve",element:<PriveteRoute><AdminAccess><ApproveTrainer></ApproveTrainer></AdminAccess></PriveteRoute>},
       { path: "activityLogPage", Component: ActivityLogPage },
       { path: "my-profile", Component: MyProfile },
       {
@@ -122,12 +134,28 @@ export const router = createBrowserRouter([
         ),
       },
 
-      { path: "addSlots", Component: AddNewSlots },
-      { path: "menageSlots", Component: ManageSlots },
-      {path:'postForums',Component:PostForums},
-      {path:'balance',Component:Balance}
-   
-
+      {
+        path: "addSlots",
+        element: (
+          <PriveteRoute>
+            <TrainerAccess>
+              <AddNewSlots></AddNewSlots>
+            </TrainerAccess>
+          </PriveteRoute>
+        ),
+      },
+      {
+        path: "menageSlots",
+        element: (
+          <PriveteRoute>
+            <TrainerAccess>
+              <ManageSlots></ManageSlots>
+            </TrainerAccess>
+          </PriveteRoute>
+        ),
+      },
+      { path: "postForums", element:<PriveteRoute><AdminTrainerAcess><PostForums></PostForums></AdminTrainerAcess></PriveteRoute> },
+      { path: "balance", element:<PriveteRoute><AdminAccess><Balance></Balance></AdminAccess></PriveteRoute> },
     ],
   },
 ]);

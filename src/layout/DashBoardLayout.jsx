@@ -91,7 +91,9 @@ const DashBoardLayout = () => {
               )}
             </li>
 
-            <li>
+          {
+
+            role === 'admin' &&   <li>
               <NavLink
                 to="/dashboard/addClass"
                 className={({ isActive }) =>
@@ -104,7 +106,10 @@ const DashBoardLayout = () => {
                 Add Class
               </NavLink>
             </li>
-            <li>
+          }
+         {
+
+           role  === 'admin' &&    <li>
               <NavLink
                 to="/dashboard/approve"
                 className={({ isActive }) =>
@@ -117,9 +122,12 @@ const DashBoardLayout = () => {
                 Available Trainers
               </NavLink>
             </li>
+         }
 
             <>
-              <li>
+            {
+
+              role === 'admin' &&   <li>
                 <NavLink
                   to="/dashboard/pending-trainer"
                   className={({ isActive }) =>
@@ -132,6 +140,7 @@ const DashBoardLayout = () => {
                   Pending Trainer
                 </NavLink>
               </li>
+            }
               <li>
                 <NavLink
                   to="/dashboard/activityLogPage"
@@ -175,7 +184,8 @@ const DashBoardLayout = () => {
                   Booked Trainer
                 </NavLink>
               </li>
-              <li>
+            {
+              role ==='trainer' &&   <li>
                 <NavLink
                   to="/dashboard/addSlots"
                   className={({ isActive }) =>
@@ -188,7 +198,9 @@ const DashBoardLayout = () => {
                   Add Slots
                 </NavLink>
               </li>
-              <li>
+            }
+            {
+              role ==='trainer' &&   <li>
                 <NavLink
                   to="/dashboard/menageSlots"
                   className={({ isActive }) =>
@@ -201,7 +213,9 @@ const DashBoardLayout = () => {
                   Manage Slots
                 </NavLink>
               </li>
-              <li>
+            }
+             {
+             ( role ==='admin' || role ==='trainer') &&  <li>
                 <NavLink
                   to="/dashboard/postForums"
                   className={({ isActive }) =>
@@ -214,8 +228,10 @@ const DashBoardLayout = () => {
                   Post Forums
                 </NavLink>
               </li>
+             }
 
-              <li>
+             {
+              role  === 'admin' &&  <li>
                 <NavLink
                   to="/dashboard/balance"
                   className={({ isActive }) =>
@@ -228,6 +244,7 @@ const DashBoardLayout = () => {
                   Balance
                 </NavLink>
               </li>
+             }
             </>
           </ul>
         </nav>
