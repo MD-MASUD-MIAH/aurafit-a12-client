@@ -5,11 +5,11 @@ const ClassContainer = () => {
   const [searchText, setSearchText] = useState("");
   return (
     <div className="w-11/12 mx-auto">
-      <div className="flex flex-col items-center gap-3 pt-5 pb-19">
-        <h1 className="text-3xl font-bold text-center  ">
+      <div className="text-center my-12">
+        <h2 className="md:text-3xl text-xl font-bold text-gray-800 mb-4">
           Join Our Expert-Led Classes
-        </h1>
-        <p className="max-w-2xl text-center">
+        </h2>
+        <p className="md:text-xl text-xs text-gray-600 max-w-3xl mx-auto">
           Take your fitness journey to the next level with guidance from
           certified trainers. Our expert-led classes are designed for all
           fitness levels — whether you're just starting out or pushing for peak

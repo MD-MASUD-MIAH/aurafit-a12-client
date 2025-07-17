@@ -1,16 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { FiActivity, FiAward, FiClock, FiHeart, FiUser } from "react-icons/fi";
+import { FiActivity, FiAward, FiUser } from "react-icons/fi";
+import { Link } from "react-router";
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
 
   const images = [
-    "https://i.ibb.co/JRY9CpFg/675c8f2a46f9748ac270d1a2-landscap-011-1775p.jpg",
-    "https://i.ibb.co/vt9LKTZ/65d3674df1397c34b67e7e9a-IMG-8049.jpg",
-    "https://i.ibb.co/NdJH3TkT/VEN06242-min-2048x1365-CZSg-I9qf.jpg",
-   
+    "https://i.ibb.co/wZqTNBkH/Flux-Dev-highresolution-stock-photo-of-A-muscular-athletic-man-3.jpg",
+    "https://i.ibb.co/RTgn7B6r/hlh090123bodystrengthindiversity-002-64e8befba5f85-1.jpg",
+    "https://i.ibb.co/qLf7y0ZV/shutterstock-1204167769-2000x.webp",
   ];
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Hero = () => {
               alt={`Fitness ${index + 1}`}
               className="w-full h-full object-cover object-center"
             />
-            <div className="absolute inset-0 bg-black/40 bg-gradient-to-r from-black/60 to-black/20" />
+            <div className="absolute " />
           </motion.div>
         ))}
       </div>
@@ -46,14 +46,14 @@ const Hero = () => {
       <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-6 lg:px-8 flex py-30">
           {/* Left Content */}
-          <div className="w-full lg:w-1/2">
+          <div className="w-full ">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="max-w-2xl"
+              className=""
             >
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+              <h1 className="text-3xl md:text-6xl font-bold text-white mb-4">
                 Transform Your{" "}
                 <span className="text-[#2563EB]">Fitness Journey</span>
               </h1>
@@ -62,20 +62,24 @@ const Hero = () => {
                 version of yourself.
               </p>
               <div className="flex flex-wrap gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full shadow-lg transition-all duration-300"
-                >
-                  Get Started - It's Free
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full border border-white/20 shadow-lg transition-all duration-300"
-                >
-                  Explore Plans
-                </motion.button>
+                <Link to={"/allClass"}>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full shadow-lg transition-all duration-300"
+                  >
+                    Get Started
+                  </motion.button>
+                </Link>
+                <Link to={"/allTrainer"}>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full border border-white/20 shadow-lg transition-all duration-300"
+                  >
+                    Explore Now
+                  </motion.button>
+                </Link>
               </div>
 
               {/* Icons Features */}
@@ -108,7 +112,7 @@ const Hero = () => {
           </div>
 
           {/* Right Content */}
-          <div className="hidden lg:block lg:w-1/2 pl-12">
+          {/* <div className="hidden lg:block lg:w-1/2 pl-12">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -164,7 +168,7 @@ const Hero = () => {
                 </div>
               </div>
             </motion.div>
-          </div>
+          </div> */}
         </div>
       </div>
 

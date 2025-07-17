@@ -3,12 +3,11 @@ import { FaFireAlt, FaUsers, FaWalking } from "react-icons/fa";
 const About = () => {
   return (
     <div className="  mx-auto w-11/12   l">
-      <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-          {" "}
+      <div className="text-center mb-12 ">
+        <h2 className="md:text-3xl text-xl font-bold text-gray-800 mb-4">
           Health & Wellness Philosophy
         </h2>
-        <p className="text-base text-gray-700 md:text-lg">
+        <p className="md:text-xl text-xs text-gray-600 max-w-3xl mx-auto">
           We believe fitness is not just about working out—it's a lifestyle.
           That’s why we focus on holistic wellness, combining activity tracking
           with nutrition tips,
@@ -76,7 +75,7 @@ const About = () => {
         <div className="grid grid-cols-2 gap-5">
           <img
             className="object-cover w-full h-56 col-span-2 rounded shadow-lg"
-            src="https://i.ibb.co/KzKWTzSC/the-team-edited-800w-e1496920052827.jpg;"
+            src="https://i.ibb.co/ns9bbZh9/Team-Photo.jpg"
             alt=""
           />
           <img
@@ -86,7 +85,7 @@ const About = () => {
           />
           <img
             className="object-cover w-full h-48 rounded shadow-lg"
-            src="https://i.ibb.co/3YNKzRXZ/personal-training-become-a-personal-trainer-640x480.jpg"
+            src="https://i.ibb.co/6c3v3T2s/MAX02823.jpg"
             alt=""
           />
         </div>

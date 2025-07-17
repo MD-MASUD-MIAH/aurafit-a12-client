@@ -6,7 +6,7 @@ import { PageName } from "./PageName";
 const TainerDeatilsPage = () => {
   const { id } = useParams();
 
-  PageName('Booking Slot')
+  PageName("Booking Slot");
 
   const { isPending, data: singleData = {} } = useQuery({
     queryKey: ["singleData", id],
@@ -108,62 +108,71 @@ const TainerDeatilsPage = () => {
 
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">About</h3>
-              <p className="text-gray-700">
-                "{singleData.bio}"
-              </p>
+              <p className="text-gray-700">"{singleData.bio}"</p>
             </div>
           </div>
         </div>
 
         {/* Right Column - Skills & Availability */}
-        <div className="space-y-6">
+        <div className="space-y-6 flex flex-col justify-between">
           {/* Skills Section */}
 
-          {/* Availability Section */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-4 flex items-center">
-              <svg
-                className="w-5 h-5 text-blue-500 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              Available slots You Can Book Now
-            </h3>
+          <div className="space-y-6">
+            {/* Availability Section */}
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-4 flex items-center">
+                <svg
+                  className="w-5 h-5 text-blue-500 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                Available slots You Can Book Now
+              </h3>
 
-            <div className="grid grid-cols-2  gap-2">
-              {singleData.timeSlots.map((slot, i) => (
-             <Link
-  to={`/book/${singleData._id}?slot=${encodeURIComponent(slot)}`}
-  key={i}
-  className="flex items-center bg-gray-50 px-3 py-2 rounded tom-btn"
->
-  <button className="w-2 h-2 bg-blue-500 rounded-full mr-2"></button>
-  <span className="text-white text-sm">{slot}</span>
-</Link>
-              ))}
+              <div className="grid grid-cols-2  gap-2">
+                {singleData.timeSlots.map((slot, i) => (
+                  <Link
+                    to={`/book/${singleData._id}?slot=${encodeURIComponent(
+                      slot
+                    )}`}
+                    key={i}
+                    className="flex items-center bg-gray-50 px-3 py-2 rounded tom-btn"
+                  >
+                    <button className="w-2 h-2 bg-blue-500 rounded-full mr-2"></button>
+                    <span className="text-white text-sm">{slot}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            {/* Max Classes */}
+            <div className="bg-white rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-semibold mb-2">Capacity</h3>
+              <p className="text-gray-700">
+                Maximum classes per day:{" "}
+                <span className="font-bold text-blue-600">
+                  {singleData.maxClassesPerDay}
+                </span>
+              </p>
             </div>
           </div>
-          {/* Max Classes */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3 className="text-xl font-semibold mb-2">Capacity</h3>
-            <p className="text-gray-700">
-              Maximum classes per day:{" "}
-              <span className="font-bold text-blue-600">
-                {singleData.maxClassesPerDay}
-              </span>
-            </p>
-          </div>
 
-          <div className="flex text-center">
-            <Link to="/beTrainer" className="tom-btn w-full">
+          <div className=" space-y-6 w-11/12 mx-auto py-4  ">
+            <h1 className="font-bold">
+              Share your passion, empower people, and build your fitness career
+              with Aurafit. Apply now to become one of our certified trainers!
+            </h1>
+            <Link
+              to="/beTrainer"
+              className="tom-btn w-full text-center flex items-center justify-center"
+            >
               Become a Trainer
             </Link>
           </div>

@@ -53,19 +53,19 @@ const FitnessFeatures = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white  overflow-hidden  w-11/12 mx-auto">
+    <section className="py-16 px-4 sm:px-6 lg:px-8   overflow-hidden  w-11/12 mx-auto">
       <div className="">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+          <h2 className="md:text-3xl text-xl font-bold text-gray-800 mb-4">
             Your Complete Fitness Companion
           </h2>
-          <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="md:text-xl text-xs text-gray-600 max-w-3xl mx-auto">
             Everything you need to achieve your health and fitness goals in one
             place
           </p>
         </div>
 
-        <div  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div data-aos="fade-right" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard
               key={feature.title}

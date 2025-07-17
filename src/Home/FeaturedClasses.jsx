@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { FaCalendarAlt, FaFire } from "react-icons/fa";
+import { Link } from "react-router";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Loader from "../shared/Loader";
-import { Link } from "react-router";
 const FeaturedClasses = () => {
   const axiosSecure = useAxiosSecure();
   const { isPending, data: bookedData = [] } = useQuery({
@@ -59,6 +59,7 @@ const FeaturedClasses = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {classes?.map((classItem) => (
             <div
+              data-aos="zoom-in-down"
               key={classItem._id}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
@@ -88,7 +89,10 @@ const FeaturedClasses = () => {
                       {classItem?.bookingCount || 0} bookings
                     </span>
                   </div>
-                  <Link to={'/allClass'} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                  <Link
+                    to={"/allClass"}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                  >
                     Join Class
                   </Link>
                 </div>

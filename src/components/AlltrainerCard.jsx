@@ -20,7 +20,7 @@ const AlltrainerCard = ({ trainerData }) => {
           </h3>
           <div className="flex gap-2 text-xs items-center">
             Slots:
-            {trainerData.timeSlots?.map((slot, idx) => (
+            {trainerData?.timeSlots?.slice(0, 3).map((slot, idx) => (
               <span
                 key={idx}
                 className="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full"

@@ -21,13 +21,18 @@ const Testimonials = () => {
 
   console.log(comments);
 
-  
   return (
     <div>
-      <div className="w-11/12 mx-auto py-14 px-4">
-        <h2 className="text-3xl font-bold text-center  mb-10">
-          What Our Members Say
-        </h2>
+      <div className="w-11/12 mx-auto pb-10 pt-0 px-4">
+        <div className="text-center mb-12">
+          <h2 className="md:text-3xl text-xl font-bold text-gray-800 mb-4">
+            What Our Members Say
+          </h2>
+          <p className="md:text-xl text-xs text-gray-600 max-w-3xl mx-auto">
+            Hear directly from our amazing community! From personal growth to
+            real results, our members share their honest experiences and stories
+          </p>
+        </div>
         <Swiper
           modules={[Navigation]}
           spaceBetween={30}
