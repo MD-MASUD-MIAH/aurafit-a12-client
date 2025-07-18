@@ -41,11 +41,11 @@ const BookingPage = () => {
     return <Loader></Loader>;
   }
 
-  console.log(selectedClass);
+ 
 
-  console.log(singleData);
+ 
 
-  console.log(classData);
+ 
   const uniqueClasses = classData?.filter(
     (item, index, self) =>
       index === self.findIndex((t) => t.skillName === item.skillName)
@@ -72,7 +72,7 @@ const BookingPage = () => {
       data.amount = 100;
     }
 
-    console.log("Form submitted:", data);
+   
     navigate("/payment", { state: data });
   };
 

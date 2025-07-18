@@ -62,13 +62,13 @@ const TrainerBookingInfo = ({ bookingData }) => {
       userImage:user.photoURL
     };
 
-    console.log("Submitting review:", reviewData);
+    
     
     try {
      
       const  response = await axiosSecure.post(`/review-post`,reviewData)
 
-      console.log(response.data);
+     
       
 
       if (response) {

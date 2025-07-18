@@ -19,7 +19,7 @@ const Testimonials = () => {
     return <Loader></Loader>;
   }
 
-  console.log(comments);
+  
 
   return (
     <div>

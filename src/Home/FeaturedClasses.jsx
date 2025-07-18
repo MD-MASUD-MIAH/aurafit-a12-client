@@ -23,9 +23,9 @@ const FeaturedClasses = () => {
     },
   });
 
-  console.log(classes);
+  
 
-  console.log(bookedData);
+  
 
   if (isPending) {
     return <Loader></Loader>;

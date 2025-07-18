@@ -56,8 +56,7 @@ const AddNewSlots = () => {
     },
   });
 
-  console.log(rawClassData);
-  console.log(trainer);
+ 
   
 
   const classOptions = rawClassData.map((cls) => ({

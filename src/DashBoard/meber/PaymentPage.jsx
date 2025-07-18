@@ -8,7 +8,7 @@ const PaymentPage = () => {
   const location = useLocation();
   const formData = location.state;
 
-  console.log(formData);
+ 
 
   PageName('Payment')
 

@@ -27,7 +27,7 @@ const PendingDetails = () => {
     return <Loader></Loader>;
   }
 
-  console.log(singleData);
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();

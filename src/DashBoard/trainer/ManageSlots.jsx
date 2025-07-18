@@ -36,7 +36,7 @@ const ManageSlots = () => {
     },
   });
 
-  console.log(bookings);
+ 
 
   const deleteSlotMutation = useMutation({
     mutationFn: async (slotToDelete) => {

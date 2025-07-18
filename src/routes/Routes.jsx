@@ -35,11 +35,13 @@ import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
 import AdminTrainerAcess from "../Context/AdminTrainerAcess";
 import MemberAccess from "../Context/MemberAccess";
+import Loader from "../shared/Loader";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     errorElement: <NotFoundError></NotFoundError>,
+    hydrateFallbackElement:<Loader></Loader>,
     Component: MainLayout,
     children: [
       { index: true, Component: Home },

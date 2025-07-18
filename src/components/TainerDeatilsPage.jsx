@@ -22,7 +22,7 @@ const TainerDeatilsPage = () => {
     return <Loader />;
   }
 
-  console.log(singleData);
+  
 
   return (
     <div className="w-11/12 mx-auto md:p-6 overflow-hidden">

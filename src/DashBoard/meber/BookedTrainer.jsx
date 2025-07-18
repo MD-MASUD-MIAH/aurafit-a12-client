@@ -29,7 +29,7 @@ const BookedTrainer = () => {
     return <Loader></Loader>;
   }
 
-  console.log(booked);
+ 
 
   return (
     <div>

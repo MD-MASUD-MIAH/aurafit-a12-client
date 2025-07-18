@@ -51,7 +51,7 @@ const ApproveTrainer = () => {
     return console.log("error");
   }
 
-  console.log(allTrainer);
+  
 
   return (
     <div>

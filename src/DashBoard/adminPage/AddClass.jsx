@@ -13,7 +13,7 @@ const AddClass = () => {
 
   const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
-    console.log(data);
+    
     data.image = isImage;
 
     try {
@@ -36,7 +36,7 @@ const AddClass = () => {
   const handleChange = async (e) => {
     const image = await imageUpload(e.target.files[0]);
 
-    console.log(image);
+   
 
     setIsImage(image);
   };

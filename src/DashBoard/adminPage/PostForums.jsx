@@ -21,7 +21,7 @@ const PostForums = () => {
     },
   });
 
-  console.log(userData);
+ 
 
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const PostForums = () => {
       authhorRole: userData.role,
       createdAt: new Date().toISOString(),
     };
-    console.log(postData);
+    
 
     await axiosSecure.post(`/forums`, postData).then((res) => {
       console.log(res.data);

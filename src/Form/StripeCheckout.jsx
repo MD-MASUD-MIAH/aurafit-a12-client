@@ -35,7 +35,7 @@ const StripeCheckout = ({ formData }) => {
     }
   }, [formData, axiosSecure]);
 
-  console.log(formData);
+ 
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -127,7 +127,7 @@ navigate('/dashboard/booked')
 
     setProcessing(false);
 
-    console.log(result);
+   
   };
 
   return (

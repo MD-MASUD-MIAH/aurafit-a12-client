@@ -135,7 +135,7 @@ const TrainerApplicationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+   
     await axiosSecure.post("/trainer", formData)
       .then((res) => {
         console.log(res.data);
