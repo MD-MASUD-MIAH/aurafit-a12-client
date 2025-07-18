@@ -2,7 +2,7 @@ import { FaFireAlt, FaUsers, FaWalking } from "react-icons/fa";
 
 const About = () => {
   return (
-    <div className="  mx-auto w-11/12   l">
+    <div className="  mx-auto w-11/12   my-30">
       <div className="text-center mb-12 ">
         <h2 className="md:text-3xl text-xl font-bold text-gray-800 mb-4">
           Health & Wellness Philosophy

@@ -21,7 +21,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden h-full md:h-[calc(100vh-150px)]">
+    <section className="relative w-full overflow-hidden  md:h-[calc(100vh-150px)]">
       {/* Background images with fade transition */}
       <div className="absolute inset-0">
         {images.map((img, index) => (

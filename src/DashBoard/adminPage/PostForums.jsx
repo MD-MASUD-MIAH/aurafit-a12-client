@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import useAuth from "../../hooks/useAuth";
 import { PageName } from "../../components/PageName";
+import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const PostForums = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure()
-  PageName('Post Forums')
+  const axiosSecure = useAxiosSecure();
+  PageName("Post Forums");
   const { data: userData } = useQuery({
     queryKey: ["trainerOrAdmin", user.email],
     enabled: !!user.email,
@@ -21,6 +22,8 @@ const PostForums = () => {
   });
 
   console.log(userData);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,29 +39,26 @@ const PostForums = () => {
     };
     console.log(postData);
 
-    await axiosSecure
-      .post(`/forums`, postData)
-      .then((res) => {
-        console.log(res.data);
+    await axiosSecure.post(`/forums`, postData).then((res) => {
+      console.log(res.data);
 
-        Swal.fire({
-          title: "Success!",
-          text: "Your forum post has been submitted successfully.",
-          icon: "success",
-          confirmButtonText: "OK",
-        });
-      })
-
-      .catch((err) => {
-        console.log(err.message);
-
-        Swal.fire({
-          title: "❌ Error!",
-          text: "Failed to submit the post. Please try again.",
-          icon: "error",
-          confirmButtonText: "OK",
-        });
+      Swal.fire({
+        title: "Success!",
+        text: "Your forum post has been submitted successfully.",
+        icon: "success",
+        confirmButtonText: "OK",
       });
+    });
+    navigate("/forums").catch((err) => {
+      console.log(err.message);
+
+      Swal.fire({
+        title: "❌ Error!",
+        text: "Failed to submit the post. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    });
 
     // Add your submission logic here
   };
