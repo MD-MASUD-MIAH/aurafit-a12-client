@@ -111,8 +111,8 @@ const AddNewSlots = () => {
       if (res.data.modifiedCount > 0) {
         Swal.fire({
           icon: "success",
-          title: "Updated!",
-          text: "Availability and skills updated successfully!",
+          title: "Added!",
+          text: " Slot Add successfully!",
           timer: 2000,
           showConfirmButton: false,
         });
