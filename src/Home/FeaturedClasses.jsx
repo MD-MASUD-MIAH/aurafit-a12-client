@@ -31,7 +31,7 @@ const FeaturedClasses = () => {
     return <Loader></Loader>;
   }
   return (
-    <div className="px-4 py-8 sm:px-6 lg:px-8 bg-gray-50">
+    <div className="px-4 py-16 sm:px-6 lg:px-8 bg-gray-50">
       {/* Section Header */}
       <div className="w-11/12 mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
