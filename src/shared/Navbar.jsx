@@ -47,7 +47,7 @@ const Navbar = () => {
     });
   };
 
-  console.log(user?.email);
+  console.log('firebaseLoge',user?.email);
 
   return (
     <div className="sticky top-0 z-20">

@@ -99,7 +99,7 @@ const PendingDetails = () => {
             </p>
           </div>
           <h5 className="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">
-            Meet {singleData.fullName}
+            {singleData.fullName}
           </h5>
           <div className="mb-5 text-gray-800">
             <p className="mb-3">
@@ -109,6 +109,10 @@ const PendingDetails = () => {
             <p className="mb-3">
               <span className="font-bold">Availability:</span>{" "}
               {singleData.availableDays?.join(", ")}
+            </p>
+            <p className="mb-3">
+              <span className="font-bold">Skills:</span>{" "}
+              {singleData.skills?.join(", ")}
             </p>
             <p className="mb-3">
               <span className="font-bold">Time Slots:</span>{" "}

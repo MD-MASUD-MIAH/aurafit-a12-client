@@ -11,19 +11,22 @@ const useRole = () => {
     isLoading: isRoleLoading,
     isError,
     error,
+    refetch
   } = useQuery({
     queryKey: ["role", user?.email],
     enabled: !loading && !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(`/user/role/${user.email}`);
-      return res.data?.role; // directly return 'admin' / 'trainer' / 'member'
+      return res.data?.role; 
     },
   });
 
-  // Optional: Debug logs
-  // console.log("useRole ->", { role: data, isRoleLoading, isError, error });
+ console.log("user:", user);
+console.log("auth loading:", loading);
+console.log("query enabled:", !loading && !!user?.email);
+console.log("isRoleLoading:", isRoleLoading);
 
-  return { role: data, isRoleLoading, isError, error };
+  return { role: data, isRoleLoading, isError, error,refetch };
 };
 
 export default useRole;

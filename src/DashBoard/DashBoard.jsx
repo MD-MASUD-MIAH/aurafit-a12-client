@@ -1,11 +1,13 @@
 // RoleBasedDashboardRedirect.jsx
 import { Navigate } from "react-router";
 import useRole from "../hooks/useRole";
+import Loader from "../shared/Loader";
 
 const RoleBasedDashboardRedirect = () => {
-  const { role, isLoading } = useRole();
-
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  const { role, isRoleLoading } = useRole();
+  console.log(isRoleLoading);
+  
+  if (isRoleLoading) return <Loader></Loader>;
 
   if (role === "admin") return <Navigate to="/dashboard/balance" />;
   if (role === "trainer") return <Navigate to="/dashboard/menageSlots" />;

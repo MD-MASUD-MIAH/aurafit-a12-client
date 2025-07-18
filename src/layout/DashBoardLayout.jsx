@@ -141,7 +141,9 @@ const DashBoardLayout = () => {
                 </NavLink>
               </li>
             }
-              <li>
+              {
+
+                role ==='member' && <li>
                 <NavLink
                   to="/dashboard/activityLogPage"
                   className={({ isActive }) =>
@@ -154,7 +156,10 @@ const DashBoardLayout = () => {
                   Activity Log Page
                 </NavLink>
               </li>
-              <li>
+              }
+             {
+
+              role === 'member' &&  <li>
                 <NavLink
                   to="/dashboard/my-profile"
                   className={({ isActive }) =>
@@ -167,11 +172,13 @@ const DashBoardLayout = () => {
                   My Profile
                 </NavLink>
               </li>
+             }
             </>
 
             {/* Admin links */}
             <>
-              <li>
+            {
+               role === 'member' &&   <li>
                 <NavLink
                   to="/dashboard/booked"
                   className={({ isActive }) =>
@@ -184,6 +191,7 @@ const DashBoardLayout = () => {
                   Booked Trainer
                 </NavLink>
               </li>
+            }
             {
               role ==='trainer' &&   <li>
                 <NavLink

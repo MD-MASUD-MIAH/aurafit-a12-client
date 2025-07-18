@@ -139,8 +139,14 @@ const TrainerApplicationForm = () => {
     await axiosSecure.post("/trainer", formData)
       .then((res) => {
         console.log(res.data);
-        navigate("/allTrainer");
-        Swal.fire("success");
+        navigate("/dashboard/activityLogPage");
+        Swal.fire({
+    title: 'Application Submitted!',
+    text: 'Your trainer application has been successfully submitted. We will review it and get back to you shortly.',
+    icon: 'success',
+    confirmButtonText: 'Okay',
+    confirmButtonColor: '#3085d6'
+  });
         return res.data;
       })
       .catch((err) => {

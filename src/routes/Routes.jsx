@@ -34,6 +34,7 @@ import SingleVotePage from "../Home/SingleVotePage";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import MainLayout from "../layout/MainLayout";
 import AdminTrainerAcess from "../Context/AdminTrainerAcess";
+import MemberAccess from "../Context/MemberAccess";
 
 export const router = createBrowserRouter([
   {
@@ -121,15 +122,15 @@ export const router = createBrowserRouter([
       },
       { path: "addClass", element:<PriveteRoute><AdminAccess><AddClass></AddClass></AdminAccess></PriveteRoute>},
       { path: "pending-trainer", element:<PriveteRoute><AdminAccess><PendingTrainer></PendingTrainer></AdminAccess></PriveteRoute> },
-      { path: "pending-details/:id", Component: PendingDetails },
+      { path: "pending-details/:id", element:<PriveteRoute><AdminAccess><PendingDetails></PendingDetails></AdminAccess></PriveteRoute> },
       { path: "approve",element:<PriveteRoute><AdminAccess><ApproveTrainer></ApproveTrainer></AdminAccess></PriveteRoute>},
-      { path: "activityLogPage", Component: ActivityLogPage },
-      { path: "my-profile", Component: MyProfile },
+      { path: "activityLogPage", element:<PriveteRoute><MemberAccess><ActivityLogPage></ActivityLogPage></MemberAccess></PriveteRoute> },
+      { path: "my-profile", element: <PriveteRoute><MemberAccess><MyProfile></MyProfile></MemberAccess></PriveteRoute> },
       {
         path: "booked",
         element: (
           <PriveteRoute>
-            <BookedTrainer></BookedTrainer>
+          <MemberAccess> <BookedTrainer></BookedTrainer></MemberAccess>
           </PriveteRoute>
         ),
       },

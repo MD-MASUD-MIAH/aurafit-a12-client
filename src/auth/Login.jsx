@@ -94,12 +94,12 @@ const Login = () => {
             </form>
 
             <p className="text-center text-sm mt-6 text-gray-600">
-              you new in this site please,register{" "}
+              you new in this site please,{" "}
               <Link
                 to="/register"
                 className="text-blue-600 font-medium hover:underline"
               >
-                Login here
+               register here
               </Link>
             </p>
 

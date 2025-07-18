@@ -5,14 +5,17 @@ import { PageName } from "../components/PageName";
 import useAuth from "../hooks/useAuth";
 import GoogleLogin from "../social/GoogleLogin";
 import { imageUpload, saveUserMongo } from "../utilits/utilits";
+import useRole from "../hooks/useRole";
 
 const Register = () => {
   const navigate = useNavigate();
 
+  const {refetch,role} = useRole()
   const [errors, setErrors] = useState({});
   const [previewImage, setPreviewImage] = useState(null);
   const { registerUser, setUser, upDateUser } = useAuth();
-
+  console.log(role);
+  
   PageName("Register");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,6 +74,7 @@ const Register = () => {
       setPreviewImage(null);
       navigate("/");
       setErrors({});
+      refetch()
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -101,7 +105,7 @@ const Register = () => {
   return (
     <div className="bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
       <div className="w-11/12 mx-auto py-10 flex flex-col items-center justify-center min-h-[calc(100vh-300px)]">
-        <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-blue">
+        <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-blue-600">
           <div className="p-8">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold ">Create Your Account</h2>
@@ -210,7 +214,7 @@ const Register = () => {
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-[#550527] font-medium hover:underline"
+                className="text-blue-600 font-medium hover:underline"
               >
                 Login here
               </Link>

@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { FaClock, FaDumbbell, FaInfoCircle, FaUser } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
+
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const TrainerBookingInfo = ({ bookingData }) => {
 
+  const axiosSecure = useAxiosSecure()
   const {user} = useAuth()
   const packageFeatures = {
     Basic: {
@@ -64,7 +66,7 @@ const TrainerBookingInfo = ({ bookingData }) => {
     
     try {
      
-      const  response = await axios.post(`${import.meta.env.VITE_API_URL}/review-post`,reviewData)
+      const  response = await axiosSecure.post(`/review-post`,reviewData)
 
       console.log(response.data);
       

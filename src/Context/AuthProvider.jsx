@@ -34,9 +34,11 @@ const AuthProvider = ({ children }) => {
   };
 
   const googleLogin = () => {
+    setLoading(true)
     return signInWithPopup(auth, provider);
   };
   const logout = () => {
+    setLoading(true)
     return signOut(auth);
   };
 
@@ -65,7 +67,7 @@ const AuthProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
-  return <AuthContext value={userInfo}>{children}</AuthContext>;
+  return <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
