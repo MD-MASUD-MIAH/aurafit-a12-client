@@ -7,11 +7,8 @@ import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { PageName } from "./PageName";
 
-
-
 const BookingPage = () => {
-
-  PageName('Booking Page')
+  PageName("Booking Page");
   const { user } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -50,10 +47,9 @@ const BookingPage = () => {
 
   console.log(classData);
   const uniqueClasses = classData?.filter(
-  (item, index, self) =>
-    index === self.findIndex((t) => t.skillName === item.skillName)
-);
-
+    (item, index, self) =>
+      index === self.findIndex((t) => t.skillName === item.skillName)
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,7 +60,7 @@ const BookingPage = () => {
     data.trainerEmail = singleData.email;
     data.trainerId = singleData._id;
     data.trainerSkills = singleData.skills;
-    data.selectClass =selectedClass?.skillName
+    data.selectClass = selectedClass?.skillName;
 
     const packa = data.package; // now we can access it from data directly
 
@@ -79,7 +75,6 @@ const BookingPage = () => {
     console.log("Form submitted:", data);
     navigate("/payment", { state: data });
   };
-
 
   return (
     <div className="w-11/12  mx-auto">
@@ -220,25 +215,26 @@ const BookingPage = () => {
                       Classes
                     </label>
                     <select
-  name="classId"
-  className="w-full border rounded px-3 py-2"
-  onChange={(e) => {
-    const selectedId = e.target.value;
-    const foundClass = uniqueClasses.find((cls) => cls._id === selectedId);
-    setSelectedClass(foundClass);
-  }}
->
-  <option value="">--	Pick your class--</option>
-  {uniqueClasses.map((cls) => (
-    <option key={cls?._id} value={cls?._id}>
-      {cls?.skillName}
-    </option>
-  ))}
-</select>
-
+                      name="classId"
+                      className="w-full border rounded px-3 py-2"
+                      onChange={(e) => {
+                        const selectedId = e.target.value;
+                        const foundClass = uniqueClasses.find(
+                          (cls) => cls._id === selectedId
+                        );
+                        setSelectedClass(foundClass);
+                      }}
+                    >
+                      <option value="">-- Pick your class--</option>
+                      {uniqueClasses.map((cls) => (
+                        <option key={cls?._id} value={cls?._id}>
+                          {cls?.skillName}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
-                  <div className=" flex justify-between items-center">
+                  <div className=" flex flex-col  md:flex-row md:items-center md:justify-between">
                     <div className="mb-6">
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         Packages

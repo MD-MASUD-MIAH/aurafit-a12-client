@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import "./stripe.css";
+import { useNavigate } from "react-router";
 const StripeCheckout = ({ formData }) => {
   const { user } = useAuth();
   const stripe = useStripe();
@@ -15,7 +16,7 @@ const StripeCheckout = ({ formData }) => {
   const axiosSecure = useAxiosSecure();
 
 
- 
+ const navigate = useNavigate()
   
   useEffect(() => {
     const getClientSecret = async () => {
@@ -103,7 +104,17 @@ const StripeCheckout = ({ formData }) => {
         const res = await axiosSecure.post("/bookings", bookingInfo);
 
         if (res.data.insertedId) {
-          Swal.fire("Success", "Booking and payment completed!", "success");
+         Swal.fire({
+  title: 'Success!',
+  text: 'Booking and payment completed!',
+  icon: 'success',
+  confirmButtonText: 'OK',
+  confirmButtonColor: '#2563EB',
+  timer: 3000
+})
+
+navigate('/dashboard/booked')
+
         }
       } catch (err) {
         setProcessing(false);

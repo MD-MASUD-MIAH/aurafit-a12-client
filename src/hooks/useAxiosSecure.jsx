@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import { useEffect } from "react";
 
 const axiosInstance = axios.create({
-  baseURL: "https://fitness-tracker-b11a12-server-side.vercel.app",
+  baseURL: "http://localhost:4000",
   withCredentials: true,
 });
 
