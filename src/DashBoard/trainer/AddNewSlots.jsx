@@ -94,7 +94,8 @@ const AddNewSlots = () => {
     
       const mergedSkills = [...new Set([...previousSkills, ...newSkills])];
 
-      // 🔵 Prepare data
+      // 🔵 Prepare data 
+      // ko
       const payload = {
         availableDays,
         timeSlots,
