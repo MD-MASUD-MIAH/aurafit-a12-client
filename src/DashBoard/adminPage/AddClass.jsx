@@ -1,19 +1,17 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { PageName } from "../../components/PageName";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { imageUpload } from "../../utilits/utilits";
-import { PageName } from "../../components/PageName";
 
 const AddClass = () => {
-
-  PageName('Add Class')
+  PageName("Add Class");
   const { register, handleSubmit, reset } = useForm();
   const [isImage, setIsImage] = useState("");
 
   const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
-    
     data.image = isImage;
 
     try {
@@ -36,14 +34,12 @@ const AddClass = () => {
   const handleChange = async (e) => {
     const image = await imageUpload(e.target.files[0]);
 
-   
-
     setIsImage(image);
   };
 
   return (
-    <div className=" w-11/12 mx-auto mt-20 md:mt-10">
-      <div className="max-w-2xl  mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+    <div className=" lg:w-11/12 mx-auto mt-20 md:mt-10">
+      <div className=" w-full bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
           <span className="inline-block mr-2">➕</span>
           Add New Fitness Class

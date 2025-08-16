@@ -18,9 +18,7 @@ const ManageSlots = () => {
     queryKey: ["trainer", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/slots/${user.email}`
-      );
+      const res = await axiosSecure.get(`/slots/${user.email}`);
       return res.data;
     },
   });
@@ -29,14 +27,10 @@ const ManageSlots = () => {
     queryKey: ["bookings", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/trainer/bookings/${trainer._id}`
-      );
+      const res = await axiosSecure.get(`/trainer/bookings/${trainer._id}`);
       return res.data;
     },
   });
-
- 
 
   const deleteSlotMutation = useMutation({
     mutationFn: async (slotToDelete) => {
@@ -122,7 +116,7 @@ const ManageSlots = () => {
         </div>
       </div>
 
-      <div className="w-11/12  mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-11/12  mx-auto px-4 ">
         <div className="bg-white shadow-xl rounded-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
             <h2 className="text-2xl font-bold text-gray-800">Slots Bookings</h2>

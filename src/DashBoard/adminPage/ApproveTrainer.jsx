@@ -51,12 +51,10 @@ const ApproveTrainer = () => {
     return console.log("error");
   }
 
-  
-
   return (
     <div>
       <div>
-        <div className="container p-2 mx-auto sm:p-4 dark:text-gray-800">
+        <div className="container p-2 mx-auto sm:p-4 mt-10 lg:mt-0">
           <h2 className="mb-4 text-2xl font-semibold leading-tight">
             Available Trainers
           </h2>
@@ -113,7 +111,7 @@ const ApproveTrainer = () => {
                     <td className="p-3 text-right">
                       <button
                         onClick={() => handleDeleteTrainer(res._id)}
-                        className="px-3 py-1 cursor-pointer font-semibold rounded-md dark:bg-blue-600 dark:text-gray-50"
+                        className="px-3 py-1 cursor-pointer font-semibold rounded-md bg-red-500 text-white"
                       >
                         <span>Delete</span>
                       </button>

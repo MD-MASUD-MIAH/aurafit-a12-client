@@ -12,8 +12,8 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import { PageName } from "../../components/PageName";
 import useAuth from "../../hooks/useAuth";
-import Loader from "../../shared/Loader";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loader from "../../shared/Loader";
 
 const timeSlots = [
   "Early Morning (5:00 AM - 6:30 AM)",
@@ -31,7 +31,7 @@ const timeSlots = [
 const AddNewSlots = () => {
   const { user } = useAuth();
   const { handleSubmit, control } = useForm();
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
 
   PageName("Add slot");
 
@@ -39,9 +39,7 @@ const AddNewSlots = () => {
     queryKey: ["trainer", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await  axiosSecure.get(
-        `/slots/${user.email}`
-      );
+      const res = await axiosSecure.get(`/slots/${user.email}`);
       return res.data;
     },
   });
@@ -49,15 +47,10 @@ const AddNewSlots = () => {
   const { data: rawClassData = [] } = useQuery({
     queryKey: ["classNames"],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/class-names`
-      );
+      const res = await axiosSecure.get(`/class-names`);
       return res.data;
     },
   });
-
- 
-  
 
   const classOptions = rawClassData.map((cls) => ({
     value: cls?.skillName?.toLowerCase(),
@@ -84,17 +77,13 @@ const AddNewSlots = () => {
         ...new Set(classes.map((c) => c.charAt(0).toUpperCase() + c.slice(1))),
       ];
 
-     
-      const existingRes = await axiosSecure.get(
-        `/slots/${user.email}`
-      );
+      const existingRes = await axiosSecure.get(`/slots/${user.email}`);
       const existingTrainer = existingRes.data;
       const previousSkills = existingTrainer?.skills || [];
 
-    
       const mergedSkills = [...new Set([...previousSkills, ...newSkills])];
 
-      // 🔵 Prepare data 
+      // 🔵 Prepare data
       // ko
       const payload = {
         availableDays,
@@ -104,10 +93,7 @@ const AddNewSlots = () => {
       };
 
       // 🔴 Send PATCH request
-      const res = await axiosSecure.patch(
-        `/trainer/${user.email}`,
-        payload
-      );
+      const res = await axiosSecure.patch(`/trainer/${user.email}`, payload);
 
       if (res.data.modifiedCount > 0) {
         Swal.fire({
@@ -138,7 +124,7 @@ const AddNewSlots = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg w-11/12 mt-10 shadow-md">
+    <div className="w-11/12 mx-auto p-6 bg-white rounded-lg  mt-10 shadow-md">
       <h2 className="text-2xl font-bold mb-6 flex items-center">
         <FaClock className="mr-2 text-blue-500" />
         Manage Your Time Slots

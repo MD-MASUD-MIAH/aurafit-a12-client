@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Modal from "react-modal";
-
+// eslint-disable-next-line no-unused-vars
+import { AnimatePresence, motion } from "framer-motion";
 import { PageName } from "../../components/PageName";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 const ActivityLogPage = () => {
@@ -241,70 +242,112 @@ const ActivityLogPage = () => {
       </div>
 
       {/* Responsive Modal */}
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        className="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto my-8 mt-20 outline-none"
-        overlayClassName="fixed inset-0 bg-white bg-opacity-50 flex items-start md:items-center justify-center p-4"
-        contentLabel="Admin Feedback Modal"
-        ariaHideApp={false}
-      >
-        <div className="p-4 md:p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg md:text-xl font-semibold text-gray-800 flex items-center">
-              <svg
-                className="w-5 h-5 mr-2 text-indigo-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                />
-              </svg>
-              Admin Feedback
-            </h3>
-            <button
+      <AnimatePresence>
+        {modalIsOpen && (
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
+            className="outline-none"
+            overlayClassName="fixed inset-0 flex items-start md:items-center justify-center p-4"
+            contentLabel="Admin Feedback Modal"
+            ariaHideApp={false}
+            closeTimeoutMS={300} // Matches animation duration
+          >
+            {/* Overlay animation */}
+            <motion.div
+              className="fixed inset-0 bg-white bg-opacity-50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setModalIsOpen(false)}
-              className="text-gray-400 hover:text-gray-500"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
+            />
 
-          <div className="bg-gray-50 p-3 md:p-4 rounded-md max-h-[60vh] overflow-y-auto">
-            <p className="text-gray-700 whitespace-pre-line">
-              {feedback || "No feedback provided"}
-            </p>
-          </div>
-
-          <div className="mt-4 md:mt-6 flex justify-end">
-            <button
-              onClick={() => setModalIsOpen(false)}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors text-sm md:text-base"
+            {/* Modal content animation */}
+            <motion.div
+              className="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto my-8 mt-20 relative"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 500 }}
             >
-              Close
-            </button>
-          </div>
-        </div>
-      </Modal>
+              <div className="p-4 md:p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <motion.h3
+                    className="text-lg md:text-xl font-semibold text-gray-800 flex items-center"
+                    initial={{ x: -10, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    <svg
+                      className="w-5 h-5 mr-2 text-indigo-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                      />
+                    </svg>
+                    Admin Feedback
+                  </motion.h3>
+                  <motion.button
+                    onClick={() => setModalIsOpen(false)}
+                    className="text-gray-400 hover:text-gray-500"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </motion.button>
+                </div>
+
+                <motion.div
+                  className="bg-gray-50 p-3 md:p-4 rounded-md max-h-[60vh] overflow-y-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <p className="text-gray-700 whitespace-pre-line">
+                    {feedback || "No feedback provided"}
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  className="mt-4 md:mt-6 flex justify-end"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <motion.button
+                    onClick={() => setModalIsOpen(false)}
+                    className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors text-sm md:text-base"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Close
+                  </motion.button>
+                </motion.div>
+              </div>
+            </motion.div>
+          </Modal>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

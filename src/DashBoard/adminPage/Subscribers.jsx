@@ -5,13 +5,14 @@ import {
   FaEnvelope,
   FaSpinner,
 } from "react-icons/fa";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { PageName } from "../../components/PageName";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loader from "../../shared/Loader";
 
 const Subscribers = () => {
   const axiosSecure = useAxiosSecure();
 
-  PageName('Subscribers')
+  PageName("Subscribers");
 
   const { isPending, data: subscribers = [] } = useQuery({
     queryKey: ["subscribers"],
@@ -23,9 +24,7 @@ const Subscribers = () => {
 
   if (isPending) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <FaSpinner className="animate-spin text-4xl text-blue-500" />
-      </div>
+     <Loader></Loader>
     );
   }
 
@@ -42,7 +41,7 @@ const Subscribers = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="p-6 bg-white rounded-lg shadow-md my-10 lg:my-0">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Subscribers</h1>
         <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">

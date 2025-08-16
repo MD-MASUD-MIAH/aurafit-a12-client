@@ -24,7 +24,7 @@ const GoogleLogin = () => {
       }
       await saveUserMongo(userData)
       navigate('/')
-      toast.success('Signup Successful')
+      toast.success('Sign up Successful')
     } catch (err) {
       console.log(err)
       toast.error(err?.message)
