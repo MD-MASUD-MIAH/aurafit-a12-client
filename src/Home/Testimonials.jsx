@@ -23,7 +23,7 @@ const Testimonials = () => {
 
   return (
     <div>
-      <div className="w-11/12 mx-auto py-16 pt-0 px-4">
+      <div className="w-11/12 mx-auto py-16 pt-0 ">
         <div className="text-center mb-12">
           <h2 className="md:text-3xl text-xl font-bold text-gray-800 mb-4">
             What Our Members Say

@@ -5,20 +5,19 @@ const ClassContainer = () => {
   const [searchText, setSearchText] = useState("");
   return (
     <div className="w-11/12 mx-auto">
-      <div className="text-center my-12">
+      <div className="text-center my-12 w-11/12 mx-auto">
         <h2 className="md:text-3xl text-xl font-bold text-gray-800 mb-4">
           Join Our Expert-Led Classes
         </h2>
         <p className="md:text-xl text-xs text-gray-600 max-w-3xl mx-auto">
-          Take your fitness journey to the next level with guidance from
-          certified trainers. Our expert-led classes are designed for all
-          fitness levels — whether you're just starting out or pushing for peak
-          performance.
+       Take your fitness to the next level with certified trainers.
+Our expert-led classes are designed for everyone.
+From beginners to pros, we help you reach your goals.
         </p>
       </div>
 
-      <div className="relative mb-6 w-full max-w-md mx-auto">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <div className="relative mb-6 w-full px-4 lg:px-0 max-w-md mx-auto">
+        <div className="absolute inset-y-0 left-0 pl-8 lg:pl-3 flex items-center pointer-events-none">
           <FaSearch className="h-5 w-5 text-gray-400" />
         </div>
         <input

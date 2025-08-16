@@ -3,12 +3,16 @@ import logo from "../assets/logo.png";
 const Footer = () => {
   return (
     <footer className="bg-[url('https://i.ibb.co/cXX22T07/abstract-smooth-blue-curvy-template-presentation-1017-53582.jpg')] text-white pt-12 pb-8 bg-cover  bg-center bg-no-repeat ">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-11/12 mx-auto px-4 lg:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* About Column */}
           <div>
             <div className="flex items-center mb-4 gap-4">
-              <img className="w-10 h-10" src={logo} alt="" />
+              <img
+                className="w-10 h-10 lg:invert lg:brightness-0"
+                src={logo}
+                alt=""
+              />
               <h3 className="text-xl font-bold mt-1  ">AuraFit</h3>
             </div>
             <p className="text-gray-300 mb-4">

@@ -7,8 +7,6 @@ import { motion } from "framer-motion";
 import Loader from "../shared/Loader";
 
 const TrainerTeam = () => {
- 
-
   const { isPending, data: trainers = [] } = useQuery({
     queryKey: ["trainers"],
     queryFn: async () => {
@@ -25,7 +23,7 @@ const TrainerTeam = () => {
     return <Loader></Loader>;
   }
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
+    <section className="py-16 px-4 md:px-0">
       <div className="w-11/12 overflow-hidden mx-auto">
         <div className="text-center mb-12">
           <h2 className="md:text-3xl text-xl font-bold text-gray-800 mb-4">
@@ -41,58 +39,86 @@ const TrainerTeam = () => {
           {trainers.map((trainer, index) => (
             <motion.div
               key={trainer.id}
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-xl  overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              className="w-full mx-auto bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
             >
               <div
                 data-aos="fade-up"
-               
-                className={`flex flex-col overflow-hidden bg-white border rounded sm:mx-auto 
-        ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}
+                className={`flex flex-col overflow-hidden bg-white border border-gray-100 rounded-xl shadow-sm sm:mx-auto
+      ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}
               >
-                <div className="relative lg:w-1/2">
+                {/* Image Section - Golden Ratio Width (38.2%) */}
+                <div className="relative lg:w-[38.2%]">
                   <img
                     src={trainer.photo}
-                    alt=""
+                    alt={`Portrait of ${trainer.fullName}, professional trainer`}
+                    loading="lazy"
                     className="object-cover w-full lg:absolute h-80 lg:h-full"
                   />
-                  <svg
-                    className={`absolute top-0 hidden h-full text-white lg:inline-block
-            ${index % 2 === 0 ? "right-0" : "left-0 rotate-180"}`}
-                    viewBox="0 0 20 104"
-                    fill="currentColor"
-                  >
-                    <polygon points="17.3 0 20 0 20 104 0.82 104" />
-                  </svg>
+                  {/* Diagonal separator with golden ratio angle */}
                 </div>
-                <div className="flex flex-col justify-center p-8 bg-white lg:p-16 lg:pl-10 lg:w-1/2">
+
+                {/* Content Section - Golden Ratio Width (61.8%) */}
+                <div className="flex flex-col justify-center p-6 bg-white lg:p-10 lg:pl-12 lg:w-[61.8%]">
                   <div>
-                    <p className="inline-block px-3 mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-                      Specialist : {trainer.skills.join(",")}
+                    <p className="inline-flex items-center px-4 py-2 mb-6 text-sm font-semibold tracking-wider text-white uppercase rounded-full bg-[#3B82F6]">
+                      <span className="mr-2">🏆</span>
+                      Specialist: {trainer.skills.join(", ")}
                     </p>
                   </div>
-                  <h5 className="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">
+
+                  <h5 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl">
                     {trainer.fullName}
                   </h5>
-                  <div className="mb-5 text-gray-800">
-                    <p className="mb-3">
-                      <span className="font-bold">
-                        {trainer.experience} years
-                      </span>{" "}
-                      of training experience
+
+                  <div className="mb-6 text-gray-700 space-y-3">
+                    <p className="flex items-start">
+                      <span className="inline-block mr-2 text-teal-600">
+                        ⏳
+                      </span>
+                      <span>
+                        <span className="font-bold">
+                          {trainer.experience} years
+                        </span>{" "}
+                        of training experience
+                      </span>
                     </p>
-                    <p className="mb-3">
-                      <span className="font-bold">Availability:</span>{" "}
-                      {trainer.availableDays?.join(", ")}
+
+                    <p className="flex items-start">
+                      <span className="inline-block mr-2 text-[#2563EB]">
+                        📅
+                      </span>
+                      <span>
+                        <span className="font-bold">Availability:</span>{" "}
+                        {trainer.availableDays?.join(", ") || "Flexible"}
+                      </span>
                     </p>
-                    <p className="mb-3">
-                      <span className="font-bold">Time Slots:</span>{" "}
-                      {trainer.timeSlots?.join(", ")}
+
+                    <p className="flex items-start">
+                      <span className="inline-block mr-2 text-teal-600">
+                        ⏰
+                      </span>
+                      <span>
+                        <span className="font-bold">Time Slots:</span>{" "}
+                        {trainer.timeSlots?.join(", ") || "Various times"}
+                      </span>
                     </p>
-                    <p className="mb-3">
-                      <span className="font-bold">Bio:</span>{" "}
-                      {trainer.bio || "Professional fitness trainer"}
+                  </div>
+
+                  <div className="p-4 bg-gray-50 rounded-lg">
+                    <p className="flex">
+                      <span className="inline-block mr-2 text-teal-600">
+                        📝
+                      </span>
+                      <span className="italic">
+                        "
+                        {trainer.bio ||
+                          "Dedicated to helping clients achieve their fitness goals through personalized training programs."}
+                        "
+                      </span>
                     </p>
                   </div>
                 </div>

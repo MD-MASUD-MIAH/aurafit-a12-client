@@ -57,7 +57,7 @@ const DashBoardLayout = () => {
           to={"/"}
           className="flex items-center gap-4 justify-center h-16 px-4 border-b border-gray-700"
         >
-          <img className="h-10 w-10" src={logo} alt="" />
+          <img className="h-10 w-10 lg:invert lg:brightness-0" src={logo} alt="" />
           <h1 className="text-xl font-semibold">AuraFit</h1>
         </NavLink>
         <nav className="px-4 py-4">

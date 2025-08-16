@@ -9,11 +9,9 @@ const Navbar = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const { user, logout } = useAuth();
 
-  const {role} = useRole() 
+  const { role } = useRole();
 
   console.log("role object:", role);
-  
-  
 
   const handleLogout = () => {
     Swal.fire({
@@ -47,12 +45,12 @@ const Navbar = () => {
     });
   };
 
-  console.log('firebaseLoge',user?.email);
+  console.log("firebaseLoge", user?.email);
 
   return (
     <div className="sticky top-0 z-20">
       <header className="relative  z-20 w-full border-b border-slate-200 bg-[#2563EB] shadow-lg shadow-slate-700/5 after:absolute after:left-0 after:top-full after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden text-black md:text-white  ">
-        <div className="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
+        <div className="relative lg:w-11/12 mx-auto px-8 lg:px-0  ">
           <nav
             aria-label="main navigation"
             className="flex items-center justify-between"
@@ -63,10 +61,14 @@ const Navbar = () => {
               id="WindUI"
               aria-label="WindUI logo"
               aria-current="page"
-              className="flex items-center text-black lg:text-white font-bold text-xl gap-2 whitespace-nowrap py-3 focus:outline-none lg:flex-1 pl-4"
+              className="flex items-center text-black lg:text-white font-bold text-xl gap-5 whitespace-nowrap py-3 focus:outline-none lg:flex-1 "
               href="javascript:void(0)"
             >
-              <img className="w-12 h-12" src={logo} alt="" />
+              <img
+                className="w-12 h-12 lg:invert lg:brightness-0"
+                src={logo}
+                alt=""
+              />
               AuraFit
             </p>
 
@@ -103,7 +105,7 @@ const Navbar = () => {
             <ul
               role="menubar"
               aria-label="Select page"
-              className={`absolute  left-0 top-0 z-[-1] h-[28.5rem] w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-white/90 px-8 pb-12 pt-24 transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0 lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0 lg:pt-0 lg:opacity-100 ${
+              className={`absolute   left-0 top-0 z-[-1] h-[28.5rem] w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-white/90 px-8 pb-12 pt-24 transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0 lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0 lg:pt-0 lg:opacity-100 ${
                 isToggleOpen
                   ? "visible opacity-100 backdrop-blur-sm"
                   : "invisible opacity-0"

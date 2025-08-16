@@ -53,7 +53,7 @@ const FitnessFeatures = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8   overflow-hidden  w-11/12 mx-auto">
+    <section className="pt-16 pb-2 px-4 md:px-0 lg:px-0   overflow-hidden  w-11/12 mx-auto">
       <div className="">
         <div className="text-center mb-12">
           <h2 className="md:text-3xl text-xl font-bold text-gray-800 mb-4">

@@ -23,17 +23,13 @@ const FeaturedClasses = () => {
     },
   });
 
-  
-
-  
-
   if (isPending) {
     return <Loader></Loader>;
   }
   return (
-    <div className="px-4 py-16 sm:px-6 lg:px-8 bg-gray-50">
+    <div className=" px-4 md:px-0 ">
       {/* Section Header */}
-      <div className="w-11/12 mx-auto">
+      <div className="w-11/12 mx-auto ">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 flex items-center">
