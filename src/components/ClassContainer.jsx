@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
 import AllClasses from "./AllClass";
 const ClassContainer = () => {
   const [searchText, setSearchText] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
   return (
     <div className="w-11/12 mx-auto">
       <div className="text-center my-12 w-11/12 mx-auto">
@@ -10,26 +10,53 @@ const ClassContainer = () => {
           Join Our Expert-Led Classes
         </h2>
         <p className="md:text-xl text-xs text-gray-600 max-w-3xl mx-auto">
-       Take your fitness to the next level with certified trainers.
-Our expert-led classes are designed for everyone.
-From beginners to pros, we help you reach your goals.
+          Take your fitness to the next level with certified trainers. Our
+          expert-led classes are designed for everyone. From beginners to pros,
+          we help you reach your goals.
         </p>
       </div>
 
-      <div className="relative mb-6 w-full px-4 lg:px-0 max-w-md mx-auto">
-        <div className="absolute inset-y-0 left-0 pl-8 lg:pl-3 flex items-center pointer-events-none">
-          <FaSearch className="h-5 w-5 text-gray-400" />
+      <div className=" ">
+        <div className="flex flex-col-reverse gap-5 lg:flex-row justify-between items-center w-full">
+          <div className="flex  items-center gap-1">
+            <h1 className="text-xl font-bold"> Top Booked Classes :</h1>{" "}
+            <button
+              onClick={() => setSortOrder(sortOrder === "desc" ? "" : "desc")}
+              className="tom-btn"
+            >
+              {sortOrder === "desc" ? "Unsort" : "Sort"}
+            </button>
+          </div>
+          <div>
+            <label className="input w-[275px]">
+              <svg
+                className="h-[1.2em] "
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input
+                type="search"
+                onChange={(e) => setSearchText(e.target.value)}
+                className="grow"
+                placeholder="Search"
+              />
+            </label>
+          </div>
         </div>
-        <input
-          type="text"
-          placeholder="Search classes..."
-          className="block w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent placeholder-gray-400 text-gray-900 transition-all duration-200 hover:border-gray-300"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
       </div>
 
-      <AllClasses searchText={searchText}></AllClasses>
+      <AllClasses sortOrder={sortOrder} searchText={searchText}></AllClasses>
     </div>
   );
 };

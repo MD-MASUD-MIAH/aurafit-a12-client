@@ -1,4 +1,6 @@
-import { useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect, useState } from "react";
 import {
   FaCamera,
   FaClock,
@@ -11,10 +13,19 @@ import Modal from "react-modal";
 import Swal from "sweetalert2";
 import { PageName } from "../../components/PageName";
 import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/useRole";
 import { imageUpload } from "../../utilits/utilits";
 
 const MyProfile = () => {
   PageName("My Profile");
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+      easing: "ease-in-out",
+      once: true,
+    });
+  }, []);
+  const { role } = useRole();
   const { user, upDateUser, setLoading } = useAuth();
   const [name, setName] = useState(user?.displayName || "");
   const [imageFile, setImageFile] = useState(null);
@@ -40,8 +51,7 @@ const MyProfile = () => {
         photoURL,
       });
 
-      setModalIsOpen(false); // close modal after update
-
+      setModalIsOpen(false);
       Swal.fire({
         icon: "success",
         title: "Profile Updated!",
@@ -59,7 +69,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="w-11/12 md:max-w-md mx-auto mt-10 bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
+    <div className="w-11/12 md:max-w-md mx-auto mt-15 bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
       {/* Background + Profile Image */}
       <div
         className="relative h-36 bg-cover"
@@ -88,8 +98,8 @@ const MyProfile = () => {
         </h2>
 
         {/* Role Badge */}
-        <span className="inline-block mt-3 px-4 py-1.5 text-sm bg-blue-100 text-blue-800 rounded-full font-medium shadow-sm">
-          <FaUserCircle className="inline mr-1" /> Member
+        <span className="inline-block mt-3 px-4 py-1.5 text-sm bg-blue-100 text-blue-800 rounded-full font-medium shadow-sm capitalize">
+          <FaUserCircle className="inline mr-1" /> {role}
         </span>
 
         <div className="text-left space-y-4 mt-8">
@@ -144,7 +154,7 @@ const MyProfile = () => {
         contentLabel="Edit Profile Modal"
         ariaHideApp={false}
       >
-        <div className="p-6">
+        <div data-aos="zoom-in" className="p-6 relative">
           <h2 className="text-2xl font-semibold text-center mb-6">
             Edit Profile
           </h2>

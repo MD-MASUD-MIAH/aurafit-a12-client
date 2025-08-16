@@ -123,6 +123,19 @@ const Navbar = () => {
                   <span>Home</span>
                 </NavLink>
               </li>
+
+              <li role="none" className="flex items-stretch">
+                <NavLink
+                  to={"/allClass"}
+                  onClick={() => setIsToggleOpen(!isToggleOpen)}
+                  role="menuitem"
+                  aria-haspopup="false"
+                  className="flex items-center text-black lg:text-white  gap-2 py-4 font-normal transition-colors duration-300 hover:text-blue-400 focus:text-black focus:outline-none focus-visible:outline-none lg:px-8"
+                  href="javascript:void(0)"
+                >
+                  <span>Classes</span>
+                </NavLink>
+              </li>
               <li role="none" className="flex items-stretch">
                 <NavLink
                   to={"/allTrainer"}
@@ -133,21 +146,10 @@ const Navbar = () => {
                   className="flex items-center text-black lg:text-white  gap-2 py-4 font-normal transition-colors duration-300 hover:text-blue-400 focus:text-black focus:outline-none focus-visible:outline-none lg:px-8"
                   href="javascript:void(0)"
                 >
-                  <span>All Trainer</span>
+                  <span>Trainers</span>
                 </NavLink>
               </li>
-              <li role="none" className="flex items-stretch">
-                <NavLink
-                  to={"/allClass"}
-                  onClick={() => setIsToggleOpen(!isToggleOpen)}
-                  role="menuitem"
-                  aria-haspopup="false"
-                  className="flex items-center text-black lg:text-white  gap-2 py-4 font-normal transition-colors duration-300 hover:text-blue-400 focus:text-black focus:outline-none focus-visible:outline-none lg:px-8"
-                  href="javascript:void(0)"
-                >
-                  <span>All Classes</span>
-                </NavLink>
-              </li>
+
               <li role="none" className="flex items-stretch">
                 <NavLink
                   to={"/forums"}

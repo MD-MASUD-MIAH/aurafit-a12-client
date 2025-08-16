@@ -11,7 +11,7 @@ const RoleBasedDashboardRedirect = () => {
 
   if (role === "admin") return <Navigate to="/dashboard/balance" />;
   if (role === "trainer") return <Navigate to="/dashboard/menageSlots" />;
-  if (role === "member") return <Navigate to="/dashboard/my-profile" />;
+  if (role === "member") return <Navigate to="/dashboard/activityLogPage" />;
 
   return <Navigate to="/login" />; // fallback in case of unexpected role
 };

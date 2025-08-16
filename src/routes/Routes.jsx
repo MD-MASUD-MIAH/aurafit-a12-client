@@ -127,7 +127,7 @@ export const router = createBrowserRouter([
       { path: "pending-details/:id", element:<PriveteRoute><AdminAccess><PendingDetails></PendingDetails></AdminAccess></PriveteRoute> },
       { path: "approve",element:<PriveteRoute><AdminAccess><ApproveTrainer></ApproveTrainer></AdminAccess></PriveteRoute>},
       { path: "activityLogPage", element:<PriveteRoute><MemberAccess><ActivityLogPage></ActivityLogPage></MemberAccess></PriveteRoute> },
-      { path: "my-profile", element: <PriveteRoute><MemberAccess><MyProfile></MyProfile></MemberAccess></PriveteRoute> },
+      { path: "my-profile", element:<PriveteRoute><MyProfile></MyProfile></PriveteRoute> },
       {
         path: "booked",
         element: (

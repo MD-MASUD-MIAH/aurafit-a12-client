@@ -1,35 +1,38 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
+import { FaCalendarAlt } from "react-icons/fa";
 import { Link } from "react-router";
 import { PageName } from "./PageName";
-
-const AllClasses = ({ searchText }) => {
+const AllClasses = ({ searchText,sortOrder }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   console.log(searchText);
   PageName("AllClass");
+
+   
 
   const {
     data: allClass = [],
     isPending,
     isError,
   } = useQuery({
-    queryKey: ["allClass", searchText],
+    queryKey: ["allClass", searchText, sortOrder], // dependency তে যোগ করলাম
     queryFn: async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/class?search=${searchText}`
+        `${
+          import.meta.env.VITE_API_URL
+        }/class?search=${searchText}&sort=${sortOrder}`
       );
       return res.data;
     },
-    //
     enabled: true,
   });
 
   console.log(allClass);
 
   if (isPending) {
-    return<span className="loading loading-dots loading-xl"></span>
+    return <span className="loading loading-dots loading-xl"></span>;
   }
 
   if (isError) {
@@ -72,6 +75,7 @@ const AllClasses = ({ searchText }) => {
   return (
     <div>
       <div className=" px-4 lg:px-0 py-8  overflow-hidden">
+       
         {/* Class Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {currentItems.map((classItem) => (
@@ -106,9 +110,17 @@ const AllClasses = ({ searchText }) => {
               <div className="p-6">
                 {/* Title and category */}
                 <div className="flex justify-between items-start mb-3">
-                  <h2 className="text-xl font-bold text-gray-800 hover:text-indigo-600 transition-colors">
-                    {classItem.skillName}
-                  </h2>
+                  <div className="flex justify-between items-center w-full">
+                    <h2 className="text-xl font-bold text-gray-800 hover:text-indigo-600 transition-colors">
+                      {classItem.skillName}
+                    </h2>
+                    <div className="flex items-center text-gray-700">
+                      <FaCalendarAlt className="mr-2 text-blue-500" />
+                      <span className="font-medium">
+                        {classItem?.bookingCount || 0} bookings
+                      </span>
+                    </div>
+                  </div>
                   {classItem.category && (
                     <span className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">
                       {classItem.category}

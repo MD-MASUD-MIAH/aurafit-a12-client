@@ -157,9 +157,7 @@ const DashBoardLayout = () => {
                 </NavLink>
               </li>
               }
-             {
-
-              role === 'member' &&  <li>
+             <li>
                 <NavLink
                   to="/dashboard/my-profile"
                   className={({ isActive }) =>
@@ -172,7 +170,7 @@ const DashBoardLayout = () => {
                   My Profile
                 </NavLink>
               </li>
-             }
+            
             </>
 
             {/* Admin links */}
