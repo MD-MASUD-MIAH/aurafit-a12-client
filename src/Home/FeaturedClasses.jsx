@@ -70,7 +70,7 @@ const FeaturedClasses = () => {
 
               {/* Class Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 style">
                   {classItem.skillName}
                 </h3>
                 <p className="text-gray-600 mb-4 line-clamp-2">

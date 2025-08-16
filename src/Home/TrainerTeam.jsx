@@ -70,7 +70,7 @@ const TrainerTeam = () => {
                     </p>
                   </div>
 
-                  <h5 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl">
+                  <h5 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl style">
                     {trainer.fullName}
                   </h5>
 

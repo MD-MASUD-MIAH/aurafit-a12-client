@@ -53,7 +53,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className=""
             >
-              <h1 className="text-3xl md:text-6xl font-bold text-white mb-4">
+              <h1 className="text-3xl md:text-6xl font-bold text-white mb-4 style">
                 Transform Your{" "}
                 <span className="text-[#2563EB]">Fitness Journey</span>
               </h1>

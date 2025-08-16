@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @plugin "daisyui";
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rancho&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Edu+NSW+ACT+Cursive:wght@400..700&family=Oswald:wght@200..700&display=swap");
+h2 {
+  font-family: "Edu NSW ACT Cursive", cursive;
+}
+.style{
+  font-family: "Edu NSW ACT Cursive", cursive;
+}
+
+
+
 
 .tom-btn {
   background-color: #2563eb;
@@ -17,7 +27,7 @@
 .nav-btn {
   background-color: #2563eb;
   color: white;
-  border: 1px solid white; /* ✅ এটা সঠিক */
+  border: 1px solid white;
   font-weight: 600;
   padding: 0.5rem 1.25rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -61,5 +71,3 @@
   font-weight: 400;
   font-style: normal;
 }
-,
-

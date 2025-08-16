@@ -264,7 +264,7 @@ const ActivityLogPage = () => {
 
             {/* Modal content animation */}
             <motion.div
-              className="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto my-8 mt-20 relative"
+              className="bg-white rounded-lg shadow-xl w-full max-w-md lg:min-w-md mx-auto my-8 mt-20 relative "
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
