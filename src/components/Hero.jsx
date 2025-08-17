@@ -9,7 +9,7 @@ const Hero = () => {
 
   const images = [
     "https://i.ibb.co/wZqTNBkH/Flux-Dev-highresolution-stock-photo-of-A-muscular-athletic-man-3.jpg",
-    "https://i.ibb.co/RTgn7B6r/hlh090123bodystrengthindiversity-002-64e8befba5f85-1.jpg",
+    "https://i.ibb.co.com/LXmgXYHk/Flux-Dev-highresolution-stock-photo-of-A-modern-fitness-traine-3-1.jpg",
     "https://i.ibb.co/qLf7y0ZV/shutterstock-1204167769-2000x.webp",
   ];
 
