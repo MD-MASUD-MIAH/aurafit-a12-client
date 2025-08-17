@@ -42,10 +42,10 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Content */}
+     
       <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-6 lg:px-8 flex py-30">
-          {/* Left Content */}
+        
           <div className="w-full ">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
