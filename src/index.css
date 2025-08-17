@@ -5,12 +5,9 @@
 h2 {
   font-family: "Edu NSW ACT Cursive", cursive;
 }
-.style{
+.style {
   font-family: "Edu NSW ACT Cursive", cursive;
 }
-
-
-
 
 .tom-btn {
   background-color: #2563eb;
@@ -19,12 +16,13 @@ h2 {
   padding: 0.5rem 1.25rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   border: none;
-
+  font-family: "Edu NSW ACT Cursive", cursive;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   transform: scale(1);
 }
 .nav-btn {
+  font-family: "Edu NSW ACT Cursive", cursive;
   background-color: #2563eb;
   color: white;
   border: 1px solid white;

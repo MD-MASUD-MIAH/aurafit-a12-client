@@ -24,7 +24,7 @@ const FeatureCard = ({ icon, title, description, delay }) => {
 
   {/* Content */}
   <div className="relative z-10">
-    <h3 className="text-xl font-bold mb-3  text-gray-800 group-hover:text-blue-600  transition-colors duration-300">
+    <h3 className="text-xl font-bold mb-3 style text-gray-800 group-hover:text-blue-600  transition-colors duration-300">
       {title}
     </h3>
     <p className="text-gray-600  text-sm leading-relaxed">

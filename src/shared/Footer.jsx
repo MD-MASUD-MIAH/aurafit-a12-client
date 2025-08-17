@@ -13,7 +13,7 @@ const Footer = () => {
                 src={logo}
                 alt=""
               />
-              <h3 className="text-xl font-bold mt-1  ">AuraFit</h3>
+              <h3 className="text-xl font-bold mt-1 style  ">AuraFit</h3>
             </div>
             <p className="text-gray-300 mb-4">
               Your complete fitness companion for tracking workouts, nutrition,
@@ -68,7 +68,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4 style">Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -108,7 +108,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-lg font-semibold mb-4 style">Contact Us</h3>
             <ul className="space-y-3 text-gray-300">
               <li className="flex items-start">
                 <svg
@@ -169,7 +169,7 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company Policies</h3>
+            <h3 className="text-lg font-semibold mb-4 style">Company Policies</h3>
 
             <div className=" flex flex-col space-y-3">
               <Link
